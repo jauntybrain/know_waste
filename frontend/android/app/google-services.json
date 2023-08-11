@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "848280063891",
+    "project_id": "waste-wise-d88a7",
+    "storage_bucket": "waste-wise-d88a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:848280063891:android:f1e771658b28f58dc96266",
+        "android_client_info": {
+          "package_name": "com.example.know_waste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "848280063891-ffsrh464t1o7ch8eapgpj6h94l3l3ql1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8mYznC0r6NdSwdNwev9z_2d1oecvqzWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848280063891-ffsrh464t1o7ch8eapgpj6h94l3l3ql1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
