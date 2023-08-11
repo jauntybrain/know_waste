@@ -4,13 +4,14 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/presentation/features/waste_analysis/pages/waste_analysis_loading_page.dart';
+import 'package:know_waste/presentation/features/waste_analysis/widgets/recycling_tip_widget.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
 
 import '../providers/waste_analysis_provider.dart';
 import '../widgets/camera_controls_widget.dart';
 import '../widgets/waste_analysis_top_nav.dart';
 import 'waste_analysis_camera_page.dart';
-import 'waste_analysis_loading_page.dart';
 import 'waste_analysis_result_page.dart';
 
 GlobalKey stickyKey = GlobalKey();
@@ -136,20 +137,29 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 400),
               child: Stack(
+                fit: StackFit.expand,
                 children: [
+                  // Show background photo
                   if (wasteAnalysis.pickedImage != null)
-                    Image.file(
-                      wasteAnalysis.pickedImage!,
-                      fit: BoxFit.cover,
+                    Positioned.fill(
+                      child: Image.file(
+                        wasteAnalysis.pickedImage!,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  isLoading
-                      ? const WasteAnalysisLoadingPage()
-                      : (_cameraController?.value.isInitialized ?? false)
-                          ? WasteAnalysisCameraPage(
-                              controller: _cameraController,
-                              pickedImage: wasteAnalysis.pickedImage,
-                            )
-                          : Container(color: AppColors.white)
+                  // If loading, show loading indicator and tip
+                  if (isLoading) ...[
+                    const WasteAnalysisLoadingPage(),
+                    const RecyclingTipWidget(),
+                    // If camera is initialized, show camera preview
+                  ] else if (_cameraController?.value.isInitialized ?? false)
+                    WasteAnalysisCameraPage(
+                      controller: _cameraController,
+                      pickedImage: wasteAnalysis.pickedImage,
+                    )
+                  // Default: show white container
+                  else
+                    Container(color: AppColors.white)
                 ],
               ),
             ),

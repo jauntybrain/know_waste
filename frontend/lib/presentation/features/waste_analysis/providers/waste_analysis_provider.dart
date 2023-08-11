@@ -54,7 +54,7 @@ final wasteAnalysisProvider = ChangeNotifierProvider.autoDispose<WasteAnalysisNo
     StreamController<AnalyzedWaste?> controller = StreamController<AnalyzedWaste?>();
     final query = collection.withConverter
         .where('userID', isEqualTo: 'FdGe35sDg1345SFvDS')
-        .where('name', isNotEqualTo: null)
+        .where('recyclable', isNotEqualTo: null)
         .orderBy('date', descending: true)
         .limit(1)
         .snapshots(includeMetadataChanges: false)
@@ -63,7 +63,9 @@ final wasteAnalysisProvider = ChangeNotifierProvider.autoDispose<WasteAnalysisNo
         switch (change.type) {
           case DocumentChangeType.added:
             if (change.doc.data()!.date!.compareTo(DateTime.now().subtract(const Duration(seconds: 10))) == 1) {
-              controller.add(change.doc.data());
+              if (change.doc.data()!.name != null) {
+                controller.add(change.doc.data());
+              }
             }
           case DocumentChangeType.modified:
             controller.add(change.doc.data());
@@ -87,6 +89,7 @@ class WasteAnalysisNotifier extends ChangeNotifier {
   WasteAnalysisNotifier(this.ref, this.wasteRepository, this.stream) {
     stream.listen((data) async {
       if (data != null) {
+        print(data);
         _fakeLoadingTimer?.cancel();
         HapticFeedback.lightImpact();
         setAnalyzedWaste(data);
@@ -189,7 +192,7 @@ class WasteAnalysisNotifier extends ChangeNotifier {
 
       // Fake loading
       _fakeLoadingTimer = Timer.periodic(const Duration(milliseconds: 500), (Timer timer) {
-        if (loadingProgress < 0.98) {
+        if (loadingProgress < 0.95) {
           setLoadingProgress(loadingProgress + 0.01 + Random().nextDouble() * 0.06);
         }
       });

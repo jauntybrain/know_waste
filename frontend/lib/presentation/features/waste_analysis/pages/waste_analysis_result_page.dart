@@ -80,7 +80,7 @@ class WasteAnalysisResultPage extends ConsumerWidget {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   children: [
-                                    if (wasteAnalysis.analyzedWaste!.recyclable!)
+                                    if (wasteAnalysis.analyzedWaste!.recyclable ?? false)
                                       Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                                         decoration: BoxDecoration(
@@ -161,7 +161,7 @@ class WasteAnalysisResultPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Recycling advice for...',
+                  'AI Recycling advice for...',
                   style: AppTextStyles.blackBlack22.copyWith(
                     fontWeight: FontWeight.w900,
                     color: AppColors.secondary,
