@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:know_waste/models/api_error/api_error.dart';
 
 class FirestoreCollection<T> {
   FirestoreCollection();
@@ -17,11 +18,21 @@ class FirestoreCollection<T> {
     return withConverter.orderBy(field, descending: desc);
   }
 
-  Future<T?> futureSingle(String id) async {
+  Future<T?> futureSingleByID(String id) async {
     try {
       return (await withConverter.doc(id).get()).data();
     } catch (err) {
       return null;
+    }
+  }
+
+  Future<T?> futureSingleWhereEqual(String field, dynamic value) async {
+    try {
+      final query = withConverter.where(field, isEqualTo: true).orderBy('date', descending: true).limit(1);
+
+      return (await query.get()).docs.firstOrNull?.data();
+    } catch (err) {
+      rethrow;
     }
   }
 
@@ -77,15 +88,15 @@ class FirestoreCollection<T> {
     yield* streamController.stream;
   }
 
-  Future<Map<String, T>> futureAll([String? orderBy, bool desc = false]) async {
+  Future<List<T>> futureAll([String? orderBy, bool desc = false]) async {
     List<QueryDocumentSnapshot<T>> docs;
 
     docs = orderBy != null ? (await this.orderBy(orderBy, desc).get()).docs : (await withConverter.get()).docs;
 
-    return {for (QueryDocumentSnapshot<T> doc in docs) doc.id: doc.data()};
+    return docs.map((doc) => doc.data()).toList();
   }
 
-  Query<T> whereEqual(String field, String value) {
+  Query<T> whereEqual(String field, dynamic value) {
     return withConverter.where(field, isEqualTo: value);
   }
 }

@@ -7,7 +7,8 @@ class AppIconButton extends StatelessWidget {
   const AppIconButton({
     required this.onTap,
     required this.icon,
-    this.isSmaller = false,
+    this.size,
+    this.iconSize,
     this.fillColor,
     this.color,
     super.key,
@@ -15,7 +16,7 @@ class AppIconButton extends StatelessWidget {
 
   final VoidCallback onTap;
   final IconData icon;
-  final bool isSmaller;
+  final double? size, iconSize;
   final Color? fillColor, color;
 
   @override
@@ -23,8 +24,8 @@ class AppIconButton extends StatelessWidget {
     return Bouncing(
       onTap: () => HapticFeedback.lightImpact().then((_) => onTap.call()),
       child: Container(
-        width: isSmaller ? 50 : 55,
-        height: isSmaller ? 50 : 55,
+        width: size ?? 55,
+        height: size ?? 55,
         decoration: BoxDecoration(
           color: fillColor ?? Colors.white,
           borderRadius: BorderRadius.circular(18),
@@ -32,7 +33,7 @@ class AppIconButton extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          size: isSmaller ? 22 : 25,
+          size: iconSize ?? 25,
           color: color ?? const Color(0xff007029),
         ),
       ),

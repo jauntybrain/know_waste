@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/repositories/waste_repository.dart';
+import 'package:know_waste/repositories/analyzed_waste/analyzed_waste_repository.dart';
 import 'package:know_waste/services/collections.dart';
 import 'package:know_waste/services/image_picker_service.dart';
 import 'package:know_waste/services/storage/firebase_storage.dart';
@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 import '../../../../models/analyzed_waste/analyzed_waste.dart';
 import '../../../../providers/repositories_providers.dart';
 
-final firestoreStreamProvider = StreamProvider.autoDispose<AnalyzedWaste?>((ref) async* {
+final firestoreStreamProvider = StreamProvider<AnalyzedWaste?>((ref) async* {
   final collection = AnalyzedWasteCollection();
 
   StreamController<AnalyzedWaste?> controller = StreamController<AnalyzedWaste?>();
@@ -48,33 +48,50 @@ final firestoreStreamProvider = StreamProvider.autoDispose<AnalyzedWaste?>((ref)
   yield* controller.stream;
 });
 
-final wasteAnalysisProvider = ChangeNotifierProvider.autoDispose<WasteAnalysisNotifier>(
+final wasteAnalysisProvider = ChangeNotifierProvider<WasteAnalysisNotifier>(
   (ref) {
     final collection = AnalyzedWasteCollection();
     StreamController<AnalyzedWaste?> controller = StreamController<AnalyzedWaste?>();
     final query = collection.withConverter
         .where('userID', isEqualTo: 'FdGe35sDg1345SFvDS')
-        .where('recyclable', isNotEqualTo: null)
+        .where('name', isNotEqualTo: null)
         .orderBy('date', descending: true)
         .limit(1)
         .snapshots(includeMetadataChanges: false)
         .listen((event) {
       for (var change in event.docChanges) {
-        switch (change.type) {
-          case DocumentChangeType.added:
-            if (change.doc.data()!.date!.compareTo(DateTime.now().subtract(const Duration(seconds: 10))) == 1) {
-              if (change.doc.data()!.name != null) {
-                controller.add(change.doc.data());
-              }
-            }
-          case DocumentChangeType.modified:
+        print(change.doc.data()!.date);
+        if (change.doc.data()!.date!.compareTo(DateTime.now().subtract(const Duration(seconds: 15))) == 1) {
+          if (change.doc.data()!.name != null) {
             controller.add(change.doc.data());
-            break;
-          case DocumentChangeType.removed:
-            break;
+          }
         }
       }
     });
+    // final query = collection.withConverter
+    //     .where('userID', isEqualTo: 'FdGe35sDg1345SFvDS')
+    //     .where('advice', isNotEqualTo: null)
+    //     .orderBy('date', descending: true)
+    //     .limit(1)
+    //     .snapshots(includeMetadataChanges: false)
+    //     .listen((event) {
+    //   for (var change in event.docChanges) {
+    //     switch (change.type) {
+    //       case DocumentChangeType.added:
+    //         if (change.doc.data()!.date!.compareTo(DateTime.now().subtract(const Duration(seconds: 15))) == 1) {
+    //           if (change.doc.data()!.name != null) {
+    //             controller.add(change.doc.data());
+    //           }
+    //         }
+    //         break;
+    //       case DocumentChangeType.modified:
+    //         controller.add(change.doc.data());
+    //         break;
+    //       case DocumentChangeType.removed:
+    //         break;
+    //     }
+    //   }
+    // });
 
     ref.onDispose(() {
       query.cancel();
@@ -89,7 +106,6 @@ class WasteAnalysisNotifier extends ChangeNotifier {
   WasteAnalysisNotifier(this.ref, this.wasteRepository, this.stream) {
     stream.listen((data) async {
       if (data != null) {
-        print(data);
         _fakeLoadingTimer?.cancel();
         HapticFeedback.lightImpact();
         setAnalyzedWaste(data);
@@ -104,7 +120,7 @@ class WasteAnalysisNotifier extends ChangeNotifier {
   }
 
   final Ref ref;
-  final WasteRepository wasteRepository;
+  final AnalyzedWasteRepository wasteRepository;
   final Stream<AnalyzedWaste?> stream;
 
   bool _loading = false;
@@ -143,7 +159,6 @@ class WasteAnalysisNotifier extends ChangeNotifier {
   double get loadingProgress => _loadingProgress;
   void setLoadingProgress(double value) {
     _loadingProgress = value;
-    print('setting value to: $value');
     notifyListeners();
   }
 
@@ -192,7 +207,7 @@ class WasteAnalysisNotifier extends ChangeNotifier {
 
       // Fake loading
       _fakeLoadingTimer = Timer.periodic(const Duration(milliseconds: 500), (Timer timer) {
-        if (loadingProgress < 0.95) {
+        if (loadingProgress < 0.92) {
           setLoadingProgress(loadingProgress + 0.01 + Random().nextDouble() * 0.06);
         }
       });

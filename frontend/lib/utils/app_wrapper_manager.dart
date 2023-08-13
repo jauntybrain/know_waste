@@ -11,14 +11,14 @@ class AppWrapperManager {
       route: RouteNames.home,
       label: 'Home',
       icon: Icon(
-        Icons.house,
+        Icons.home_rounded,
         size: 24,
-        color: Color(0x99000000),
+        color: Color(0x73008731),
       ),
       activeIcon: Icon(
-        Icons.house,
+        Icons.home_rounded,
         size: 24,
-        color: AppColors.primary,
+        color: AppColors.secondary,
       ),
     ),
     const TabItem(
@@ -28,12 +28,12 @@ class AppWrapperManager {
       icon: Icon(
         Icons.recycling_rounded,
         size: 24,
-        color: Colors.white,
+        color: Color(0x73008731),
       ),
       activeIcon: Icon(
         Icons.recycling_rounded,
         size: 24,
-        color: Colors.white,
+        color: AppColors.secondary,
       ),
     ),
     const TabItem(
@@ -41,14 +41,14 @@ class AppWrapperManager {
       route: RouteNames.community,
       label: 'Community',
       icon: Icon(
-        Icons.recycling_rounded,
+        Icons.people_alt_rounded,
         size: 24,
-        color: Color(0x99000000),
+        color: Color(0x73008731),
       ),
       activeIcon: Icon(
-        Icons.recycling_rounded,
+        Icons.people_alt_rounded,
         size: 24,
-        color: AppColors.primary,
+        color: AppColors.secondary,
       ),
     ),
   ];

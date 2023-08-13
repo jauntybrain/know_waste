@@ -25,9 +25,4 @@ class AnalyzedWaste with _$AnalyzedWaste {
   factory AnalyzedWaste.fromJson(Map<String, Object?> json) => _$AnalyzedWasteFromJson(json);
 }
 
-DateTime? dateTimeFromTimestamp(Timestamp? timestamp) {
-  if (timestamp == null) {
-    return null;
-  }
-  return timestamp.toDate();
-}
+DateTime? dateTimeFromTimestamp(Timestamp? timestamp) => timestamp?.toDate();

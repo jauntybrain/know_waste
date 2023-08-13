@@ -25,24 +25,24 @@ class WasteAnalysisTopNav extends StatelessWidget {
             top: MediaQuery.of(context).viewPadding.top + 6,
           ),
           color: blurred ? AppColors.white.withOpacity(0.9) : Colors.transparent,
-          child: 
-          Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppIconButton(
                 onTap: () => GoRouter.of(context).pop(),
-                isSmaller: true,
+                size: 45,
                 icon: Icons.close,
               ),
               Text(
                 'Scan Waste',
-                style: AppTextStyles.blackExtraBold18.copyWith(
+                style: AppTextStyles.blackBlack22.copyWith(
                   color: Colors.black,
+                  fontSize: 20,
                 ),
               ),
               AppIconButton(
                 onTap: () {},
-                isSmaller: true,
+                size: 45,
                 icon: Icons.question_mark_rounded,
               ),
             ],

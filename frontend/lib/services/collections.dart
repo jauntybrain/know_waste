@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:know_waste/models/article/article.dart';
 
 import '../models/analyzed_waste/analyzed_waste.dart';
 import '../models/app_user/app_user.dart';
@@ -24,30 +25,15 @@ class AnalyzedWasteCollection extends FirestoreCollection<AnalyzedWaste> {
         fromFirestore: (snapshot, _) => AnalyzedWaste.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
         toFirestore: (user, _) => {},
       );
+}
 
-//   @override
-//   AnalyzedWaste streamAllFiltered() {
-//     final Stream<AnalyzedWaste?> streamController = streamAll();
+class ArticlesCollection extends FirestoreCollection<Article> {
+  @override
+  String get path => 'articles';
 
-//     try {
-//       final snapshots = withConverter.snapshots();
-
-//       snapshots.listen(
-//         (snapshot) {
-//           for (var document in snapshot.docs) {
-//             streamController.add(document.data());
-//           }
-//         },
-//         onError: (e) {
-//           streamController.addError(e);
-//           streamController.close();
-//         },
-//       );
-//     } catch (e) {
-//       streamController.addError(e);
-//       streamController.close();
-//     }
-
-//     yield * streamController.stream;
-//   }
+  @override
+  CollectionReference<Article> get withConverter => firestore.collection(path).withConverter<Article>(
+        fromFirestore: (snapshot, _) => Article.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
+        toFirestore: (article, _) => {},
+      );
 }

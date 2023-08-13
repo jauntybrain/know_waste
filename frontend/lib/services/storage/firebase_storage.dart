@@ -49,4 +49,9 @@ class FirebaseStorageService {
       }),
     );
   }
+
+  Future<String> getImageUrl(String imagePath) async {
+    final storageReference = FirebaseStorage.instance.ref(imagePath);
+    return storageReference.getDownloadURL();
+  }
 }
