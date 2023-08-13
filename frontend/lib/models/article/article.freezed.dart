@@ -22,6 +22,7 @@ Article _$ArticleFromJson(Map<String, dynamic> json) {
 mixin _$Article {
   String get uid => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get summary => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   String get tag => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $ArticleCopyWith<$Res> {
   $Res call(
       {String uid,
       String title,
+      String summary,
       String imageUrl,
       String tag,
       String content,
@@ -65,6 +67,7 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
   $Res call({
     Object? uid = null,
     Object? title = null,
+    Object? summary = null,
     Object? imageUrl = null,
     Object? tag = null,
     Object? content = null,
@@ -79,6 +82,10 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: null == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
               as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
@@ -114,6 +121,7 @@ abstract class _$$_ArticleCopyWith<$Res> implements $ArticleCopyWith<$Res> {
   $Res call(
       {String uid,
       String title,
+      String summary,
       String imageUrl,
       String tag,
       String content,
@@ -134,6 +142,7 @@ class __$$_ArticleCopyWithImpl<$Res>
   $Res call({
     Object? uid = null,
     Object? title = null,
+    Object? summary = null,
     Object? imageUrl = null,
     Object? tag = null,
     Object? content = null,
@@ -148,6 +157,10 @@ class __$$_ArticleCopyWithImpl<$Res>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      summary: null == summary
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
               as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
@@ -179,6 +192,7 @@ class _$_Article extends _Article {
   const _$_Article(
       {required this.uid,
       required this.title,
+      required this.summary,
       required this.imageUrl,
       required this.tag,
       required this.content,
@@ -195,6 +209,8 @@ class _$_Article extends _Article {
   @override
   final String title;
   @override
+  final String summary;
+  @override
   final String imageUrl;
   @override
   final String tag;
@@ -209,7 +225,7 @@ class _$_Article extends _Article {
 
   @override
   String toString() {
-    return 'Article(uid: $uid, title: $title, imageUrl: $imageUrl, tag: $tag, content: $content, date: $date, featured: $featured)';
+    return 'Article(uid: $uid, title: $title, summary: $summary, imageUrl: $imageUrl, tag: $tag, content: $content, date: $date, featured: $featured)';
   }
 
   @override
@@ -219,6 +235,7 @@ class _$_Article extends _Article {
             other is _$_Article &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.summary, summary) || other.summary == summary) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.tag, tag) || other.tag == tag) &&
@@ -231,7 +248,7 @@ class _$_Article extends _Article {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, uid, title, imageUrl, tag, content, date, featured);
+      runtimeType, uid, title, summary, imageUrl, tag, content, date, featured);
 
   @JsonKey(ignore: true)
   @override
@@ -251,6 +268,7 @@ abstract class _Article extends Article {
   const factory _Article(
       {required final String uid,
       required final String title,
+      required final String summary,
       required final String imageUrl,
       required final String tag,
       required final String content,
@@ -265,6 +283,8 @@ abstract class _Article extends Article {
   String get uid;
   @override
   String get title;
+  @override
+  String get summary;
   @override
   String get imageUrl;
   @override

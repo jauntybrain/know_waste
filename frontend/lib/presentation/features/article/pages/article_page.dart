@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:know_waste/presentation/shared/app_markdown.dart';
@@ -12,13 +15,99 @@ import '../../../shared/app_icon_button.dart';
 import '../../../theme/src/app_colors.dart';
 import '../../../theme/src/app_text_styles.dart';
 
-class ArticlePage extends StatelessWidget {
+final expandedPositionProvider = StateProvider<Offset?>((ref) => null);
+
+GlobalKey _summaryKey = GlobalKey();
+
+class ArticlePage extends ConsumerWidget {
   const ArticlePage({required this.article, super.key});
 
   final Article article;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final expandedPositon = ref.watch(expandedPositionProvider);
+
+    Widget buildSummaryBlock({bool expandable = false}) {
+      return GestureDetector(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          if (expandedPositon == null) {
+            RenderBox box = _summaryKey.currentContext?.findRenderObject() as RenderBox;
+            Offset? offset = box.localToGlobal(Offset.zero);
+            ref.read(expandedPositionProvider.notifier).state = offset;
+          } else {
+            ref.read(expandedPositionProvider.notifier).state = null;
+          }
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(14),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+            child: Container(
+              width: MediaQuery.of(context).size.width - 40,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              decoration: BoxDecoration(
+                color: AppColors.white.withOpacity(0.9),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: const Color(0x86CCCCCC)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: SvgPicture.asset('assets/images/local.svg'),
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'AI-Generated',
+                            style: AppTextStyles.blackBlack22.copyWith(
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.secondary,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            'Article summary',
+                            style: AppTextStyles.blackBlack22.copyWith(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Text(
+                        expandedPositon == null ? 'Show' : 'Hide',
+                        style: AppTextStyles.blackExtraBold16.copyWith(fontSize: 14),
+                      ),
+                      const SizedBox(width: 15),
+                    ],
+                  ),
+                  if (expandable && expandedPositon != null)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8, top: 10, bottom: 10),
+                      child: Text(
+                        article.summary,
+                        textAlign: TextAlign.start,
+                        style: AppTextStyles.grayMedium16,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -60,29 +149,41 @@ class ArticlePage extends StatelessWidget {
                       style: AppTextStyles.graySemiBold12,
                     ),
                     const SizedBox(height: 35),
-                    CachedNetworkImage(
-                      imageUrl: article.imageUrl,
-                      height: 280,
-                      width: double.infinity,
-                      imageBuilder: (context, image) => Stack(
-                        children: [
-                          Positioned.fill(
-                            child: Image(
-                              image: image,
-                              fit: BoxFit.cover,
-                            ),
+                    Stack(
+                      clipBehavior: Clip.none,
+                      alignment: Alignment.center,
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: article.imageUrl,
+                          height: 280,
+                          width: double.infinity,
+                          imageBuilder: (context, image) => Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Image(
+                                  image: image,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                top: 10,
+                                left: 12,
+                                child: Text(
+                                  '@Unsplash',
+                                  style: AppTextStyles.whiteSemiBold12,
+                                ),
+                              ),
+                            ],
                           ),
-                          Positioned(
-                            bottom: 10,
-                            left: 12,
-                            child: Text(
-                              '@Unsplash',
-                              style: AppTextStyles.whiteSemiBold12,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                        Positioned(
+                          bottom: -30,
+                          key: _summaryKey,
+                          child: buildSummaryBlock(),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 25),
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: AppMarkdown(text: article.content, lineHeight: 1.5),
@@ -141,6 +242,34 @@ class ArticlePage extends StatelessWidget {
               ),
             ),
           ),
+          Positioned.fill(
+            child: IgnorePointer(
+              ignoring: expandedPositon == null,
+              child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: expandedPositon != null ? 1 : 0,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 30,
+                        sigmaY: 30,
+                      ),
+                      child: Container(
+                        color: Colors.white.withOpacity(0.8),
+                        width: double.infinity,
+                      ),
+                    ),
+                  )),
+            ),
+          ),
+          if (expandedPositon != null) ...[
+            Positioned(
+              top: expandedPositon.dy,
+              left: expandedPositon.dx,
+              child: buildSummaryBlock(expandable: true),
+            ),
+          ],
         ],
       ),
     );

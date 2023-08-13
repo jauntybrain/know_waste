@@ -3,10 +3,12 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:know_waste/repositories/analyzed_waste/analyzed_waste_repository.dart';
 import 'package:know_waste/repositories/analyzed_waste/firestore_analyzed_waste_repository.dart';
 import 'package:know_waste/repositories/articles/articles_repository.dart';
+import 'package:know_waste/repositories/guides/guides_repository.dart';
 import 'package:know_waste/services/storage/firebase_storage.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../repositories/articles/firestore_articles_repository.dart';
+import '../repositories/guides/firestore_guides_repository.dart';
 import '../services/collections.dart';
 import '../services/database/firestore_service.dart';
 
@@ -23,5 +25,13 @@ final articlesRepositoryProvider = Provider<ArticlesRepository>(
     _firestoreInstance,
     ref.watch(firebaseStorageServiceProvider),
     ArticlesCollection(),
+  ),
+);
+
+final guidesRepositoryProvider = Provider<GuidesRepository>(
+  (ref) => FirestoreGuidesRepository(
+    _firestoreInstance,
+    ref.watch(firebaseStorageServiceProvider),
+    GuidesCollection(),
   ),
 );

@@ -8,8 +8,8 @@ import 'package:know_waste/utils/constants.dart';
 import '../../../../theme/src/app_colors.dart';
 import '../../../../theme/src/app_shadows.dart';
 import '../../../../theme/src/app_text_styles.dart';
-import '../../widgets/article_widget.dart';
-import '../../widgets/article_widget_skeleton.dart';
+import '../../widgets/article/article_widget.dart';
+import '../../widgets/article/article_widget_skeleton.dart';
 
 class CommunityFeaturedSection extends ConsumerWidget {
   const CommunityFeaturedSection({super.key});

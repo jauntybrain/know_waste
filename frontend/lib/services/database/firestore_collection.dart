@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:know_waste/models/api_error/api_error.dart';
 
 class FirestoreCollection<T> {
   FirestoreCollection();

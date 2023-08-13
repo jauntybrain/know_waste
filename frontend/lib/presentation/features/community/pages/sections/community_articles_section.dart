@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:know_waste/models/api_error/api_error.dart';
 import 'package:know_waste/presentation/features/community/providers/articles_provider.dart';
-import 'package:know_waste/presentation/features/community/widgets/article_widget_skeleton.dart';
 import 'package:know_waste/presentation/router/router_context_extension.dart';
 
 import '../../../../theme/src/app_colors.dart';
 import '../../../../theme/src/app_shadows.dart';
 import '../../../../theme/src/app_text_styles.dart';
-import '../../widgets/article_widget.dart';
+import '../../widgets/article/article_widget.dart';
+import '../../widgets/article/article_widget_skeleton.dart';
 
 class CommunityArticlesSection extends ConsumerWidget {
   const CommunityArticlesSection({super.key});

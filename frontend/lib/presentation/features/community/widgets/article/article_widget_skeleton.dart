@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../utils/constants.dart';
-import '../../../theme/src/app_colors.dart';
-import '../../../theme/src/app_shadows.dart';
+import '../../../../../utils/constants.dart';
+import '../../../../theme/src/app_colors.dart';
+import '../../../../theme/src/app_shadows.dart';
 
 class ArticleWidgetSkeleton extends StatelessWidget {
   const ArticleWidgetSkeleton({Key? key})

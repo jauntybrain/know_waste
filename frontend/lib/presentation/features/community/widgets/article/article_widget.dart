@@ -9,11 +9,11 @@ import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:know_waste/utils/extensions.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../utils/constants.dart';
-import '../../../theme/src/app_buttons.dart';
-import '../../../theme/src/app_colors.dart';
-import '../../../theme/src/app_shadows.dart';
-import '../../../theme/src/app_text_styles.dart';
+import '../../../../../utils/constants.dart';
+import '../../../../theme/src/app_buttons.dart';
+import '../../../../theme/src/app_colors.dart';
+import '../../../../theme/src/app_shadows.dart';
+import '../../../../theme/src/app_text_styles.dart';
 
 class ArticleWidget extends StatelessWidget {
   const ArticleWidget({
@@ -56,6 +56,7 @@ class ArticleWidget extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: article.imageUrl,
                       fit: BoxFit.cover,
+                      height: 140,
                       progressIndicatorBuilder: (context, url, progress) => Shimmer.fromColors(
                         baseColor: Colors.black.withOpacity(0.1),
                         highlightColor: Colors.black.withOpacity(0.08),
@@ -159,7 +160,7 @@ class ArticleWidget extends StatelessWidget {
                       filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: AppColors.white.withOpacity(0.9),
+                          color: AppColors.white.withOpacity(0.92),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(20),

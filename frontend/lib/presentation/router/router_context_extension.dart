@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/models/guide/guide.dart';
 
 import '../../models/article/article.dart';
 import 'route_names.dart';
@@ -14,6 +15,13 @@ extension RouterContextExtension on BuildContext {
     GoRouter.of(this).goNamed(
       RouteNames.article,
       extra: article,
+    );
+  }
+
+  void pushGuide(Guide guide) {
+    GoRouter.of(this).goNamed(
+      RouteNames.guide,
+      extra: guide,
     );
   }
 }

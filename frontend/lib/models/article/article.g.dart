@@ -9,6 +9,7 @@ part of 'article.dart';
 _$_Article _$$_ArticleFromJson(Map<String, dynamic> json) => _$_Article(
       uid: json['uid'] as String,
       title: json['title'] as String,
+      summary: json['summary'] as String,
       imageUrl: json['imageUrl'] as String,
       tag: json['tag'] as String,
       content: json['content'] as String,
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$_ArticleToJson(_$_Article instance) =>
     <String, dynamic>{
       'uid': instance.uid,
       'title': instance.title,
+      'summary': instance.summary,
       'imageUrl': instance.imageUrl,
       'tag': instance.tag,
       'content': instance.content,

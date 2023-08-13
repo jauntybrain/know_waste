@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/presentation/features/community/pages/sections/community_guide_section.dart';
 import 'package:know_waste/presentation/features/community/providers/articles_provider.dart';
 import 'package:know_waste/presentation/features/community/providers/featured_article_provider.dart';
+import 'package:know_waste/presentation/features/community/providers/guides_provider.dart';
 
 import '../../../shared/app_icon_button.dart';
 import '../../../theme/theme.dart';
@@ -31,10 +33,13 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
           RefreshIndicator.adaptive(
             edgeOffset: MediaQuery.of(context).viewPadding.top + 60,
             onRefresh: () async {
-              ref.invalidate(articlesProvider);
-              ref.invalidate(featuredArticleProvider);
+              ref
+                ..invalidate(articlesProvider)
+                ..invalidate(featuredArticleProvider)
+                ..invalidate(guidesProvider);
             },
             child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,6 +51,8 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
                     children: [
                       const CommunityFeaturedSection(),
                       const SizedBox(height: 30),
+                      // const CommunityGuidesSection(),
+                      // const SizedBox(height: 10),
                       const CommunityChallengesSection(),
                       const SizedBox(height: 20),
                       const CommunityArticlesSection(),

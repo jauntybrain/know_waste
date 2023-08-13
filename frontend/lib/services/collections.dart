@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:know_waste/models/article/article.dart';
+import 'package:know_waste/models/guide/guide.dart';
 
 import '../models/analyzed_waste/analyzed_waste.dart';
 import '../models/app_user/app_user.dart';
@@ -34,6 +35,17 @@ class ArticlesCollection extends FirestoreCollection<Article> {
   @override
   CollectionReference<Article> get withConverter => firestore.collection(path).withConverter<Article>(
         fromFirestore: (snapshot, _) => Article.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
+        toFirestore: (article, _) => {},
+      );
+}
+
+class GuidesCollection extends FirestoreCollection<Guide> {
+  @override
+  String get path => 'guides';
+
+  @override
+  CollectionReference<Guide> get withConverter => firestore.collection(path).withConverter<Guide>(
+        fromFirestore: (snapshot, _) => Guide.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
         toFirestore: (article, _) => {},
       );
 }

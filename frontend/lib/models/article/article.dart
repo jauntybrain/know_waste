@@ -13,6 +13,7 @@ class Article with _$Article {
   const factory Article({
     required String uid,
     required String title,
+    required String summary,
     required String imageUrl,
     required String tag,
     required String content,
