@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:know_waste/models/article/article.dart';
+import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:know_waste/utils/extensions.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -182,7 +184,7 @@ class ArticleWidget extends StatelessWidget {
                                 height: 42,
                                 width: 120,
                                 borderRadius: 40,
-                                onTap: () {},
+                                onTap: () => onTap?.call(article),
                                 hasShadow: true,
                                 child: const Text('Read Now'),
                               ),
@@ -200,5 +202,11 @@ class ArticleWidget extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) => isLarge ? _buildLargeArticle(context) : _buildRegularArticle();
+  Widget build(BuildContext context) => Bouncing(
+        onTap: () {
+          HapticFeedback.lightImpact();
+          onTap?.call(article);
+        },
+        child: isLarge ? _buildLargeArticle(context) : _buildRegularArticle(),
+      );
 }

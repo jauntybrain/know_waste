@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../models/article/article.dart';
 import 'route_names.dart';
 
 /// [RouterContextExtension] is an extension on [BuildContext] to simplify navigation.
@@ -9,14 +10,10 @@ extension RouterContextExtension on BuildContext {
     GoRouter.of(this).pop();
   }
 
-  void goHome({
-    Map<String, String> queryParams = const <String, String>{},
-    Object? extra,
-  }) {
+  void pushArticle(Article article) {
     GoRouter.of(this).goNamed(
-      RouteNames.home,
-      queryParameters: queryParams,
-      extra: extra,
+      RouteNames.article,
+      extra: article,
     );
   }
 }

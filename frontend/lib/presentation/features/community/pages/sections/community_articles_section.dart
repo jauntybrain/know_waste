@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:know_waste/models/api_error/api_error.dart';
 import 'package:know_waste/presentation/features/community/providers/articles_provider.dart';
 import 'package:know_waste/presentation/features/community/widgets/article_widget_skeleton.dart';
+import 'package:know_waste/presentation/router/router_context_extension.dart';
 
 import '../../../../theme/src/app_colors.dart';
 import '../../../../theme/src/app_shadows.dart';
@@ -51,7 +52,10 @@ class CommunityArticlesSection extends ConsumerWidget {
               crossAxisSpacing: 12,
             ),
             itemCount: articles.length,
-            itemBuilder: (context, index) => ArticleWidget(article: articles[index]),
+            itemBuilder: (context, index) => ArticleWidget(
+              article: articles[index],
+              onTap: context.pushArticle,
+            ),
           ),
           error: (e, tr) => Center(
             child: e is ApiError ? Text((e).message) : const Text('Error occurred'),

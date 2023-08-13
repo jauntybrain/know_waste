@@ -97,7 +97,7 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
                         size: 45,
                         iconSize: 22,
                         fillColor: AppColors.primary.withOpacity(0.1),
-                        icon: Icons.bookmark_rounded,
+                        icon: Icons.bookmarks_rounded,
                       ),
                     ],
                   ),

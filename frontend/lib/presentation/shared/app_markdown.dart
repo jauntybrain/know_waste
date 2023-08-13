@@ -10,12 +10,14 @@ class AppMarkdown extends StatefulWidget {
     required this.text,
     this.bottomPadding = true,
     this.hasReadMore = false,
+    this.lineHeight,
     Key? key,
   }) : super(key: key);
 
   final String text;
   final bool bottomPadding;
   final bool hasReadMore;
+  final double? lineHeight;
 
   @override
   _AppMarkdownState createState() => _AppMarkdownState();
@@ -45,9 +47,12 @@ class _AppMarkdownState extends State<AppMarkdown> {
             styleSheet: MarkdownStyleSheet(
               blockquote: AppTextStyles.black60Medium13,
               checkbox: AppTextStyles.primaryBold18,
-              p: AppTextStyles.grayMedium16.copyWith(height: 1.3),
+              p: AppTextStyles.grayMedium16.copyWith(height: widget.lineHeight ?? 1.3),
               a: AppTextStyles.primarySemiBold16.copyWith(color: AppColors.secondary),
-              strong: AppTextStyles.grayBold16.copyWith(height: 1.4, color: Colors.black.withOpacity(0.8)),
+              strong: AppTextStyles.grayBold16.copyWith(
+                height: widget.lineHeight ?? 1.3,
+                color: Colors.black.withOpacity(0.8),
+              ),
               h1: AppTextStyles.blackExtraBold22,
               h2: AppTextStyles.blackExtraBold20,
               pPadding: EdgeInsets.only(bottom: widget.bottomPadding ? 4 : 0),

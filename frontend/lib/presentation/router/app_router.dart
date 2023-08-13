@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/presentation/features/article/pages/article_page.dart';
 import 'package:know_waste/presentation/features/community/pages/community_page.dart';
 import 'package:know_waste/presentation/shared/app_wrapper.dart';
 
+import '../../models/article/article.dart';
 import '../features/home/pages/home_page.dart';
 import '../features/waste_analysis/pages/waste_analysis_page.dart';
 import '../features/welcome/pages/welcome_page.dart';
@@ -88,12 +90,20 @@ class AppRouter {
               StatefulShellBranch(
                 routes: [
                   GoRoute(
-                    path: RoutePaths.community,
-                    name: RouteNames.community,
-                    builder: (BuildContext context, GoRouterState state) {
-                      return const CommunityPage();
-                    },
-                  ),
+                      path: RoutePaths.community,
+                      name: RouteNames.community,
+                      builder: (BuildContext context, GoRouterState state) {
+                        return const CommunityPage();
+                      },
+                      routes: [
+                        GoRoute(
+                          path: RoutePaths.article,
+                          name: RouteNames.article,
+                          builder: (BuildContext context, GoRouterState state) {
+                            return ArticlePage(article: state.extra as Article);
+                          },
+                        ),
+                      ]),
                 ],
               ),
             ],

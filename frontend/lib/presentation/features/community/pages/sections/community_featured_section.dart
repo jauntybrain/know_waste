@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:know_waste/models/api_error/api_error.dart';
 import 'package:know_waste/presentation/features/community/providers/featured_article_provider.dart';
+import 'package:know_waste/presentation/router/router_context_extension.dart';
 import 'package:know_waste/utils/constants.dart';
 
 import '../../../../theme/src/app_colors.dart';
@@ -40,8 +41,9 @@ class CommunityFeaturedSection extends ConsumerWidget {
           ),
           const SizedBox(height: 10),
           articleState.when(
-            data: (article) =>
-                article != null ? ArticleWidget.large(article: article) : articleContainer(text: 'Coming soon!'),
+            data: (article) => article != null
+                ? ArticleWidget.large(article: article, onTap: context.pushArticle)
+                : articleContainer(text: 'Coming soon!'),
             loading: () => const ArticleWidgetSkeleton.large(),
             error: (e, tr) => articleContainer(text: e is ApiError ? (e).message : 'Error occurred'),
           ),
