@@ -9,6 +9,7 @@ import 'package:know_waste/presentation/features/community/providers/articles_pr
 import 'package:know_waste/presentation/features/community/providers/featured_article_provider.dart';
 import 'package:know_waste/presentation/features/community/providers/guides_provider.dart';
 
+import '../../../router/route_names.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../theme/theme.dart';
 import 'sections/community_articles_section.dart';
@@ -51,8 +52,8 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
                     children: [
                       const CommunityFeaturedSection(),
                       const SizedBox(height: 30),
-                      // const CommunityGuidesSection(),
-                      // const SizedBox(height: 10),
+                      const CommunityGuidesSection(),
+                      const SizedBox(height: 10),
                       const CommunityChallengesSection(),
                       const SizedBox(height: 20),
                       const CommunityArticlesSection(),
@@ -85,12 +86,17 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppIconButton(
-                        onTap: () => GoRouter.of(context).pop(),
-                        size: 45,
-                        iconSize: 22,
-                        fillColor: AppColors.primary.withOpacity(0.1),
-                        icon: Icons.search_rounded,
+                      Hero(
+                        tag: 'search_bar',
+                        child: AppIconButton(
+                          onTap: () {
+                            GoRouter.of(context).goNamed(RouteNames.search);
+                          },
+                          size: 45,
+                          iconSize: 22,
+                          fillColor: AppColors.primary.withOpacity(0.1),
+                          icon: Icons.search_rounded,
+                        ),
                       ),
                       Text(
                         'Community',
@@ -99,12 +105,15 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
                           fontSize: 20,
                         ),
                       ),
-                      AppIconButton(
-                        onTap: () {},
-                        size: 45,
-                        iconSize: 22,
-                        fillColor: AppColors.primary.withOpacity(0.1),
-                        icon: Icons.bookmarks_rounded,
+                      Hero(
+                        tag: 'search_close',
+                        child: AppIconButton(
+                          onTap: () {},
+                          size: 45,
+                          iconSize: 22,
+                          fillColor: AppColors.primary.withOpacity(0.1),
+                          icon: Icons.bookmarks_rounded,
+                        ),
                       ),
                     ],
                   ),

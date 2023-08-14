@@ -6,9 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:know_waste/presentation/shared/app_markdown.dart';
+import 'package:know_waste/presentation/shared/app_toast.dart';
+import 'package:know_waste/providers/user_provider.dart';
 
 import '../../../../models/article/article.dart';
 import '../../../shared/app_icon_button.dart';
@@ -27,6 +30,7 @@ class ArticlePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final expandedPositon = ref.watch(expandedPositionProvider);
+    final isBookmarked = ref.watch(userProvider)!.bookmarks.contains(article.uid);
 
     Widget buildSummaryBlock({bool expandable = false}) {
       return GestureDetector(
@@ -230,11 +234,27 @@ class ArticlePage extends ConsumerWidget {
                         ),
                       ),
                       AppIconButton(
-                        onTap: () {},
+                        onTap: () {
+                          if (!isBookmarked) {
+                            ref.read(userProvider.notifier).addBookmark(article.uid, (success) {
+                              AppToast.of(context).show(
+                                gravity: ToastGravity.BOTTOM,
+                                text: 'Added to bookmarks!',
+                              );
+                            });
+                          } else {
+                            ref.read(userProvider.notifier).removeBookmark(article.uid, (success) {
+                              AppToast.of(context).show(
+                                gravity: ToastGravity.BOTTOM,
+                                text: 'Removed from bookmarks!',
+                              );
+                            });
+                          }
+                        },
                         size: 45,
                         iconSize: 22,
                         fillColor: AppColors.primary.withOpacity(0.1),
-                        icon: Icons.bookmark_outline_rounded,
+                        icon: isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
                       ),
                     ],
                   ),

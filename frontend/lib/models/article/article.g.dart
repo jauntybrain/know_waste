@@ -13,7 +13,7 @@ _$_Article _$$_ArticleFromJson(Map<String, dynamic> json) => _$_Article(
       imageUrl: json['imageUrl'] as String,
       tag: json['tag'] as String,
       content: json['content'] as String,
-      date: dateTimeFromTimestamp(json['date'] as Timestamp),
+      date: dateTimeFromTimestamp(json['date']),
       featured: json['featured'] as bool? ?? false,
     );
 

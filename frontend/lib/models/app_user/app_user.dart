@@ -11,14 +11,14 @@ class AppUser with _$AppUser {
 
   const factory AppUser({
     required String uid,
-    required String email,
-    required String username,
-    required String firstName,
-    required String lastName,
+    String? email,
+    String? username,
+    String? firstName,
+    String? lastName,
     String? phoneNumber,
     String? profilePicture,
+    @Default([]) List<String> bookmarks,
     @JsonKey(name: 'fcm_token') String? fcmToken,
-    String? token,
   }) = _AppUser;
 
   factory AppUser.fromJson(Map<String, Object?> json) => _$AppUserFromJson(json);

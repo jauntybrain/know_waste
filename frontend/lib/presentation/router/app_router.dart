@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/models/guide/guide.dart';
 import 'package:know_waste/presentation/features/article/pages/article_page.dart';
+import 'package:know_waste/presentation/features/bookmarks/pages/bookmarks_page.dart';
 import 'package:know_waste/presentation/features/community/pages/community_page.dart';
+import 'package:know_waste/presentation/features/community/pages/search_page.dart';
 import 'package:know_waste/presentation/features/guide/pages/guide_page.dart';
 import 'package:know_waste/presentation/shared/app_wrapper.dart';
 
@@ -111,6 +113,21 @@ class AppRouter {
                         builder: (BuildContext context, GoRouterState state) {
                           return GuidePage(guide: state.extra as Guide);
                         },
+                      ),
+                      GoRoute(
+                        path: RoutePaths.search,
+                        name: RouteNames.search,
+                        parentNavigatorKey: _rootNavigatorKey,
+                        pageBuilder: (BuildContext context, GoRouterState state) => fadePageTransition<void>(
+                          context: context,
+                          state: state,
+                          child: const SearchPage(),
+                        ),
+                      ),
+                      GoRoute(
+                        path: RoutePaths.bookmarks,
+                        name: RouteNames.bookmarks,
+                        builder: (BuildContext context, GoRouterState state) => const BookmarksPage(),
                       ),
                     ],
                   ),

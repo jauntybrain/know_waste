@@ -21,15 +21,15 @@ AppUser _$AppUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AppUser {
   String get uid => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
   String? get profilePicture => throw _privateConstructorUsedError;
+  List<String> get bookmarks => throw _privateConstructorUsedError;
   @JsonKey(name: 'fcm_token')
   String? get fcmToken => throw _privateConstructorUsedError;
-  String? get token => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,14 +43,14 @@ abstract class $AppUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uid,
-      String email,
-      String username,
-      String firstName,
-      String lastName,
+      String? email,
+      String? username,
+      String? firstName,
+      String? lastName,
       String? phoneNumber,
       String? profilePicture,
-      @JsonKey(name: 'fcm_token') String? fcmToken,
-      String? token});
+      List<String> bookmarks,
+      @JsonKey(name: 'fcm_token') String? fcmToken});
 }
 
 /// @nodoc
@@ -67,36 +67,36 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
   @override
   $Res call({
     Object? uid = null,
-    Object? email = null,
-    Object? username = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? email = freezed,
+    Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? phoneNumber = freezed,
     Object? profilePicture = freezed,
+    Object? bookmarks = null,
     Object? fcmToken = freezed,
-    Object? token = freezed,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
+              as String?,
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -105,13 +105,13 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String?,
+      bookmarks: null == bookmarks
+          ? _value.bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       fcmToken: freezed == fcmToken
           ? _value.fcmToken
           : fcmToken // ignore: cast_nullable_to_non_nullable
-              as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -126,14 +126,14 @@ abstract class _$$_AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uid,
-      String email,
-      String username,
-      String firstName,
-      String lastName,
+      String? email,
+      String? username,
+      String? firstName,
+      String? lastName,
       String? phoneNumber,
       String? profilePicture,
-      @JsonKey(name: 'fcm_token') String? fcmToken,
-      String? token});
+      List<String> bookmarks,
+      @JsonKey(name: 'fcm_token') String? fcmToken});
 }
 
 /// @nodoc
@@ -147,36 +147,36 @@ class __$$_AppUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uid = null,
-    Object? email = null,
-    Object? username = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? email = freezed,
+    Object? username = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? phoneNumber = freezed,
     Object? profilePicture = freezed,
+    Object? bookmarks = null,
     Object? fcmToken = freezed,
-    Object? token = freezed,
   }) {
     return _then(_$_AppUser(
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
+              as String?,
+      username: freezed == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      firstName: null == firstName
+              as String?,
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phoneNumber: freezed == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -185,13 +185,13 @@ class __$$_AppUserCopyWithImpl<$Res>
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
               as String?,
+      bookmarks: null == bookmarks
+          ? _value._bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       fcmToken: freezed == fcmToken
           ? _value.fcmToken
           : fcmToken // ignore: cast_nullable_to_non_nullable
-              as String?,
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -202,15 +202,16 @@ class __$$_AppUserCopyWithImpl<$Res>
 class _$_AppUser extends _AppUser {
   const _$_AppUser(
       {required this.uid,
-      required this.email,
-      required this.username,
-      required this.firstName,
-      required this.lastName,
+      this.email,
+      this.username,
+      this.firstName,
+      this.lastName,
       this.phoneNumber,
       this.profilePicture,
-      @JsonKey(name: 'fcm_token') this.fcmToken,
-      this.token})
-      : super._();
+      final List<String> bookmarks = const [],
+      @JsonKey(name: 'fcm_token') this.fcmToken})
+      : _bookmarks = bookmarks,
+        super._();
 
   factory _$_AppUser.fromJson(Map<String, dynamic> json) =>
       _$$_AppUserFromJson(json);
@@ -218,26 +219,33 @@ class _$_AppUser extends _AppUser {
   @override
   final String uid;
   @override
-  final String email;
+  final String? email;
   @override
-  final String username;
+  final String? username;
   @override
-  final String firstName;
+  final String? firstName;
   @override
-  final String lastName;
+  final String? lastName;
   @override
   final String? phoneNumber;
   @override
   final String? profilePicture;
+  final List<String> _bookmarks;
+  @override
+  @JsonKey()
+  List<String> get bookmarks {
+    if (_bookmarks is EqualUnmodifiableListView) return _bookmarks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bookmarks);
+  }
+
   @override
   @JsonKey(name: 'fcm_token')
   final String? fcmToken;
-  @override
-  final String? token;
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, username: $username, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, profilePicture: $profilePicture, fcmToken: $fcmToken, token: $token)';
+    return 'AppUser(uid: $uid, email: $email, username: $username, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, profilePicture: $profilePicture, bookmarks: $bookmarks, fcmToken: $fcmToken)';
   }
 
   @override
@@ -257,15 +265,25 @@ class _$_AppUser extends _AppUser {
                 other.phoneNumber == phoneNumber) &&
             (identical(other.profilePicture, profilePicture) ||
                 other.profilePicture == profilePicture) &&
+            const DeepCollectionEquality()
+                .equals(other._bookmarks, _bookmarks) &&
             (identical(other.fcmToken, fcmToken) ||
-                other.fcmToken == fcmToken) &&
-            (identical(other.token, token) || other.token == token));
+                other.fcmToken == fcmToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, email, username, firstName,
-      lastName, phoneNumber, profilePicture, fcmToken, token);
+  int get hashCode => Object.hash(
+      runtimeType,
+      uid,
+      email,
+      username,
+      firstName,
+      lastName,
+      phoneNumber,
+      profilePicture,
+      const DeepCollectionEquality().hash(_bookmarks),
+      fcmToken);
 
   @JsonKey(ignore: true)
   @override
@@ -284,14 +302,14 @@ class _$_AppUser extends _AppUser {
 abstract class _AppUser extends AppUser {
   const factory _AppUser(
       {required final String uid,
-      required final String email,
-      required final String username,
-      required final String firstName,
-      required final String lastName,
+      final String? email,
+      final String? username,
+      final String? firstName,
+      final String? lastName,
       final String? phoneNumber,
       final String? profilePicture,
-      @JsonKey(name: 'fcm_token') final String? fcmToken,
-      final String? token}) = _$_AppUser;
+      final List<String> bookmarks,
+      @JsonKey(name: 'fcm_token') final String? fcmToken}) = _$_AppUser;
   const _AppUser._() : super._();
 
   factory _AppUser.fromJson(Map<String, dynamic> json) = _$_AppUser.fromJson;
@@ -299,22 +317,22 @@ abstract class _AppUser extends AppUser {
   @override
   String get uid;
   @override
-  String get email;
+  String? get email;
   @override
-  String get username;
+  String? get username;
   @override
-  String get firstName;
+  String? get firstName;
   @override
-  String get lastName;
+  String? get lastName;
   @override
   String? get phoneNumber;
   @override
   String? get profilePicture;
   @override
+  List<String> get bookmarks;
+  @override
   @JsonKey(name: 'fcm_token')
   String? get fcmToken;
-  @override
-  String? get token;
   @override
   @JsonKey(ignore: true)
   _$$_AppUserCopyWith<_$_AppUser> get copyWith =>

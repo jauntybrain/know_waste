@@ -3,12 +3,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:stack_trace/stack_trace.dart' as stack_trace; 
+import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 import 'firebase_options.dart';
 import 'presentation/router/app_router.dart';
 import 'presentation/theme/src/app_themes.dart';
 import 'providers/providers_logger.dart';
+import 'providers/user_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,6 +46,7 @@ class KnowWasteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Consumer(
         builder: (context, ref, child) {
+          ref.watch(userProvider);
           router ??= AppRouter(ref);
 
           return MaterialApp.router(

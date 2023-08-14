@@ -37,6 +37,7 @@ dependencies:
   uuid: ^3.0.7
   camera: ^0.10.5+3
   intl: ^0.18.1
+  algoliasearch: ^0.2.0
 
   # Freezed
   freezed: ^2.4.2
@@ -44,6 +45,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_serializable: ^6.7.0
   json_annotation: ^4.8.1
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

@@ -24,6 +24,7 @@ class Article with _$Article {
   factory Article.fromJson(Map<String, Object?> json) => _$ArticleFromJson(json);
 }
 
-DateTime dateTimeFromTimestamp(Timestamp timestamp) => timestamp.toDate();
+DateTime dateTimeFromTimestamp(dynamic timestamp) =>
+    timestamp is Timestamp ? timestamp.toDate() : DateTime.fromMillisecondsSinceEpoch(timestamp);
 
 Timestamp dateTimeToTimestamp(DateTime date) => Timestamp.fromDate(date);
