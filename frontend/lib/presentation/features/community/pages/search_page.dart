@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/community/widgets/article_search/article_search_skeleton.dart';
+import 'package:know_waste/presentation/router/router_context_extension.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
 
 import '../../../../models/api_error/api_error.dart';
@@ -45,10 +46,14 @@ class SearchPage extends ConsumerWidget {
                               duration: const Duration(milliseconds: 200),
                               child: ListView.separated(
                                 shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: articles.length,
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
                                 itemBuilder: (context, index) {
-                                  return ArticleSearchWidget(article: articles[index]);
+                                  return ArticleSearchWidget(
+                                    article: articles[index],
+                                    onTap: context.pushArticle,
+                                  );
                                 },
                                 separatorBuilder: (context, index) => const SizedBox(height: 12),
                               ),

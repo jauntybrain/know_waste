@@ -62,29 +62,31 @@ class FirestoreCollection<T> {
     }
   }
 
-  Stream<T?> streamAll() async* {
-    final StreamController<T?> streamController = StreamController();
+  Stream<List<T>> streamAllWhereIn(Object field, List<String> array) async* {
+    if (array.isEmpty) {
+      yield* Stream.value([]);
+    } else {
+      final StreamController<List<T>> streamController = StreamController();
 
-    try {
-      final snapshots = withConverter.snapshots();
+      try {
+        final snapshots = withConverter.where(field, whereIn: array).snapshots();
 
-      snapshots.listen(
-        (snapshot) {
-          for (var document in snapshot.docs) {
-            streamController.add(document.data());
-          }
-        },
-        onError: (e) {
-          streamController.addError(e);
-          streamController.close();
-        },
-      );
-    } catch (e) {
-      streamController.addError(e);
-      streamController.close();
+        snapshots.listen(
+          (snapshot) {
+            streamController.add(snapshot.docs.map((e) => e.data()).toList());
+          },
+          onError: (e) {
+            streamController.addError(e);
+            streamController.close();
+          },
+        );
+      } catch (e) {
+        streamController.addError(e);
+        streamController.close();
+      }
+
+      yield* streamController.stream;
     }
-
-    yield* streamController.stream;
   }
 
   Future<List<T>> futureAll([String? orderBy, bool desc = false]) async {

@@ -81,6 +81,25 @@ class ArticleWidget extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // TODO: add bookmark button
+                  // Positioned(
+                  //   top: 10,
+                  //   right: 10,
+                  //   child: ClipRRect(
+                  //     borderRadius: BorderRadius.circular(12),
+                  //     child: BackdropFilter(
+                  //       filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                  //       child: AppIconButton(
+                  //         onTap: () {},
+                  //         size: 40,
+                  //         iconSize: 20,
+                  //         radius: 12,
+                  //         fillColor: AppColors.white.withOpacity(0.8),
+                  //         icon: Icons.bookmark_outline_rounded,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

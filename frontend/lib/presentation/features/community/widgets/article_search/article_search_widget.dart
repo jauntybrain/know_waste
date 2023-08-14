@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../models/article/article.dart';
+import '../../../../shared/app_icon_button.dart';
 import '../../../../shared/bouncing.dart';
 import '../../../../theme/theme.dart';
 
@@ -11,10 +12,12 @@ class ArticleSearchWidget extends StatelessWidget {
   const ArticleSearchWidget({
     Key? key,
     required this.article,
+    this.onBookmark,
     this.onTap,
   }) : super(key: key);
 
   final Article article;
+  final Function(Article)? onBookmark;
   final Function(Article)? onTap;
 
   @override
@@ -71,16 +74,30 @@ class ArticleSearchWidget extends StatelessWidget {
                         style: AppTextStyles.blackBlack22.copyWith(fontSize: 17.5, height: 1.2),
                       ),
                       const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          article.tag,
-                          style: AppTextStyles.primaryBold14.copyWith(color: AppColors.secondary),
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              article.tag,
+                              style: AppTextStyles.primaryBold14.copyWith(color: AppColors.secondary),
+                            ),
+                          ),
+                          if (onBookmark != null)
+                            AppIconButton(
+                              onTap: () => onBookmark?.call(article),
+                              size: 40,
+                              iconSize: 20,
+                              radius: 10,
+                              fillColor: AppColors.white,
+                              icon: Icons.bookmark_rounded,
+                            ),
+                        ],
                       ),
                     ],
                   ),

@@ -7,6 +7,7 @@ class AppIconButton extends StatelessWidget {
   const AppIconButton({
     required this.onTap,
     required this.icon,
+    this.radius,
     this.size,
     this.iconSize,
     this.fillColor,
@@ -16,7 +17,7 @@ class AppIconButton extends StatelessWidget {
 
   final VoidCallback onTap;
   final IconData icon;
-  final double? size, iconSize;
+  final double? radius, size, iconSize;
   final Color? fillColor, color;
 
   @override
@@ -28,7 +29,7 @@ class AppIconButton extends StatelessWidget {
         height: size ?? 55,
         decoration: BoxDecoration(
           color: fillColor ?? Colors.white,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(radius ?? 18),
           border: Border.all(width: 0.4, color: const Color(0xffCFE1D6)),
         ),
         child: Icon(

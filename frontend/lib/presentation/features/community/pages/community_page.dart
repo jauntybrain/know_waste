@@ -90,7 +90,7 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
                         tag: 'search_bar',
                         child: AppIconButton(
                           onTap: () {
-                            GoRouter.of(context).goNamed(RouteNames.search);
+                            GoRouter.of(context).pushNamed(RouteNames.search);
                           },
                           size: 45,
                           iconSize: 22,
@@ -108,7 +108,7 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
                       Hero(
                         tag: 'search_close',
                         child: AppIconButton(
-                          onTap: () {},
+                          onTap: () => GoRouter.of(context).pushNamed(RouteNames.bookmarks),
                           size: 45,
                           iconSize: 22,
                           fillColor: AppColors.primary.withOpacity(0.1),

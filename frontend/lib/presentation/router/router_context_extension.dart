@@ -12,14 +12,14 @@ extension RouterContextExtension on BuildContext {
   }
 
   void pushArticle(Article article) {
-    GoRouter.of(this).goNamed(
+    GoRouter.of(this).pushNamed(
       RouteNames.article,
       extra: article,
     );
   }
 
   void pushGuide(Guide guide) {
-    GoRouter.of(this).goNamed(
+    GoRouter.of(this).pushNamed(
       RouteNames.guide,
       extra: guide,
     );

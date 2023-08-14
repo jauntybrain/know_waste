@@ -31,6 +31,7 @@ class FirestoreArticlesRepository implements ArticlesRepository {
       throw ApiError(message: 'Error fetching articles');
     }
   }
+  
 
   @override
   Future<Article?> getFeaturedArticle() async {
