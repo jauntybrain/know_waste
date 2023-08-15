@@ -6,10 +6,12 @@ import 'package:know_waste/presentation/features/community/pages/sections/commun
 import 'package:know_waste/presentation/features/home/pages/recycling_tools_section.dart';
 import 'package:know_waste/presentation/features/home/widgets/home_app_bar.dart';
 
+import '../../../theme/src/app_icons.dart';
+import '../../../theme/theme.dart';
 import '../widgets/home_recommended_tool_widget.dart';
 import 'stats_section.dart';
 
-final showAppbar = StateProvider.autoDispose<bool>((ref) => false);
+final appbarStateProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +21,33 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class HomePageState extends ConsumerState<HomePage> {
+  ScrollController scrollController = ScrollController();
+  bool get showAppBar => ref.watch(appbarStateProvider);
+  final appBarThreshold = 200;
+
+  @override
+  void initState() {
+    scrollController.addListener(_scrollListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_scrollListener());
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  _scrollListener() {
+    final offset = scrollController.position.pixels;
+
+    if (offset > appBarThreshold && !showAppBar) {
+      ref.read(appbarStateProvider.notifier).state = true;
+    } else if (offset < appBarThreshold && showAppBar) {
+      ref.read(appbarStateProvider.notifier).state = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,39 +55,74 @@ class HomePageState extends ConsumerState<HomePage> {
       appBar: AppBar(
         toolbarHeight: 0,
         backgroundColor: Colors.transparent,
-        systemOverlayStyle: const SystemUiOverlayStyle(
+        systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.light,
-          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: showAppBar ? Brightness.dark : Brightness.light,
+          statusBarBrightness: showAppBar ? Brightness.light : Brightness.dark,
         ),
       ),
-      body: CustomScrollView(
-        slivers: [
-          const HomeAppBar(),
-          SliverSafeArea(
-            top: false,
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                AnimationConfiguration.toStaggeredList(
-                  duration: const Duration(milliseconds: 200),
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: HomeRecommendedToolWidget(),
+      body: Stack(
+        children: [
+          CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              const HomeAppBar(),
+              SliverSafeArea(
+                top: false,
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate(
+                    AnimationConfiguration.toStaggeredList(
+                      duration: const Duration(milliseconds: 200),
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: HomeRecommendedToolWidget(),
+                        ),
+                        const SizedBox(height: 25),
+                        const StatsSection(),
+                        const SizedBox(height: 30),
+                        const CommunityChallengesSection(),
+                        const SizedBox(height: 15),
+                        const RecyclingToolsSection(),
+                        const SizedBox(height: 30),
+                      ],
+                      childAnimationBuilder: (widget) => SlideAnimation(
+                        verticalOffset: 50.0,
+                        child: FadeInAnimation(child: widget),
+                      ),
                     ),
-                    const SizedBox(height: 25),
-                    const StatsSection(),
-                    const SizedBox(height: 30),
-                    const CommunityChallengesSection(),
-                    const SizedBox(height: 15),
-                    const RecyclingToolsSection(),
-                    const SizedBox(height: 30),
-                  ],
-                  childAnimationBuilder: (widget) => SlideAnimation(
-                    verticalOffset: 50.0,
-                    child: FadeInAnimation(child: widget),
                   ),
                 ),
+              ),
+            ],
+          ),
+          AnimatedPositioned(
+            width: MediaQuery.of(context).size.width,
+            duration: const Duration(milliseconds: 200),
+            top: showAppBar ? 0 : -115,
+            curve: Curves.ease,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                boxShadow: [AppShadows.small],
+                border: const Border(
+                  bottom: BorderSide(
+                    width: 1,
+                    color: Color(0xFFf2f2f2),
+                  ),
+                ),
+              ),
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: 20,
+                top: MediaQuery.of(context).padding.top + 5,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppIcons.icon(AppIcons.logoHorizontal, color: AppColors.secondary, size: 20),
+                ],
               ),
             ),
           ),
