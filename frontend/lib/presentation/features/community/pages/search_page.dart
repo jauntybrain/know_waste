@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/community/widgets/article_search/article_search_skeleton.dart';
 import 'package:know_waste/presentation/router/router_context_extension.dart';
@@ -66,20 +65,7 @@ class SearchPage extends ConsumerWidget {
                         shrinkWrap: true,
                         itemCount: 7,
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        itemBuilder: (context, index) {
-                          if (index == 0) {
-                            return const SizedBox(height: 8);
-                          }
-                          return AnimationConfiguration.staggeredList(
-                            position: index,
-                            duration: const Duration(milliseconds: 375),
-                            delay: const Duration(milliseconds: 300),
-                            child: const SlideAnimation(
-                              verticalOffset: 30,
-                              child: FadeInAnimation(child: ArticleSearchSkeleton()),
-                            ),
-                          );
-                        },
+                        itemBuilder: (context, index) => const ArticleSearchSkeleton(),
                         separatorBuilder: (context, index) => const SizedBox(height: 12),
                       ),
                       error: (e, tr) => Text(e is ApiError ? (e).message : 'Error occurred'),

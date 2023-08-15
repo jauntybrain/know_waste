@@ -73,7 +73,7 @@ class RecyclingToolWidget extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     recyclingTool.about,
-                    style: AppTextStyles.grayMedium16,
+                    style: AppTextStyles.grayMedium14.copyWith(fontSize: 15.5),
                   ),
                   if (recyclingTool.route != null) ...[
                     const SizedBox(height: 15),
