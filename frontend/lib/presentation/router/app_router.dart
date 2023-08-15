@@ -7,6 +7,7 @@ import 'package:know_waste/presentation/features/bookmarks/pages/bookmarks_page.
 import 'package:know_waste/presentation/features/community/pages/community_page.dart';
 import 'package:know_waste/presentation/features/community/pages/search_page.dart';
 import 'package:know_waste/presentation/features/guide/pages/guide_page.dart';
+import 'package:know_waste/presentation/features/profile/pages/profile_page.dart';
 import 'package:know_waste/presentation/shared/app_wrapper.dart';
 
 import '../../models/article/article.dart';
@@ -121,6 +122,17 @@ class AppRouter {
                         builder: (BuildContext context, GoRouterState state) => const BookmarksPage(),
                       ),
                     ],
+                  ),
+                ],
+              ),
+              StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: RoutePaths.profile,
+                    name: RouteNames.profile,
+                    builder: (BuildContext context, GoRouterState state) {
+                      return const ProfilePage();
+                    },
                   ),
                 ],
               ),
