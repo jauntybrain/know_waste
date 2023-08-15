@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:know_waste/repositories/user/user_repository.dart';
@@ -46,11 +45,17 @@ class FirestoreUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> signInAnonymously() async {
-    try {
-      await firebaseAuth.signInAnonymously();
-    } catch (e) {
-      log(e.toString());
-    }
+  Future<User?> signInAnonymously() async {
+    return await firebaseAuth.signInAnonymously();
+  }
+
+  @override
+  Future<User?> signInWithApple() async {
+    return (await firebaseAuth.signInWithApple())?.user;
+  }
+
+  @override
+  Future<User?> signInWithGoogle() async {
+    return (await firebaseAuth.signInWithGoogle())?.user;
   }
 }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// Credit: https://github.com/MingSern/flutter_bounceable 
 class Bouncing extends StatefulWidget {
   /// Set it to `null` to disable `onTap`.
   final VoidCallback? onTap;

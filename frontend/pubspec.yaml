@@ -46,6 +46,9 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_serializable: ^6.7.0
   json_annotation: ^4.8.1
+  crypto: ^3.0.3
+  google_sign_in: ^6.1.4
+  sign_in_with_apple: ^5.0.0
 
 dev_dependencies:
   flutter_test:

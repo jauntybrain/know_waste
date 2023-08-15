@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AuthService {
   AuthService(this._auth);
@@ -51,6 +56,53 @@ class AuthService {
 
   Future<void> resetPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        return await FirebaseAuth.instance.signInWithCredential(credential);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  String _sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+
+    return digest.toString();
+  }
+
+  Future<UserCredential?> signInWithApple() async {
+    final rawNonce = generateNonce();
+    final nonce = _sha256ofString(rawNonce);
+
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: nonce,
+    );
+
+    final oauthCredential = OAuthProvider('apple.com').credential(
+      idToken: appleCredential.identityToken,
+      rawNonce: rawNonce,
+    );
+
+    return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
   }
 
   Future<void> signOut() async {

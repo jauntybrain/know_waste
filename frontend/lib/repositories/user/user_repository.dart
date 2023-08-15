@@ -13,5 +13,9 @@ abstract class UserRepository {
 
   Future<void> signOut([String? userId]);
 
-  Future<void> signInAnonymously();
+  Future<User?> signInAnonymously();
+
+  Future<User?> signInWithGoogle();
+
+  Future<User?> signInWithApple();
 }
