@@ -2,7 +2,7 @@
 "version": "0.2.0",
   "configurations": [
     {
-      "name": "Hero (No Impeller)",
+      "name": "KnowWaste (No Impeller)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",

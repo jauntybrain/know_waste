@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
 import 'bouncing.dart';
 
@@ -16,7 +16,7 @@ class AppIconButton extends StatelessWidget {
   });
 
   final VoidCallback onTap;
-  final IconData icon;
+  final dynamic icon;
   final double? radius, size, iconSize;
   final Color? fillColor, color;
 
@@ -27,16 +27,25 @@ class AppIconButton extends StatelessWidget {
       child: Container(
         width: size ?? 55,
         height: size ?? 55,
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: fillColor ?? Colors.white,
           borderRadius: BorderRadius.circular(radius ?? 18),
           border: Border.all(width: 0.4, color: const Color(0xffCFE1D6)),
         ),
-        child: Icon(
-          icon,
-          size: iconSize ?? 25,
-          color: color ?? const Color(0xff007029),
-        ),
+        child: icon is IconData
+            ? Icon(
+                icon as IconData,
+                size: iconSize ?? 25,
+                color: color ?? const Color(0xff007029),
+              )
+            : icon is String
+                ? AppIcons.icon(
+                    icon as String,
+                    size: iconSize ?? 25,
+                    color: color ?? const Color(0xff007029),
+                  )
+                : const SizedBox.shrink(),
       ),
     );
   }

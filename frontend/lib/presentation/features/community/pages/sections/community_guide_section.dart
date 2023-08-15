@@ -30,35 +30,39 @@ class CommunityGuidesSection extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 10),
-        SizedBox(
-          height: 190,
-          width: MediaQuery.of(context).size.width,
-          child: guidesState.when(
-            data: (guides) => MasonryGridView.count(
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              scrollDirection: Axis.horizontal,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              crossAxisCount: 2,
-              itemCount: guides.length,
-              itemBuilder: (context, index) => GuideWidget(
-                guide: guides[index],
-                onTap: context.pushGuide,
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: SizedBox(
+            key: ValueKey(guidesState),
+            height: 190,
+            width: MediaQuery.of(context).size.width,
+            child: guidesState.when(
+              data: (guides) => MasonryGridView.count(
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                scrollDirection: Axis.horizontal,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                crossAxisCount: 2,
+                itemCount: guides.length,
+                itemBuilder: (context, index) => GuideWidget(
+                  guide: guides[index],
+                  onTap: context.pushGuide,
+                ),
               ),
-            ),
-            error: (e, tr) => Center(
-              child: e is ApiError ? Text((e).message) : const Text('Error occurred'),
-            ),
-            loading: () => MasonryGridView.count(
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              scrollDirection: Axis.horizontal,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              crossAxisCount: 2,
-              itemCount: 4,
-              itemBuilder: (context, index) => const GuideWidgetSkeleton(),
+              error: (e, tr) => Center(
+                child: e is ApiError ? Text((e).message) : const Text('Error occurred'),
+              ),
+              loading: () => MasonryGridView.count(
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                scrollDirection: Axis.horizontal,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                crossAxisCount: 2,
+                itemCount: 4,
+                itemBuilder: (context, index) => const GuideWidgetSkeleton(),
+              ),
             ),
           ),
         ),

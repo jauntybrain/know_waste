@@ -40,12 +40,18 @@ class CommunityFeaturedSection extends ConsumerWidget {
             style: AppTextStyles.blackBlack22,
           ),
           const SizedBox(height: 10),
-          articleState.when(
-            data: (article) => article != null
-                ? ArticleWidget.large(article: article, onTap: context.pushArticle)
-                : articleContainer(text: 'Coming soon!'),
-            loading: () => const ArticleWidgetSkeleton.large(),
-            error: (e, tr) => articleContainer(text: e is ApiError ? (e).message : 'Error occurred'),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: Container(
+              key: ValueKey(articleState),
+              child: articleState.when(
+                data: (article) => article != null
+                    ? ArticleWidget.large(article: article, onTap: context.pushArticle)
+                    : articleContainer(text: 'Coming soon!'),
+                loading: () => const ArticleWidgetSkeleton.large(),
+                error: (e, tr) => articleContainer(text: e is ApiError ? (e).message : 'Error occurred'),
+              ),
+            ),
           ),
         ],
       ),

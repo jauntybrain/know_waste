@@ -40,38 +40,44 @@ class CommunityArticlesSection extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 10),
-        articlesState.when(
-          data: (articles) => GridView.builder(
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: 310,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: Container(
+            key: ValueKey(articlesState),
+            child: articlesState.when(
+              data: (articles) => GridView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisExtent: 310,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                ),
+                itemCount: articles.length,
+                itemBuilder: (context, index) => ArticleWidget(
+                  article: articles[index],
+                  onTap: context.pushArticle,
+                ),
+              ),
+              error: (e, tr) => Center(
+                child: e is ApiError ? Text((e).message) : const Text('Error occurred'),
+              ),
+              loading: () => GridView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisExtent: 270,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                ),
+                itemCount: 4,
+                itemBuilder: (context, index) => const ArticleWidgetSkeleton(),
+              ),
             ),
-            itemCount: articles.length,
-            itemBuilder: (context, index) => ArticleWidget(
-              article: articles[index],
-              onTap: context.pushArticle,
-            ),
-          ),
-          error: (e, tr) => Center(
-            child: e is ApiError ? Text((e).message) : const Text('Error occurred'),
-          ),
-          loading: () => GridView.builder(
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: 270,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-            ),
-            itemCount: 4,
-            itemBuilder: (context, index) => const ArticleWidgetSkeleton(),
           ),
         ),
       ],
