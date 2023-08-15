@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/waste_analysis/pages/waste_analysis_loading_page.dart';
@@ -168,48 +169,55 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
       }
     }
 
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Background
-          ...buildBackground(),
-          Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 30,
-                sigmaY: 30,
-              ),
-              child: Container(
-                color: AppColors.white.withOpacity(0.85),
-                width: double.infinity,
+    return AnnotatedRegion(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            // Background
+            ...buildBackground(),
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 30,
+                  sigmaY: 30,
+                ),
+                child: Container(
+                  color: AppColors.white.withOpacity(0.85),
+                  width: double.infinity,
+                ),
               ),
             ),
-          ),
-
-          // Main Page Content
-          Positioned.fill(child: buildContent()),
-
-          // Top & Bottom Navigation
-          Positioned(
-            top: 0,
-            width: MediaQuery.of(context).size.width,
-            child: WasteAnalysisTopNav(blurred: hasData),
-          ),
-          if (wasteAnalysis.pickedImage == null && !isLoading)
+            // Main Page Content
+            Positioned.fill(child: buildContent()),
+            // Top Navigation
             Positioned(
-              bottom: MediaQuery.of(context).viewPadding.bottom,
+              top: 0,
               width: MediaQuery.of(context).size.width,
-              child: CameraControlsWidget(
-                controller: _cameraController,
-                onCapture: (image) => ref.read(wasteAnalysisProvider.notifier)
-                  ..setPickedImage(image)
-                  ..uploadImage(),
-                onGallery: () => ref.read(wasteAnalysisProvider.notifier).pickImage(isCamera: false),
-              ),
+              child: WasteAnalysisTopNav(blurred: hasData),
             ),
-          if (wasteAnalysis.analyzedWaste != null && !isLoading) buildAnalysisBottomNav(),
-        ],
+            // Camera Controls
+            if (wasteAnalysis.pickedImage == null && !isLoading)
+              Positioned(
+                bottom: MediaQuery.of(context).viewPadding.bottom,
+                width: MediaQuery.of(context).size.width,
+                child: CameraControlsWidget(
+                  controller: _cameraController,
+                  onCapture: (image) => ref.read(wasteAnalysisProvider.notifier)
+                    ..setPickedImage(image)
+                    ..uploadImage(),
+                  onGallery: () => ref.read(wasteAnalysisProvider.notifier).pickImage(isCamera: false),
+                ),
+              ),
+            // Bottom Navigation
+            if (wasteAnalysis.analyzedWaste != null && !isLoading) buildAnalysisBottomNav(),
+          ],
+        ),
       ),
     );
   }

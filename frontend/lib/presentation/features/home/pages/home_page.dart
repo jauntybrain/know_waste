@@ -21,9 +21,10 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class HomePageState extends ConsumerState<HomePage> {
+  final double appBarThreshold = 150.0;
+
   ScrollController scrollController = ScrollController();
   bool get showAppBar => ref.watch(appbarStateProvider);
-  final appBarThreshold = 200;
 
   @override
   void initState() {
