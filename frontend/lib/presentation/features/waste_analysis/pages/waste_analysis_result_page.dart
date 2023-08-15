@@ -178,7 +178,7 @@ class WasteAnalysisResultPage extends ConsumerWidget {
                 ),
                 const SizedBox(height: 30),
                 Text(
-                  'AI-powered',
+                  'AI-Powered',
                   style: AppTextStyles.blackBlack22.copyWith(
                     fontWeight: FontWeight.w900,
                     color: AppColors.secondary,

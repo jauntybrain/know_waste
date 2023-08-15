@@ -24,9 +24,6 @@ class AppColors {
   static const LinearGradient primaryGradient = LinearGradient(
     begin: AlignmentDirectional.centerStart,
     end: AlignmentDirectional.centerEnd,
-    colors: [
-      primary,
-      primaryDark,
-    ],
+    colors: [primary, primaryDark],
   );
 }

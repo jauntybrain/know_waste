@@ -23,10 +23,7 @@ class GuideWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Bouncing(
-        onTap: () {
-          HapticFeedback.lightImpact();
-          onTap?.call(guide);
-        },
+        onTap: () => onTap?.call(guide),
         child: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(

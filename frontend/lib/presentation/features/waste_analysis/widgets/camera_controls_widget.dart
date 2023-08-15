@@ -43,7 +43,6 @@ class CameraControlsWidget extends ConsumerWidget {
                 ),
                 Bouncing(
                   onTap: () async {
-                    HapticFeedback.heavyImpact();
                     if (controller!.value.isTakingPicture) {
                       return;
                     }

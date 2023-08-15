@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:know_waste/presentation/theme/src/app_icons.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
 
 import '../../../shared/app_markdown.dart';
@@ -85,11 +85,7 @@ class WasteAnalysisPage1State extends ConsumerState<WasteAnalysisPage1> {
                               children: [
                                 Row(
                                   children: [
-                                    SvgPicture.asset(
-                                      'assets/images/jade-advice.svg',
-                                      height: 30,
-                                      width: 30,
-                                    ),
+                                    AppIcons.icon(AppIcons.advice, size: 30),
                                     const SizedBox(width: 12),
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,

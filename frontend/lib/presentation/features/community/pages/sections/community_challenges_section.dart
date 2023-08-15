@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
 import '../../../../theme/src/app_colors.dart';
 import '../../../../theme/src/app_shadows.dart';
@@ -61,7 +61,7 @@ class CommunityChallengesSection extends ConsumerWidget {
                                     color: AppColors.primary.withOpacity(0.2),
                                   ),
                                 ),
-                                Positioned(child: SvgPicture.asset('assets/images/jade-advice.svg')),
+                                Positioned(child: AppIcons.icon(AppIcons.advice)),
                               ],
                             ),
                           ),
@@ -125,7 +125,7 @@ class CommunityChallengesSection extends ConsumerWidget {
                                     color: const Color(0xffFEAD62).withOpacity(0.2),
                                   ),
                                 ),
-                                Positioned(child: SvgPicture.asset('assets/images/jade-advice.svg')),
+                                Positioned(child: AppIcons.icon(AppIcons.advice)),
                               ],
                             ),
                           ),

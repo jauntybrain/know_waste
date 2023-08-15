@@ -223,10 +223,7 @@ class ArticleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Bouncing(
-        onTap: () {
-          HapticFeedback.lightImpact();
-          onTap?.call(article);
-        },
+        onTap: () => onTap?.call(article),
         child: isLarge ? _buildLargeArticle(context) : _buildRegularArticle(),
       );
 }

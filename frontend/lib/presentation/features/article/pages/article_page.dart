@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +15,7 @@ import 'package:know_waste/providers/user_provider.dart';
 import '../../../../models/article/article.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../theme/src/app_colors.dart';
+import '../../../theme/src/app_icons.dart';
 import '../../../theme/src/app_text_styles.dart';
 
 final expandedPositionProvider = StateProvider<Offset?>((ref) => null);
@@ -67,7 +67,7 @@ class ArticlePage extends ConsumerWidget {
                           color: AppColors.primary.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: SvgPicture.asset('assets/images/local.svg'),
+                        child: AppIcons.icon(AppIcons.local),
                       ),
                       const SizedBox(width: 10),
                       Column(

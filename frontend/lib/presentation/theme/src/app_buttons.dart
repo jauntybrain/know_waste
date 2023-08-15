@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:know_waste/presentation/shared/bouncing.dart';
 
 import 'app_colors.dart';
@@ -25,8 +24,9 @@ class AppButton extends StatelessWidget {
     this.isDisabled = false,
     this.hasShadow = true,
   })  : decoration = BoxDecoration(
-          color: fillColor?.withOpacity(isDisabled ? 0.5 : 1) ??
-              (onTap == null ? Colors.grey[300] : AppColors.secondary.withOpacity(isDisabled ? 0.5 : 1)),
+          color: isDisabled
+              ? fillColor?.withOpacity(0.2)
+              : fillColor ?? (onTap == null ? Colors.grey[300] : AppColors.secondary.withOpacity(isDisabled ? 0.5 : 1)),
           borderRadius: BorderRadius.circular(borderRadius),
           boxShadow: isDisabled || !hasShadow ? null : [AppShadows.primary],
           border: border,
@@ -76,12 +76,7 @@ class AppButton extends StatelessWidget {
     return Wrap(
       children: [
         Bouncing(
-          onTap: isLoading || isDisabled
-              ? null
-              : () {
-                  HapticFeedback.lightImpact();
-                  onTap?.call();
-                },
+          onTap: isLoading || isDisabled ? null : () => onTap?.call(),
           child: SizedBox(
             height: height,
             width: width,

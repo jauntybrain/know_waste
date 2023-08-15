@@ -23,7 +23,7 @@ class AppIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Bouncing(
-      onTap: () => HapticFeedback.lightImpact().then((_) => onTap.call()),
+      onTap: () => onTap.call(),
       child: Container(
         width: size ?? 55,
         height: size ?? 55,

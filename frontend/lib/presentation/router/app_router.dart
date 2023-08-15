@@ -60,9 +60,11 @@ class AppRouter {
             path: RoutePaths.analyze,
             name: RouteNames.analyze,
             parentNavigatorKey: _rootNavigatorKey,
-            builder: (BuildContext context, GoRouterState state) {
-              return const WasteAnalysisPage();
-            },
+            pageBuilder: (BuildContext context, GoRouterState state) => slideUpPageTransition(
+              context: context,
+              state: state,
+              child: const WasteAnalysisPage(),
+            ),
           ),
           StatefulShellRoute.indexedStack(
             builder: (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
@@ -76,17 +78,6 @@ class AppRouter {
                     name: RouteNames.home,
                     builder: (BuildContext context, GoRouterState state) {
                       return const HomePage();
-                    },
-                  ),
-                ],
-              ),
-              StatefulShellBranch(
-                routes: [
-                  GoRoute(
-                    path: '/scan',
-                    name: 'scan',
-                    builder: (BuildContext context, GoRouterState state) {
-                      return Container();
                     },
                   ),
                 ],
