@@ -44,8 +44,6 @@ class FirestoreUserRepository implements UserRepository {
 
   @override
   Future<void> updateProfile(String uid, Map<String, dynamic> newProfile) {
-    print(newProfile);
-    print('${userCollection.path}/$uid');
     return firestore.update('${userCollection.path}/$uid', newProfile);
   }
 

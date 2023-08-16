@@ -38,7 +38,11 @@ final userRepositoryProvider = Provider<UserRepository>(
 );
 
 final wasteRepositoryProvider = Provider<AnalyzedWasteRepository>(
-  (ref) => FirestoreAnalyzedWasteRepository(_firestoreInstance, AnalyzedWasteCollection()),
+  (ref) => FirestoreAnalyzedWasteRepository(
+    _firestoreAuthService,
+    _firestoreInstance,
+    AnalyzedWasteCollection(),
+  ),
 );
 
 final articlesRepositoryProvider = Provider<ArticlesRepository>(

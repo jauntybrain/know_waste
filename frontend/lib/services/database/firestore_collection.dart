@@ -27,7 +27,7 @@ class FirestoreCollection<T> {
 
   Future<T?> futureSingleWhereEqual(String field, dynamic value) async {
     try {
-      final query = withConverter.where(field, isEqualTo: true).orderBy('date', descending: true).limit(1);
+      final query = withConverter.where(field, isEqualTo: value).orderBy('date', descending: true).limit(1);
 
       return (await query.get()).docs.firstOrNull?.data();
     } catch (err) {
@@ -90,11 +90,21 @@ class FirestoreCollection<T> {
   }
 
   Future<List<T>> futureAll([String? orderBy, bool desc = false]) async {
-    List<QueryDocumentSnapshot<T>> docs;
-
-    docs = orderBy != null ? (await this.orderBy(orderBy, desc).get()).docs : (await withConverter.get()).docs;
+    final docs = orderBy != null ? (await this.orderBy(orderBy, desc).get()).docs : (await withConverter.get()).docs;
 
     return docs.map((doc) => doc.data()).toList();
+  }
+
+  Future<List<T>> futureAllWhereEqual(String field, dynamic value) async {
+    try {
+      final query = whereEqual(field, value);
+
+      final docs = (await query.get()).docs;
+
+      return docs.map((doc) => doc.data()).toList();
+    } catch (err) {
+      rethrow;
+    }
   }
 
   Query<T> whereEqual(String field, dynamic value) {

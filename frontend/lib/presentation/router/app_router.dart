@@ -7,6 +7,7 @@ import 'package:know_waste/presentation/features/bookmarks/pages/bookmarks_page.
 import 'package:know_waste/presentation/features/community/pages/community_page.dart';
 import 'package:know_waste/presentation/features/community/pages/search_page.dart';
 import 'package:know_waste/presentation/features/guide/pages/guide_page.dart';
+import 'package:know_waste/presentation/features/profile/pages/attributions_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/notifications_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/profile_page.dart';
 import 'package:know_waste/presentation/shared/app_wrapper.dart';
@@ -161,6 +162,18 @@ class AppRouter {
                         path: RoutePaths.help,
                         name: RouteNames.help,
                         builder: (BuildContext context, GoRouterState state) => const HelpPage(),
+                        routes: [
+                          GoRoute(
+                            path: RoutePaths.attributions,
+                            name: RouteNames.attributions,
+                            parentNavigatorKey: _rootNavigatorKey,
+                            pageBuilder: (BuildContext context, GoRouterState state) => slideUpPageTransition<void>(
+                              context: context,
+                              state: state,
+                              child: const AttributionsPage(),
+                            ),
+                          ),
+                        ],
                       ),
                       GoRoute(
                         path: RoutePaths.scans,
