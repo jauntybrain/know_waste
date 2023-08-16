@@ -14,4 +14,5 @@ class RouteNames {
   // Content
   static const String article = 'article';
   static const String guide = 'guide';
+  static const String challenge = 'challenge';
 }

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:know_waste/presentation/features/community/pages/sections/community_challenges_section.dart';
 import 'package:know_waste/presentation/features/home/pages/recycling_tools_section.dart';
 import 'package:know_waste/presentation/features/home/widgets/home_app_bar.dart';
 
 import '../../../theme/src/app_icons.dart';
 import '../../../theme/theme.dart';
+import '../../community/pages/sections/community_challenges_section.dart';
 import '../widgets/home_recommended_tool_widget.dart';
 import 'stats_section.dart';
 

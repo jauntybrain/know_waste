@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:know_waste/models/article/article.dart';
+import 'package:know_waste/models/challenge/challenge.dart';
 import 'package:know_waste/models/guide/guide.dart';
 
 import '../models/analyzed_waste/analyzed_waste.dart';
@@ -46,6 +47,17 @@ class GuidesCollection extends FirestoreCollection<Guide> {
   @override
   CollectionReference<Guide> get withConverter => firestore.collection(path).withConverter<Guide>(
         fromFirestore: (snapshot, _) => Guide.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
+        toFirestore: (article, _) => {},
+      );
+}
+
+class ChallengesCollection extends FirestoreCollection<Challenge> {
+  @override
+  String get path => 'challenges';
+
+  @override
+  CollectionReference<Challenge> get withConverter => firestore.collection(path).withConverter<Challenge>(
+        fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
         toFirestore: (article, _) => {},
       );
 }

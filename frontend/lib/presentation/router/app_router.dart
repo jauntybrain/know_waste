@@ -11,6 +11,8 @@ import 'package:know_waste/presentation/features/profile/pages/profile_page.dart
 import 'package:know_waste/presentation/shared/app_wrapper.dart';
 
 import '../../models/article/article.dart';
+import '../../models/challenge/challenge.dart';
+import '../features/challenge/pages/challenge_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../features/waste_analysis/pages/waste_analysis_page.dart';
 import '../features/welcome/pages/welcome_page.dart';
@@ -66,6 +68,13 @@ class AppRouter {
               state: state,
               child: const WasteAnalysisPage(),
             ),
+          ),
+          GoRoute(
+            path: RoutePaths.challenge,
+            name: RouteNames.challenge,
+            builder: (BuildContext context, GoRouterState state) {
+              return ChallengePage(challenge: state.extra as Challenge);
+            },
           ),
           StatefulShellRoute.indexedStack(
             builder: (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/models/challenge/challenge.dart';
 import 'package:know_waste/models/guide/guide.dart';
 
 import '../../models/article/article.dart';
 import 'route_names.dart';
 
-/// [RouterContextExtension] is an extension on [BuildContext] to simplify navigation.
-extension RouterContextExtension on BuildContext {
+/// [RouterContextExt] is an extension on [BuildContext] to simplify navigation.
+extension RouterContextExt on BuildContext {
   void pop() {
     GoRouter.of(this).pop();
   }
@@ -22,6 +23,13 @@ extension RouterContextExtension on BuildContext {
     GoRouter.of(this).pushNamed(
       RouteNames.guide,
       extra: guide,
+    );
+  }
+
+  void pushChallenge(Challenge challenge) {
+    GoRouter.of(this).pushNamed(
+      RouteNames.challenge,
+      extra: challenge,
     );
   }
 }
