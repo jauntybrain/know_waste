@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/shared/bouncing.dart';
+import 'package:know_waste/utils/constants.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../../router/route_names.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../theme/theme.dart';
 
@@ -18,145 +21,216 @@ class HelpPage extends StatelessWidget {
           children: [
             // Page content
             SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: MediaQuery.of(context).viewPadding.top + 60),
-                  Bouncing(
-                    onTap: () {
-                      // launchUrlString('mailto:jauntybrain@gmail.com');
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [AppShadows.small],
-                        border: Border.all(color: const Color(0xfff2f2f2)),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.mail_outline_rounded,
-                            color: AppColors.secondary,
-                            size: 25,
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Contact us',
-                                  style: AppTextStyles.blackBold15,
-                                ),
-                                Text(
-                                  'For questions, proposals, and more',
-                                  style: AppTextStyles.lightGrayRegular14
-                                      .copyWith(fontSize: 13, color: Colors.black.withOpacity(0.8), height: 1.3),
-                                ),
-                              ],
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).viewPadding.top + 55),
+                    Bouncing(
+                      onTap: () => launchUrlString('mailto:jauntybrain@gmail.com'),
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [AppShadows.small],
+                          border: Border.all(color: const Color(0xfff2f2f2)),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(width: 0.4, color: const Color(0xffCFE1D6)),
+                              ),
+                              child: const Icon(
+                                Icons.mail_outline_rounded,
+                                color: AppColors.secondary,
+                                size: 25,
+                              ),
                             ),
-                          ),
-                          const Icon(Icons.open_in_new),
-                        ],
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Contact',
+                                    style: AppTextStyles.blackExtraBold15,
+                                  ),
+                                  Text(
+                                    'For questions, proposals, and more',
+                                    style: AppTextStyles.lightGrayRegular14
+                                        .copyWith(fontSize: 13, color: Colors.black.withOpacity(0.8), height: 1.3),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(Icons.open_in_new, color: AppColors.secondary),
+                            const SizedBox(width: 12),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Bouncing(
-                    onTap: () {
-                      // launchUrlString('mailto:jauntybrain@gmail.com?subject=KnowWaste%20Application%20bug%20report&'
-                      //     'body=Please%20describe%20the%20bug%20you%20found%20in%20the%20application.%20Thank%20you!');
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [AppShadows.small],
-                        border: Border.all(color: const Color(0xfff2f2f2)),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.bug_report_rounded,
-                            color: Colors.red,
-                            size: 25,
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Report a bug',
-                                  style: AppTextStyles.blackBold15,
-                                ),
-                                Text(
-                                  'Found a problem? Please let us know!',
-                                  style: AppTextStyles.lightGrayRegular14
-                                      .copyWith(fontSize: 13, color: Colors.black.withOpacity(0.8), height: 1.3),
-                                ),
-                              ],
+                    const SizedBox(height: 10),
+                    Bouncing(
+                      onTap: () => launchUrlString('mailto:jauntybrain@gmail.com?subject=KnowWaste%20bug%20report&'
+                          'body=Please%20describe%20the%20bug%20you%20found%20in%20the%20application.%20Thank%20you!'),
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [AppShadows.small],
+                          border: Border.all(color: const Color(0xfff2f2f2)),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(width: 0.4, color: const Color(0xffCFE1D6)),
+                              ),
+                              child: const Icon(
+                                Icons.bug_report_outlined,
+                                color: AppColors.secondary,
+                                size: 25,
+                              ),
                             ),
-                          ),
-                          const Icon(Icons.open_in_new),
-                        ],
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Report a bug',
+                                    style: AppTextStyles.blackExtraBold15,
+                                  ),
+                                  Text(
+                                    'Found a problem? Please let me know!',
+                                    style: AppTextStyles.lightGrayRegular14
+                                        .copyWith(fontSize: 13, color: Colors.black.withOpacity(0.8), height: 1.3),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(Icons.open_in_new, color: AppColors.secondary),
+                            const SizedBox(width: 12),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Bouncing(
-                    onTap: () {
-                      // GoRouter.of(context).goNamed(RouteNames.attributions);
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [AppShadows.small],
-                        border: Border.all(color: const Color(0xfff2f2f2)),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.info_outline_rounded,
-                            color: AppColors.secondary,
-                            size: 25,
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Third Party services',
-                                  style: AppTextStyles.blackBold15,
-                                ),
-                                Text(
-                                  'Check out the cool resources we use',
-                                  style: AppTextStyles.lightGrayRegular14
-                                      .copyWith(fontSize: 13, color: Colors.black.withOpacity(0.8), height: 1.3),
-                                ),
-                              ],
+                    const SizedBox(height: 10),
+                    Bouncing(
+                      onTap: () => GoRouter.of(context).goNamed(RouteNames.attributions),
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [AppShadows.small],
+                          border: Border.all(color: const Color(0xfff2f2f2)),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(width: 0.4, color: const Color(0xffCFE1D6)),
+                              ),
+                              child: const Icon(
+                                Icons.info_outline_rounded,
+                                color: AppColors.secondary,
+                                size: 24,
+                              ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Third-Party services',
+                                    style: AppTextStyles.blackExtraBold15,
+                                  ),
+                                  Text(
+                                    'Check out these awesome resources I used',
+                                    style: AppTextStyles.lightGrayRegular14
+                                        .copyWith(fontSize: 13, color: Colors.black.withOpacity(0.8), height: 1.3),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 15),
-                  const Divider(
-                    color: Color(0xffe8e8e8),
-                    thickness: 1,
-                  ),
-                ],
+                    const Divider(
+                      color: Color(0xffe8e8e8),
+                      thickness: 1,
+                      height: 40,
+                    ),
+                    Bouncing(
+                      onTap: () => launchUrlString(AppConstants.privacyPolicyUrl),
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [AppShadows.small],
+                          border: Border.all(color: const Color(0xfff2f2f2)),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                color: AppColors.primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(width: 0.4, color: const Color(0xffCFE1D6)),
+                              ),
+                              child: const Icon(
+                                Icons.shield_outlined,
+                                color: AppColors.secondary,
+                                size: 25,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Privacy Policy',
+                                    style: AppTextStyles.blackExtraBold15,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(Icons.open_in_new, color: AppColors.secondary),
+                            const SizedBox(width: 12),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             // Top Navigation

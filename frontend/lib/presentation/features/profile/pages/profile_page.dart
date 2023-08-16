@@ -18,31 +18,30 @@ import 'package:know_waste/providers/user_provider.dart';
 import '../../../../models/profile_item.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../theme/src/app_colors.dart';
-import '../../../theme/src/app_icons.dart';
 import '../../../theme/src/app_text_styles.dart';
 import '../widgets/profile_tile.dart';
 
 const profileItems = [
   ProfileItem(
-    icon: AppIcons.settings,
+    icon: Icons.settings_rounded,
     title: 'Settings',
     subtitle: 'Configure app settings',
     routeName: RouteNames.settings,
   ),
   ProfileItem(
-    icon: AppIcons.help,
+    icon: Icons.question_answer_rounded,
     title: 'Help and support',
     subtitle: 'Find out more about KnowWaste',
     routeName: RouteNames.help,
   ),
   ProfileItem(
-    icon: AppIcons.scans,
+    icon: Icons.inventory_2_rounded,
     title: 'Your scans',
     subtitle: 'Check out your waste scans',
     routeName: RouteNames.scans,
   ),
   ProfileItem(
-    icon: AppIcons.signIn,
+    icon: Icons.logout_rounded,
     title: 'Sign out',
     subtitle: 'Log out from your current account',
     routeName: '',
@@ -205,7 +204,7 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Made with 💚 in Arizona',
+                    'Made with 💚',
                     style: AppTextStyles.black60Medium13,
                   ),
                   const SizedBox(height: 5),

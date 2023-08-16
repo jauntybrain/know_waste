@@ -33,7 +33,7 @@ class ProfileTile extends ConsumerWidget {
             AppIconButton(
               onTap: () {},
               size: 40,
-              iconSize: 5,
+              iconSize: 19,
               radius: 10,
               fillColor: AppColors.primary.withOpacity(0.1),
               icon: profileItem.icon,

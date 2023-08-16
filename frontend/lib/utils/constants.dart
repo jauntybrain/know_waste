@@ -8,6 +8,8 @@ import 'package:know_waste/presentation/theme/theme.dart';
 class AppConstants {
   static const featuredArticleHeight = 240.0;
 
+  static const privacyPolicyUrl = 'https://waste-wise-d88a7.web.app/privacy-policy';
+
   static const recyclingTools = [
     RecyclingTool(
       uid: 'waste-scanner',

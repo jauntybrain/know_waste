@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../theme/src/app_colors.dart';
 import '../theme/src/app_text_styles.dart';
@@ -44,6 +45,7 @@ class _AppMarkdownState extends State<AppMarkdown> {
             selectable: true,
             physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
+            onTapLink: (text, href, title) => href != null ? launchUrlString(href) : {},
             styleSheet: MarkdownStyleSheet(
               blockquote: AppTextStyles.black60Medium13,
               checkbox: AppTextStyles.primaryBold18,

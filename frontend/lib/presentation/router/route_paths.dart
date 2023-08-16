@@ -11,6 +11,7 @@ class RoutePaths {
   static const String settings = 'settings';
   static const String help = 'help';
   static const String scans = 'scans';
+  static const String attributions = 'attributions';
 
   // Tools
   static const String analyze = '/analyze';

@@ -34,11 +34,11 @@ class AuthPromptWidget extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Join today',
+            '♻️ Join today ',
             textAlign: TextAlign.start,
-            style: AppTextStyles.blackBlack22.copyWith(fontSize: 21.5),
+            style: AppTextStyles.blackBlack22.copyWith(fontSize: 21),
           ),
-          const SizedBox(height: 2),
+          const SizedBox(height: 4),
           SizedBox(
             width: 350,
             child: Text(
@@ -46,7 +46,7 @@ class AuthPromptWidget extends ConsumerWidget {
               textAlign: TextAlign.start,
               style: AppTextStyles.grayMedium16.copyWith(
                 color: const Color(0xffAEAEAE),
-                fontSize: 16,
+                fontSize: 15,
               ),
             ),
           ),

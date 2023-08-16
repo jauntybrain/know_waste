@@ -27,7 +27,7 @@ class AppIconButton extends StatelessWidget {
       child: Container(
         width: size ?? 55,
         height: size ?? 55,
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: fillColor ?? Colors.white,
           borderRadius: BorderRadius.circular(radius ?? 18),

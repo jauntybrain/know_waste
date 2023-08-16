@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ProfileItem {
   const ProfileItem({
     required this.icon,
@@ -8,7 +10,7 @@ class ProfileItem {
     this.hasChevron = true,
   });
 
-  final String icon;
+  final IconData icon;
   final String title;
   final String subtitle;
   final String routeName;
