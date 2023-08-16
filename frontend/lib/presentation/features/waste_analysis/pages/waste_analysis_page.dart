@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/waste_analysis/pages/waste_analysis_loading_page.dart';
-import 'package:know_waste/presentation/features/waste_analysis/widgets/recycling_tip_widget.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
 
 import '../providers/waste_analysis_provider.dart';
@@ -47,7 +46,7 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
       }
       if (_cameraController!.value.hasError) {
         print('Camera error ${_cameraController!.value.errorDescription}');
-        // TODO: add error dialog
+        // TODO: Add error dialog
       }
     });
 
@@ -151,7 +150,8 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
                   // If loading, show loading indicator and tip
                   if (isLoading) ...[
                     const WasteAnalysisLoadingPage(),
-                    const RecyclingTipWidget(),
+                    // TODO: Bring back tips later
+                    // const RecyclingTipWidget(),
                     // If camera is initialized, show camera preview
                   ] else if (_cameraController?.value.isInitialized ?? false)
                     WasteAnalysisCameraPage(

@@ -23,7 +23,7 @@ class AppAuthSheet {
   }
 
   void _showBottomSheet(context, title, emoji, initialPage, token) {
-    AuthSheetPages currentPage = initialPage;
+    // AuthSheetPages currentPage = initialPage;
 
     showModalBottomSheet(
       context: context,

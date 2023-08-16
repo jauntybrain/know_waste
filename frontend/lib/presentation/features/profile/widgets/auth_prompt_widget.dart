@@ -19,6 +19,8 @@ class AuthPromptWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final smallScreen = MediaQuery.of(context).size.width < 390;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -49,13 +51,14 @@ class AuthPromptWidget extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Row(
+          Flex(
+            direction: smallScreen ? Axis.vertical : Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppButton.primary(
                 onTap: onRegister,
                 height: 50,
-                width: 215,
+                width: smallScreen ? double.infinity : 215,
                 fillColor: AppColors.secondary.withOpacity(0.1),
                 textColor: AppColors.secondary,
                 hasShadow: false,
@@ -67,7 +70,7 @@ class AuthPromptWidget extends ConsumerWidget {
                   ],
                 ),
               ),
-              Container(height: 20, width: 1, color: Colors.black.withOpacity(0.1)),
+              Container(height: 20, width: 1, color: Colors.black.withOpacity(smallScreen ? 0 : 0.1)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
