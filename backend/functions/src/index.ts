@@ -18,5 +18,5 @@
 //   response.send("Hello from Firebase!");
 // });
 
-import { processLabeledWaste, processAnalyzedWaste } from './triggers';
-export { processLabeledWaste, processAnalyzedWaste }
+import { processLabeledWaste, processAnalyzedWaste, updateUsersPercentile } from './triggers';
+export { processLabeledWaste, processAnalyzedWaste, updateUsersPercentile }
