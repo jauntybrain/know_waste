@@ -7,6 +7,10 @@ class RoutePaths {
   static const String profile = '/profile';
   static const String search = 'search';
   static const String bookmarks = 'bookmarks';
+  static const String notifications = 'notifications';
+  static const String settings = 'settings';
+  static const String help = 'help';
+  static const String scans = 'scans';
 
   // Tools
   static const String analyze = '/analyze';

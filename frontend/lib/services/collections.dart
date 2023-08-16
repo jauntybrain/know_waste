@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:know_waste/models/article/article.dart';
 import 'package:know_waste/models/challenge/challenge.dart';
 import 'package:know_waste/models/guide/guide.dart';
+import 'package:know_waste/models/user_stats/user_stats.dart';
 
 import '../models/analyzed_waste/analyzed_waste.dart';
 import '../models/app_user/app_user.dart';
@@ -14,6 +15,17 @@ class UserCollection extends FirestoreCollection<AppUser> {
   @override
   CollectionReference<AppUser> get withConverter => firestore.collection(path).withConverter<AppUser>(
         fromFirestore: (snapshot, _) => AppUser.fromJson(snapshot.data()!),
+        toFirestore: (user, _) => {},
+      );
+}
+
+class UserStatsCollection extends FirestoreCollection<UserStats> {
+  @override
+  String get path => 'userStats';
+
+  @override
+  CollectionReference<UserStats> get withConverter => firestore.collection(path).withConverter<UserStats>(
+        fromFirestore: (snapshot, _) => UserStats.fromJson(snapshot.data()!),
         toFirestore: (user, _) => {},
       );
 }

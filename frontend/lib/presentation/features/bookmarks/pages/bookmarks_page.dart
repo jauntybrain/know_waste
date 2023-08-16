@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/community/widgets/article_search/article_search_skeleton.dart';
 import 'package:know_waste/presentation/router/router_context_extension.dart';
+import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
 import '../../../../models/api_error/api_error.dart';
 import '../../../../providers/user_provider.dart';
@@ -68,27 +69,21 @@ class BookmarksPage extends ConsumerWidget {
                               separatorBuilder: (context, index) => const SizedBox(height: 12),
                             )
                           : Container(
-                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                              padding: const EdgeInsets.all(20),
                               margin: EdgeInsets.only(
                                 top: MediaQuery.of(context).size.height / 2 -
                                     MediaQuery.of(context).viewPadding.top -
-                                    80,
+                                    150,
                               ),
                               decoration: BoxDecoration(
                                 color: AppColors.primary.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
+                              child: Column(
                                 children: [
-                                  const Icon(
-                                    Icons.hourglass_empty_rounded,
-                                    color: AppColors.secondary,
-                                    size: 35,
-                                  ),
-                                  const SizedBox(width: 5),
+                                  AppIcons.icon(AppIcons.bookmarks, size: 70),
+                                  const SizedBox(height: 20),
                                   Text('No bookmarks yet', style: AppTextStyles.blackExtraBold16),
-                                  const SizedBox(width: 10),
                                 ],
                               ),
                             ),
@@ -124,7 +119,7 @@ class BookmarksPage extends ConsumerWidget {
               width: MediaQuery.of(context).size.width,
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.white.withOpacity(1),
+                  color: AppColors.white,
                   boxShadow: [AppShadows.small],
                 ),
                 padding: EdgeInsets.only(
@@ -147,7 +142,7 @@ class BookmarksPage extends ConsumerWidget {
                       'Bookmarks',
                       style: AppTextStyles.blackBlack22.copyWith(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 19,
                       ),
                     ),
                     const SizedBox(width: 45),

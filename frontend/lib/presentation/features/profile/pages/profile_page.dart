@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/profile/widgets/auth_prompt_widget.dart';
+import 'package:know_waste/presentation/router/route_names.dart';
 import 'package:know_waste/presentation/shared/app_toast.dart';
+import 'package:know_waste/presentation/shared/bouncing.dart';
+import 'package:know_waste/providers/package_info_provider.dart';
+import 'package:know_waste/providers/user_provider.dart';
 
 import '../../../../models/profile_item.dart';
 import '../../../shared/app_icon_button.dart';
@@ -22,19 +27,19 @@ const profileItems = [
     icon: AppIcons.settings,
     title: 'Settings',
     subtitle: 'Configure app settings',
-    routeName: '',
+    routeName: RouteNames.settings,
   ),
   ProfileItem(
     icon: AppIcons.help,
     title: 'Help and support',
     subtitle: 'Find out more about KnowWaste',
-    routeName: '',
+    routeName: RouteNames.help,
   ),
   ProfileItem(
     icon: AppIcons.scans,
     title: 'Your scans',
     subtitle: 'Check out your waste scans',
-    routeName: '',
+    routeName: RouteNames.scans,
   ),
   ProfileItem(
     icon: AppIcons.signIn,
@@ -51,6 +56,9 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isAnonymous = ref.watch(userProvider.select((value) => value?.email == null));
+    final currentUser = ref.watch(userProvider);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -101,48 +109,45 @@ class ProfilePage extends ConsumerWidget {
                                     padding: const EdgeInsets.all(10),
                                     child: AnimatedSwitcher(
                                       duration: const Duration(milliseconds: 200),
-                                      child: SvgPicture.asset(
-                                        'assets/icons/default-avatar.svg',
-                                        height: 140,
-                                        width: 140,
-                                      ),
-                                      //  currentUser?.profilePicture != null
-                                      //     ? ClipRRect(
-                                      //         borderRadius: BorderRadius.circular(100),
-                                      //         child: CachedNetworkImage(
-                                      //           imageUrl: currentUser!.profilePicture!,
-                                      //           height: 140,
-                                      //           width: 140,
-                                      //           placeholder: (context, url) => const CircularProgressIndicator(),
-                                      //           fit: BoxFit.cover,
-                                      //         ),
-                                      //       )
-                                      // : Image.asset('assets/images/default_avatar.png'),
+                                      child: currentUser?.profilePicture != null
+                                          ? ClipRRect(
+                                              borderRadius: BorderRadius.circular(100),
+                                              child: CachedNetworkImage(
+                                                imageUrl: currentUser!.profilePicture!,
+                                                height: 140,
+                                                width: 140,
+                                                placeholder: (context, url) => const CircularProgressIndicator(),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            )
+                                          : SvgPicture.asset(
+                                              'assets/icons/default-avatar.svg',
+                                              height: 140,
+                                              width: 140,
+                                            ),
                                     ),
                                   ),
                                   Positioned(
                                     bottom: 0,
                                     child: Material(
                                       color: Colors.transparent,
-                                      child: Ink(
-                                        decoration: BoxDecoration(
-                                          color: AppColors.secondary,
-                                          border: Border.all(color: AppColors.background, width: 3),
-                                          shape: BoxShape.circle,
+                                      child: Bouncing(
+                                        onTap: () => AppToast.of(context).show(
+                                          text: 'Coming soon!',
+                                          icon: Icons.hourglass_top_rounded,
+                                          gravity: ToastGravity.BOTTOM,
                                         ),
-                                        child: InkWell(
-                                          onTap: () {
-                                            HapticFeedback.lightImpact();
-                                            GoRouter.of(context).goNamed('');
-                                          },
-                                          borderRadius: BorderRadius.circular(60),
-                                          child: Container(
-                                            padding: const EdgeInsets.all(10),
-                                            child: const Icon(
-                                              Icons.edit_rounded,
-                                              size: 24,
-                                              color: Colors.white,
-                                            ),
+                                        child: Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.secondary,
+                                            border: Border.all(color: AppColors.background, width: 3),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: const Icon(
+                                            Icons.edit_rounded,
+                                            size: 24,
+                                            color: Colors.white,
                                           ),
                                         ),
                                       ),
@@ -154,32 +159,33 @@ class ProfilePage extends ConsumerWidget {
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            'Anonymous user',
+                            currentUser?.firstName ?? 'Anonymous user',
                             style: AppTextStyles.blackBold22.copyWith(height: 1, fontSize: 19),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '@anonymous',
+                            currentUser?.username ?? '@anonymous',
                             style: AppTextStyles.grayMedium16.copyWith(color: const Color(0xffB4B4B4)),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  AuthPromptWidget(
-                    onRegister: () {
-                      // TODO: Introduce email sign up in the future
-                      AppToast.of(context).show(
-                        text: 'Coming soon!',
-                        icon: Icons.hourglass_top_rounded,
-                        gravity: ToastGravity.BOTTOM,
-                      );
-                    },
-                  ),
+                  const SizedBox(height: 25),
+                  if (isAnonymous)
+                    AuthPromptWidget(
+                      onRegister: () {
+                        // TODO: Introduce email sign up in the future
+                        AppToast.of(context).show(
+                          text: 'Coming soon!',
+                          icon: Icons.hourglass_top_rounded,
+                          gravity: ToastGravity.BOTTOM,
+                        );
+                      },
+                    ),
                   const SizedBox(height: 5),
                   ListView.builder(
-                    itemCount: profileItems.length,
+                    itemCount: profileItems.where((element) => isAnonymous ? !element.registeredOnly : true).length,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
@@ -197,10 +203,19 @@ class ProfilePage extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  const Divider(
-                    thickness: 2,
-                    height: 0,
-                    color: Color(0xffF3F3F3),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Made with 💚 in Arizona',
+                    style: AppTextStyles.black60Medium13,
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    'ver. ${ref.read(packageInfoProvider).version}',
+                    style: AppTextStyles.black60Medium13.copyWith(
+                      color: AppColors.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
                   ),
                   SizedBox(height: MediaQuery.of(context).padding.bottom + 20),
                 ],
@@ -233,7 +248,7 @@ class ProfilePage extends ConsumerWidget {
                         style: AppTextStyles.blackBlack22,
                       ),
                       AppIconButton(
-                        onTap: () => GoRouter.of(context).pushNamed(''),
+                        onTap: () => GoRouter.of(context).pushNamed(RouteNames.notifications),
                         size: 45,
                         iconSize: 22,
                         fillColor: AppColors.primary.withOpacity(0.1),

@@ -45,7 +45,7 @@ class ProfileTile extends ConsumerWidget {
                 children: [
                   Text(
                     profileItem.title,
-                    style: AppTextStyles.blackExtraBold16.copyWith(fontSize: 15),
+                    style: AppTextStyles.blackExtraBold16,
                   ),
                   const SizedBox(height: 1),
                   Text(

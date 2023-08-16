@@ -22,6 +22,8 @@ class AppIcons {
   static const String scans = 'scans.svg';
   static const String appleLogo = 'apple.svg';
   static const String googleLogo = 'google.svg';
+  static const String bookmarks = 'bookmarks.svg';
+  static const String notifications = 'notifications.svg';
 
   /// Check if the icon is vector
   static bool isSvg(String path) => path.contains('svg');

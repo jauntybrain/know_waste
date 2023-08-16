@@ -11,7 +11,7 @@ import '../../community/pages/sections/community_challenges_section.dart';
 import '../widgets/home_recommended_tool_widget.dart';
 import 'stats_section.dart';
 
-final appbarStateProvider = StateProvider.autoDispose<bool>((ref) => false);
+final homeAppBarStateProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class HomePageState extends ConsumerState<HomePage> {
   final double appBarThreshold = 150.0;
 
   ScrollController scrollController = ScrollController();
-  bool get showAppBar => ref.watch(appbarStateProvider);
+  bool get showAppBar => ref.watch(homeAppBarStateProvider);
 
   @override
   void initState() {
@@ -43,9 +43,9 @@ class HomePageState extends ConsumerState<HomePage> {
     final offset = scrollController.position.pixels;
 
     if (offset > appBarThreshold && !showAppBar) {
-      ref.read(appbarStateProvider.notifier).state = true;
+      ref.read(homeAppBarStateProvider.notifier).state = true;
     } else if (offset < appBarThreshold && showAppBar) {
-      ref.read(appbarStateProvider.notifier).state = false;
+      ref.read(homeAppBarStateProvider.notifier).state = false;
     }
   }
 
