@@ -1,5 +1,5 @@
 name: know_waste
-description: A new Flutter project.
+description: Recycling education made easy with Flutter and AI
 publish_to: "none"
 version: 0.1.0
 
@@ -10,12 +10,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Firebase
+  # Firebase & Auth
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.2
   cloud_firestore: ^4.8.4
   cloud_functions: ^4.3.4
   firebase_storage: ^11.2.5
+  sign_in_with_apple: ^5.0.0
+  google_sign_in: ^6.1.4
 
   # UI
   google_fonts: ^5.1.0
@@ -39,6 +41,10 @@ dependencies:
   camera: ^0.10.5+3
   intl: ^0.18.1
   algoliasearch: ^0.2.0
+  url_launcher: ^6.1.12
+  rxdart: ^0.27.7
+  crypto: ^3.0.3
+  package_info_plus: ^4.1.0
 
   # Freezed
   freezed: ^2.4.2
@@ -46,9 +52,6 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_serializable: ^6.7.0
   json_annotation: ^4.8.1
-  crypto: ^3.0.3
-  google_sign_in: ^6.1.4
-  sign_in_with_apple: ^5.0.0
 
 dev_dependencies:
   flutter_test:

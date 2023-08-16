@@ -21,6 +21,8 @@ AppUser _$AppUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AppUser {
   String get uid => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  UserStats? get stats => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ abstract class $AppUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uid,
+      @JsonKey(includeToJson: false) UserStats? stats,
       String? email,
       String? username,
       String? firstName,
@@ -51,6 +54,8 @@ abstract class $AppUserCopyWith<$Res> {
       String? profilePicture,
       List<String> bookmarks,
       @JsonKey(name: 'fcm_token') String? fcmToken});
+
+  $UserStatsCopyWith<$Res>? get stats;
 }
 
 /// @nodoc
@@ -67,6 +72,7 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
   @override
   $Res call({
     Object? uid = null,
+    Object? stats = freezed,
     Object? email = freezed,
     Object? username = freezed,
     Object? firstName = freezed,
@@ -81,6 +87,10 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      stats: freezed == stats
+          ? _value.stats
+          : stats // ignore: cast_nullable_to_non_nullable
+              as UserStats?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -115,6 +125,18 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
               as String?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserStatsCopyWith<$Res>? get stats {
+    if (_value.stats == null) {
+      return null;
+    }
+
+    return $UserStatsCopyWith<$Res>(_value.stats!, (value) {
+      return _then(_value.copyWith(stats: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -126,6 +148,7 @@ abstract class _$$_AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String uid,
+      @JsonKey(includeToJson: false) UserStats? stats,
       String? email,
       String? username,
       String? firstName,
@@ -134,6 +157,9 @@ abstract class _$$_AppUserCopyWith<$Res> implements $AppUserCopyWith<$Res> {
       String? profilePicture,
       List<String> bookmarks,
       @JsonKey(name: 'fcm_token') String? fcmToken});
+
+  @override
+  $UserStatsCopyWith<$Res>? get stats;
 }
 
 /// @nodoc
@@ -147,6 +173,7 @@ class __$$_AppUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? uid = null,
+    Object? stats = freezed,
     Object? email = freezed,
     Object? username = freezed,
     Object? firstName = freezed,
@@ -161,6 +188,10 @@ class __$$_AppUserCopyWithImpl<$Res>
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
+      stats: freezed == stats
+          ? _value.stats
+          : stats // ignore: cast_nullable_to_non_nullable
+              as UserStats?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -202,6 +233,7 @@ class __$$_AppUserCopyWithImpl<$Res>
 class _$_AppUser extends _AppUser {
   const _$_AppUser(
       {required this.uid,
+      @JsonKey(includeToJson: false) this.stats,
       this.email,
       this.username,
       this.firstName,
@@ -218,6 +250,9 @@ class _$_AppUser extends _AppUser {
 
   @override
   final String uid;
+  @override
+  @JsonKey(includeToJson: false)
+  final UserStats? stats;
   @override
   final String? email;
   @override
@@ -245,7 +280,7 @@ class _$_AppUser extends _AppUser {
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, username: $username, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, profilePicture: $profilePicture, bookmarks: $bookmarks, fcmToken: $fcmToken)';
+    return 'AppUser(uid: $uid, stats: $stats, email: $email, username: $username, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, profilePicture: $profilePicture, bookmarks: $bookmarks, fcmToken: $fcmToken)';
   }
 
   @override
@@ -254,6 +289,7 @@ class _$_AppUser extends _AppUser {
         (other.runtimeType == runtimeType &&
             other is _$_AppUser &&
             (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.stats, stats) || other.stats == stats) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.username, username) ||
                 other.username == username) &&
@@ -276,6 +312,7 @@ class _$_AppUser extends _AppUser {
   int get hashCode => Object.hash(
       runtimeType,
       uid,
+      stats,
       email,
       username,
       firstName,
@@ -302,6 +339,7 @@ class _$_AppUser extends _AppUser {
 abstract class _AppUser extends AppUser {
   const factory _AppUser(
       {required final String uid,
+      @JsonKey(includeToJson: false) final UserStats? stats,
       final String? email,
       final String? username,
       final String? firstName,
@@ -316,6 +354,9 @@ abstract class _AppUser extends AppUser {
 
   @override
   String get uid;
+  @override
+  @JsonKey(includeToJson: false)
+  UserStats? get stats;
   @override
   String? get email;
   @override

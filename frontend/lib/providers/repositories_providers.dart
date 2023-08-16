@@ -33,6 +33,7 @@ final userRepositoryProvider = Provider<UserRepository>(
     _firestoreAuthService,
     _firestoreInstance,
     UserCollection(),
+    UserStatsCollection(),
   ),
 );
 

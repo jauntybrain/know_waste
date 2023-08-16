@@ -68,6 +68,7 @@ class UserNotifier extends StateNotifier<AppUser?> {
     try {
       List<String> newBookmarks = List.from(state!.bookmarks);
       state = state!.copyWith(bookmarks: newBookmarks..remove(articleID));
+      print(state!.uid);
       await userRepository.updateProfile(state!.uid, state!.toJson());
       callback.call(true);
     } catch (err) {

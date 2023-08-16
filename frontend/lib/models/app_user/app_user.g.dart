@@ -8,6 +8,9 @@ part of 'app_user.dart';
 
 _$_AppUser _$$_AppUserFromJson(Map<String, dynamic> json) => _$_AppUser(
       uid: json['uid'] as String,
+      stats: json['stats'] == null
+          ? null
+          : UserStats.fromJson(json['stats'] as Map<String, dynamic>),
       email: json['email'] as String?,
       username: json['username'] as String?,
       firstName: json['firstName'] as String?,

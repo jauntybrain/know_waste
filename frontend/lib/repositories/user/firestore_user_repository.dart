@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:know_waste/models/user_stats/user_stats.dart';
 import 'package:know_waste/repositories/user/user_repository.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../models/app_user/app_user.dart';
 import '../../services/auth/auth_service.dart';
@@ -13,11 +15,13 @@ class FirestoreUserRepository implements UserRepository {
     this.firebaseAuth,
     this.firestore,
     this.userCollection,
+    this.userStatsCollection,
   );
 
   final AuthService firebaseAuth;
   final FirestoreService firestore;
   final FirestoreCollection<AppUser> userCollection;
+  final FirestoreCollection<UserStats> userStatsCollection;
 
   @override
   Stream<User?> authState() async* {
@@ -26,7 +30,11 @@ class FirestoreUserRepository implements UserRepository {
 
   @override
   Stream<AppUser?> userProfile() async* {
-    yield* userCollection.streamSingle(firebaseAuth.currentUser?.uid).cast<AppUser?>();
+    yield* Rx.combineLatest2(
+      userCollection.streamSingle(firebaseAuth.currentUser?.uid).cast<AppUser?>(),
+      userStatsCollection.streamSingle(firebaseAuth.currentUser?.uid).cast<UserStats?>(),
+      (AppUser? user, UserStats? userStats) => user?.copyWith(stats: userStats),
+    );
   }
 
   @override
@@ -36,6 +44,8 @@ class FirestoreUserRepository implements UserRepository {
 
   @override
   Future<void> updateProfile(String uid, Map<String, dynamic> newProfile) {
+    print(newProfile);
+    print('${userCollection.path}/$uid');
     return firestore.update('${userCollection.path}/$uid', newProfile);
   }
 
