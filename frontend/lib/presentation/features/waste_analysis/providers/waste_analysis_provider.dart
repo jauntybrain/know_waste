@@ -61,7 +61,6 @@ final wasteAnalysisProvider = ChangeNotifierProvider<WasteAnalysisNotifier>(
         .snapshots(includeMetadataChanges: false)
         .listen((event) {
       for (var change in event.docChanges) {
-        print(change.doc.data()!.date);
         if (change.doc.data()!.date!.compareTo(DateTime.now().subtract(const Duration(seconds: 15))) == 1) {
           if (change.doc.data()!.name != null) {
             controller.add(change.doc.data());
@@ -69,30 +68,6 @@ final wasteAnalysisProvider = ChangeNotifierProvider<WasteAnalysisNotifier>(
         }
       }
     });
-    // final query = collection.withConverter
-    //     .where('userID', isEqualTo: 'FdGe35sDg1345SFvDS')
-    //     .where('advice', isNotEqualTo: null)
-    //     .orderBy('date', descending: true)
-    //     .limit(1)
-    //     .snapshots(includeMetadataChanges: false)
-    //     .listen((event) {
-    //   for (var change in event.docChanges) {
-    //     switch (change.type) {
-    //       case DocumentChangeType.added:
-    //         if (change.doc.data()!.date!.compareTo(DateTime.now().subtract(const Duration(seconds: 15))) == 1) {
-    //           if (change.doc.data()!.name != null) {
-    //             controller.add(change.doc.data());
-    //           }
-    //         }
-    //         break;
-    //       case DocumentChangeType.modified:
-    //         controller.add(change.doc.data());
-    //         break;
-    //       case DocumentChangeType.removed:
-    //         break;
-    //     }
-    //   }
-    // });
 
     ref.onDispose(() {
       query.cancel();
@@ -219,7 +194,7 @@ class WasteAnalysisNotifier extends ChangeNotifier {
 
   @override
   String toString() {
-    // todo
+    // TODO
     return 'Loading: $loading, ';
   }
 }
