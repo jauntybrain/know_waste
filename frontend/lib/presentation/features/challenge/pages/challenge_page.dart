@@ -3,14 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/models/api_error/api_error.dart';
 import 'package:know_waste/models/challenge/challenge.dart';
 import 'package:know_waste/presentation/features/challenge/pages/challenge_info_section.dart';
 import 'package:know_waste/presentation/features/challenge/widgets/challenge_app_bar.dart';
+import 'package:know_waste/presentation/features/challenge/widgets/quit_challenge_dialog.dart';
 import 'package:know_waste/presentation/shared/app_markdown.dart';
+import 'package:know_waste/presentation/shared/app_toast.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
 import 'package:know_waste/utils/extensions.dart';
 
+import '../../../../models/challenge_stats/challenge_stats.dart';
 import '../../../shared/app_icon_button.dart';
+import '../providers/challenge_stats_provider.dart';
 import 'challenge_stats_section.dart';
 
 final challengeAppBarStateProvider = StateProvider.autoDispose<bool>((ref) => false);
@@ -29,6 +34,9 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
 
   ScrollController scrollController = ScrollController();
   bool get showAppBar => ref.watch(challengeAppBarStateProvider);
+
+  AsyncValue<ChallengeStats?> get statsWatcher => ref.watch(userChallengeStatsProvider(widget.challenge.uid));
+  UserChallengeStatsNotifier get statsReader => ref.read(userChallengeStatsProvider(widget.challenge.uid).notifier);
 
   @override
   void initState() {
@@ -55,6 +63,12 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(userChallengeStatsProvider(widget.challenge.uid), (prev, next) {
+      if (next is AsyncError) {
+        AppToast.of(context).show(text: (next.asError!.error as ApiError).message, isError: true);
+      }
+    });
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -90,15 +104,30 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
                         children: [
                           const SizedBox(height: 1),
                           Align(
-                            alignment: Alignment.topRight,
-                            child: AppButton.primary(
-                              borderRadius: 50,
-                              height: 44,
-                              width: 160,
-                              onTap: () {},
-                              child: const Text('Join Challenge'),
-                            ),
-                          ),
+                              alignment: Alignment.topRight,
+                              child: statsWatcher.value == null
+                                  ? AppButton.primary(
+                                      borderRadius: 50,
+                                      height: 44,
+                                      width: 160,
+                                      isLoading: statsWatcher.isLoading,
+                                      onTap: () => statsReader.joinChallenge(),
+                                      child: const Text('Join Challenge'),
+                                    )
+                                  : AppButton.secondary(
+                                      borderRadius: 50,
+                                      height: 44,
+                                      width: 160,
+                                      isLoading: statsWatcher.isLoading,
+                                      onTap: () => QuitChallengeDialog.of(context).show().then(
+                                        (value) {
+                                          if (value != null) {
+                                            statsReader.quitChallenge();
+                                          }
+                                        },
+                                      ),
+                                      child: const Text('Quit Challenge'),
+                                    )),
                           const SizedBox(height: 20),
                           Text(
                             widget.challenge.tool,
@@ -117,7 +146,15 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
                           const SizedBox(height: 15),
                           AppMarkdown(text: widget.challenge.content, lineHeight: 1.5),
                           const SizedBox(height: 20),
-                          ChallengeStatsSection(challengeID: widget.challenge.uid),
+                          ChallengeStatsSection(
+                            challengeID: widget.challenge.uid,
+                            percent: statsWatcher.value == null
+                                ? null
+                                : statsWatcher.value!.progress > widget.challenge.goal
+                                    ? 1
+                                    : statsWatcher.value!.progress / widget.challenge.goal,
+                          ),
+                          const SizedBox(height: 20),
                         ],
                         childAnimationBuilder: (widget) => SlideAnimation(
                           verticalOffset: 50.0,

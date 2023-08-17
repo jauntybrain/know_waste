@@ -23,7 +23,7 @@ class ContentBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? double.infinity,
+      width: width,
       height: height,
       padding: padding ?? const EdgeInsets.all(6),
       decoration: BoxDecoration(

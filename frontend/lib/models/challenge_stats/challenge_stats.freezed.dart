@@ -20,6 +20,7 @@ ChallengeStats _$ChallengeStatsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ChallengeStats {
+  String get challengeID => throw _privateConstructorUsedError;
   String get userID => throw _privateConstructorUsedError;
   int get progress => throw _privateConstructorUsedError;
   @JsonKey(fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
@@ -38,7 +39,8 @@ abstract class $ChallengeStatsCopyWith<$Res> {
       _$ChallengeStatsCopyWithImpl<$Res, ChallengeStats>;
   @useResult
   $Res call(
-      {String userID,
+      {String challengeID,
+      String userID,
       int progress,
       @JsonKey(fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
       DateTime? dateJoined});
@@ -57,11 +59,16 @@ class _$ChallengeStatsCopyWithImpl<$Res, $Val extends ChallengeStats>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? challengeID = null,
     Object? userID = null,
     Object? progress = null,
     Object? dateJoined = freezed,
   }) {
     return _then(_value.copyWith(
+      challengeID: null == challengeID
+          ? _value.challengeID
+          : challengeID // ignore: cast_nullable_to_non_nullable
+              as String,
       userID: null == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
@@ -87,7 +94,8 @@ abstract class _$$_ChallengeStatsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String userID,
+      {String challengeID,
+      String userID,
       int progress,
       @JsonKey(fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
       DateTime? dateJoined});
@@ -104,11 +112,16 @@ class __$$_ChallengeStatsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? challengeID = null,
     Object? userID = null,
     Object? progress = null,
     Object? dateJoined = freezed,
   }) {
     return _then(_$_ChallengeStats(
+      challengeID: null == challengeID
+          ? _value.challengeID
+          : challengeID // ignore: cast_nullable_to_non_nullable
+              as String,
       userID: null == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
@@ -129,7 +142,8 @@ class __$$_ChallengeStatsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ChallengeStats extends _ChallengeStats {
   const _$_ChallengeStats(
-      {required this.userID,
+      {required this.challengeID,
+      required this.userID,
       required this.progress,
       @JsonKey(fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
       this.dateJoined})
@@ -138,6 +152,8 @@ class _$_ChallengeStats extends _ChallengeStats {
   factory _$_ChallengeStats.fromJson(Map<String, dynamic> json) =>
       _$$_ChallengeStatsFromJson(json);
 
+  @override
+  final String challengeID;
   @override
   final String userID;
   @override
@@ -148,7 +164,7 @@ class _$_ChallengeStats extends _ChallengeStats {
 
   @override
   String toString() {
-    return 'ChallengeStats(userID: $userID, progress: $progress, dateJoined: $dateJoined)';
+    return 'ChallengeStats(challengeID: $challengeID, userID: $userID, progress: $progress, dateJoined: $dateJoined)';
   }
 
   @override
@@ -156,6 +172,8 @@ class _$_ChallengeStats extends _ChallengeStats {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ChallengeStats &&
+            (identical(other.challengeID, challengeID) ||
+                other.challengeID == challengeID) &&
             (identical(other.userID, userID) || other.userID == userID) &&
             (identical(other.progress, progress) ||
                 other.progress == progress) &&
@@ -165,7 +183,8 @@ class _$_ChallengeStats extends _ChallengeStats {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userID, progress, dateJoined);
+  int get hashCode =>
+      Object.hash(runtimeType, challengeID, userID, progress, dateJoined);
 
   @JsonKey(ignore: true)
   @override
@@ -183,7 +202,8 @@ class _$_ChallengeStats extends _ChallengeStats {
 
 abstract class _ChallengeStats extends ChallengeStats {
   const factory _ChallengeStats(
-      {required final String userID,
+      {required final String challengeID,
+      required final String userID,
       required final int progress,
       @JsonKey(fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp)
       final DateTime? dateJoined}) = _$_ChallengeStats;
@@ -192,6 +212,8 @@ abstract class _ChallengeStats extends ChallengeStats {
   factory _ChallengeStats.fromJson(Map<String, dynamic> json) =
       _$_ChallengeStats.fromJson;
 
+  @override
+  String get challengeID;
   @override
   String get userID;
   @override

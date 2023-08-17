@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:know_waste/models/challenge_stats/challenge_stats.dart';
 import 'package:know_waste/services/storage/firebase_storage.dart';
 
@@ -41,7 +43,34 @@ class FirestoreChallengesRepository implements ChallengesRepository {
   Future<List<ChallengeStats>> getStats(String id) async {
     try {
       final snapshot = await firestore.db.collection('${challengesCollection.path}/$id/stats').get();
-      return snapshot.docs.map((doc) => ChallengeStats.fromJson(doc.data())).toList();
+      return snapshot.docs.map((doc) => ChallengeStats.fromJson(doc.data()..addAll({'challengeID': id}))).toList();
+    } catch (e) {
+      throw ApiError(message: 'Error fetching stats');
+    }
+  }
+
+  @override
+  Future<ChallengeStats> joinChallenge(String id) async {
+    try {
+      final userID = FirebaseAuth.instance.currentUser!.uid;
+      final ref = firestore.db.collection('${challengesCollection.path}/$id/stats').doc(userID);
+      await ref.set({
+        'userID': FirebaseAuth.instance.currentUser!.uid,
+        'progress': 0,
+        'dateJoined': Timestamp.now(),
+      });
+      return await ref.get().then((value) => ChallengeStats.fromJson(value.data()!..addAll({'challengeID': id})));
+    } catch (e) {
+      throw ApiError(message: 'Error joining challenge');
+    }
+  }
+
+  @override
+  Future<void> quitChallenge(String id) async {
+    try {
+      final userID = FirebaseAuth.instance.currentUser!.uid;
+      final ref = firestore.db.collection('${challengesCollection.path}/$id/stats').doc(userID);
+      await ref.delete();
     } catch (e) {
       throw ApiError(message: 'Error fetching stats');
     }

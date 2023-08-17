@@ -8,6 +8,7 @@ part of 'challenge_stats.dart';
 
 _$_ChallengeStats _$$_ChallengeStatsFromJson(Map<String, dynamic> json) =>
     _$_ChallengeStats(
+      challengeID: json['challengeID'] as String,
       userID: json['userID'] as String,
       progress: json['progress'] as int,
       dateJoined: dateTimeFromTimestamp(json['dateJoined']),
@@ -15,6 +16,7 @@ _$_ChallengeStats _$$_ChallengeStatsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_ChallengeStatsToJson(_$_ChallengeStats instance) =>
     <String, dynamic>{
+      'challengeID': instance.challengeID,
       'userID': instance.userID,
       'progress': instance.progress,
       'dateJoined': dateTimeToTimestamp(instance.dateJoined),

@@ -11,6 +11,7 @@ class ChallengeStats with _$ChallengeStats {
   const ChallengeStats._();
 
   const factory ChallengeStats({
+    required String challengeID,
     required String userID,
     required int progress,
     @JsonKey(fromJson: dateTimeFromTimestamp, toJson: dateTimeToTimestamp) DateTime? dateJoined,

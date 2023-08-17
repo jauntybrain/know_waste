@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:know_waste/presentation/shared/content_box.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../theme/theme.dart';
 import '../providers/challenge_stats_provider.dart';
 
 class ChallengeStatsSection extends ConsumerWidget {
-  const ChallengeStatsSection({required this.challengeID, super.key});
+  const ChallengeStatsSection({required this.challengeID, this.percent, super.key});
 
   final String challengeID;
+  final double? percent;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,6 +26,37 @@ class ChallengeStatsSection extends ConsumerWidget {
           style: AppTextStyles.blackExtraBold20,
         ),
         const SizedBox(height: 10),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: percent != null
+              ? ContentBox(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Your progress',
+                        style: AppTextStyles.blackBold16,
+                      ),
+                      const SizedBox(height: 8),
+                      LinearPercentIndicator(
+                        lineHeight: 8,
+                        padding: EdgeInsets.zero,
+                        percent: percent!,
+                        barRadius: const Radius.circular(3),
+                        backgroundColor: AppColors.background,
+                        progressColor: AppColors.secondary,
+                        animation: true,
+                        restartAnimation: false,
+                        animateFromLastPercent: true,
+                        animationDuration: 200,
+                      ),
+                    ],
+                  ),
+                )
+              : const SizedBox.shrink(),
+        ),
+        if (percent != null) const SizedBox(height: 10),
         ContentBox(
           child: Column(
             children: [
