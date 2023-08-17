@@ -59,11 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDh8haU252k-qSAry9pZ-d8l0VQEeR_7eI',
-    appId: '1:848280063891:ios:80120e766ba01774c96266',
+    appId: '1:848280063891:ios:67a781c301053bfdc96266',
     messagingSenderId: '848280063891',
     projectId: 'waste-wise-d88a7',
     storageBucket: 'waste-wise-d88a7.appspot.com',
-    iosClientId: '848280063891-kkelj6o5bhm19tq6of1mbfvgttrue1t0.apps.googleusercontent.com',
-    iosBundleId: 'com.example.knowWaste',
+    iosClientId: '848280063891-37fsb0k4frblao3r6dmspl7t7g5pmkjh.apps.googleusercontent.com',
+    iosBundleId: 'com.application.knowWaste',
   );
 }
