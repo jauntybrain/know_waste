@@ -1,3 +1,4 @@
+import 'package:know_waste/models/challenge_stats/challenge_stats.dart';
 import 'package:know_waste/services/storage/firebase_storage.dart';
 
 import '../../models/api_error/api_error.dart';
@@ -33,6 +34,16 @@ class FirestoreChallengesRepository implements ChallengesRepository {
       );
     } catch (e) {
       throw ApiError(message: 'Error fetching challenges');
+    }
+  }
+
+  @override
+  Future<List<ChallengeStats>> getStats(String id) async {
+    try {
+      final snapshot = await firestore.db.collection('${challengesCollection.path}/$id/stats').get();
+      return snapshot.docs.map((doc) => ChallengeStats.fromJson(doc.data())).toList();
+    } catch (e) {
+      throw ApiError(message: 'Error fetching stats');
     }
   }
 }

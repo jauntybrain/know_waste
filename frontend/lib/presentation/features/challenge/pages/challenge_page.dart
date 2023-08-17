@@ -117,7 +117,7 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
                           const SizedBox(height: 15),
                           AppMarkdown(text: widget.challenge.content, lineHeight: 1.5),
                           const SizedBox(height: 20),
-                          const ChallengeStatsSection(),
+                          ChallengeStatsSection(challengeID: widget.challenge.uid),
                         ],
                         childAnimationBuilder: (widget) => SlideAnimation(
                           verticalOffset: 50.0,

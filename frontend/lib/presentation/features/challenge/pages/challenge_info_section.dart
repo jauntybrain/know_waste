@@ -41,7 +41,7 @@ class ChallengeInfoSection extends StatelessWidget {
                     const SizedBox(width: 10),
                     Text(
                       'Unlimited',
-                      style: AppTextStyles.blackExtraBold16,
+                      style: AppTextStyles.blackExtraBold15,
                     ),
                     const SizedBox(width: 10),
                   ],
@@ -79,7 +79,7 @@ class ChallengeInfoSection extends StatelessWidget {
                     const SizedBox(width: 10),
                     Text(
                       criteria,
-                      style: AppTextStyles.blackExtraBold16,
+                      style: AppTextStyles.blackExtraBold15,
                     ),
                     const SizedBox(width: 10),
                   ],

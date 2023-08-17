@@ -89,6 +89,8 @@ class FirestoreCollection<T> {
     }
   }
 
+  
+
   Future<List<T>> futureAll([String? orderBy, bool desc = false]) async {
     final docs = orderBy != null ? (await this.orderBy(orderBy, desc).get()).docs : (await withConverter.get()).docs;
 
