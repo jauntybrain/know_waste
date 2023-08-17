@@ -39,6 +39,7 @@ export const processLabeledWaste = functions
 
             await firestore.collection('analyzedWaste').add({
                 'labeledWasteID': snapshot.id,
+                'imageUrl': wasteData.file,
                 'userID': userID,
                 'labels': textLabels,
                 'objects': textObjects,
