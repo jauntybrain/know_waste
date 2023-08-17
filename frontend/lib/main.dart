@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:know_waste/providers/package_info_provider.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
@@ -13,7 +14,8 @@ import 'providers/providers_logger.dart';
 import 'providers/user_provider.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -27,6 +29,8 @@ Future<void> main() async {
 
   final packageInfo = PackageInfoService();
   await packageInfo.init();
+
+  FlutterNativeSplash.remove();
 
   runApp(
     ProviderScope(
