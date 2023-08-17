@@ -41,6 +41,7 @@ final wasteRepositoryProvider = Provider<AnalyzedWasteRepository>(
   (ref) => FirestoreAnalyzedWasteRepository(
     _firestoreAuthService,
     _firestoreInstance,
+    ref.watch(firebaseStorageServiceProvider),
     AnalyzedWasteCollection(),
   ),
 );

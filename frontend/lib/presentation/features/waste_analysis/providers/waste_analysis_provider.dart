@@ -14,6 +14,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../models/analyzed_waste/analyzed_waste.dart';
 import '../../../../providers/repositories_providers.dart';
+import '../../../../providers/user_provider.dart';
 
 final firestoreStreamProvider = StreamProvider<AnalyzedWaste?>((ref) async* {
   final collection = AnalyzedWasteCollection();
@@ -199,7 +200,7 @@ class WasteAnalysisNotifier extends ChangeNotifier {
       _pickedImageID = const Uuid().v4();
       await ref.read(firebaseStorageServiceProvider).uploadImage(
             file: pickedImage!,
-            path: 'items/FdGe35sDg1345SFvDS/$_pickedImageID.jpg',
+            path: 'items/${ref.read(userProvider)!.uid}}/$_pickedImageID.jpg',
             onUploadProgress: setLoadingProgress,
           );
       setProcessing(true);

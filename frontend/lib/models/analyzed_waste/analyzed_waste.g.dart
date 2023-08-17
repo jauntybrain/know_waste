@@ -13,6 +13,7 @@ _$_AnalyzedWaste _$$_AnalyzedWasteFromJson(Map<String, dynamic> json) =>
           (json['labels'] as List<dynamic>).map((e) => e as String).toList(),
       objects:
           (json['objects'] as List<dynamic>).map((e) => e as String).toList(),
+      imageUrl: json['imageUrl'] as String?,
       advice: json['advice'] as String?,
       tips: json['tips'] as String?,
       name: json['name'] as String?,
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$_AnalyzedWasteToJson(_$_AnalyzedWaste instance) =>
       'uid': instance.uid,
       'labels': instance.labels,
       'objects': instance.objects,
+      'imageUrl': instance.imageUrl,
       'advice': instance.advice,
       'tips': instance.tips,
       'name': instance.name,

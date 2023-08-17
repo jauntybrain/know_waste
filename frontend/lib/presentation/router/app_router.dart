@@ -17,8 +17,8 @@ import '../../models/challenge/challenge.dart';
 import '../features/challenge/pages/challenge_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../features/profile/pages/help_page.dart';
-import '../features/profile/pages/scans_page.dart';
 import '../features/profile/pages/settings_page.dart';
+import '../features/user_scans/pages/user_analyzed_waste_page.dart';
 import '../features/waste_analysis/pages/waste_analysis_page.dart';
 import '../features/welcome/pages/welcome_page.dart';
 import 'route_names.dart';
@@ -178,7 +178,7 @@ class AppRouter {
                       GoRoute(
                         path: RoutePaths.scans,
                         name: RouteNames.scans,
-                        builder: (BuildContext context, GoRouterState state) => const ScansPage(),
+                        builder: (BuildContext context, GoRouterState state) => const UserAnalyzedWastePage(),
                       ),
                     ],
                   ),

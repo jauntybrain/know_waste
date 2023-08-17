@@ -23,6 +23,7 @@ mixin _$AnalyzedWaste {
   String get uid => throw _privateConstructorUsedError;
   List<String> get labels => throw _privateConstructorUsedError;
   List<String> get objects => throw _privateConstructorUsedError;
+  String? get imageUrl => throw _privateConstructorUsedError;
   String? get advice => throw _privateConstructorUsedError;
   String? get tips => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $AnalyzedWasteCopyWith<$Res> {
       {String uid,
       List<String> labels,
       List<String> objects,
+      String? imageUrl,
       String? advice,
       String? tips,
       String? name,
@@ -71,6 +73,7 @@ class _$AnalyzedWasteCopyWithImpl<$Res, $Val extends AnalyzedWaste>
     Object? uid = null,
     Object? labels = null,
     Object? objects = null,
+    Object? imageUrl = freezed,
     Object? advice = freezed,
     Object? tips = freezed,
     Object? name = freezed,
@@ -91,6 +94,10 @@ class _$AnalyzedWasteCopyWithImpl<$Res, $Val extends AnalyzedWaste>
           ? _value.objects
           : objects // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       advice: freezed == advice
           ? _value.advice
           : advice // ignore: cast_nullable_to_non_nullable
@@ -131,6 +138,7 @@ abstract class _$$_AnalyzedWasteCopyWith<$Res>
       {String uid,
       List<String> labels,
       List<String> objects,
+      String? imageUrl,
       String? advice,
       String? tips,
       String? name,
@@ -153,6 +161,7 @@ class __$$_AnalyzedWasteCopyWithImpl<$Res>
     Object? uid = null,
     Object? labels = null,
     Object? objects = null,
+    Object? imageUrl = freezed,
     Object? advice = freezed,
     Object? tips = freezed,
     Object? name = freezed,
@@ -173,6 +182,10 @@ class __$$_AnalyzedWasteCopyWithImpl<$Res>
           ? _value._objects
           : objects // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      imageUrl: freezed == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       advice: freezed == advice
           ? _value.advice
           : advice // ignore: cast_nullable_to_non_nullable
@@ -208,6 +221,7 @@ class _$_AnalyzedWaste extends _AnalyzedWaste {
       {required this.uid,
       required final List<String> labels,
       required final List<String> objects,
+      this.imageUrl,
       this.advice,
       this.tips,
       this.name,
@@ -240,6 +254,8 @@ class _$_AnalyzedWaste extends _AnalyzedWaste {
   }
 
   @override
+  final String? imageUrl;
+  @override
   final String? advice;
   @override
   final String? tips;
@@ -255,7 +271,7 @@ class _$_AnalyzedWaste extends _AnalyzedWaste {
 
   @override
   String toString() {
-    return 'AnalyzedWaste(uid: $uid, labels: $labels, objects: $objects, advice: $advice, tips: $tips, name: $name, material: $material, recyclable: $recyclable, date: $date)';
+    return 'AnalyzedWaste(uid: $uid, labels: $labels, objects: $objects, imageUrl: $imageUrl, advice: $advice, tips: $tips, name: $name, material: $material, recyclable: $recyclable, date: $date)';
   }
 
   @override
@@ -266,6 +282,8 @@ class _$_AnalyzedWaste extends _AnalyzedWaste {
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other._labels, _labels) &&
             const DeepCollectionEquality().equals(other._objects, _objects) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.advice, advice) || other.advice == advice) &&
             (identical(other.tips, tips) || other.tips == tips) &&
             (identical(other.name, name) || other.name == name) &&
@@ -283,6 +301,7 @@ class _$_AnalyzedWaste extends _AnalyzedWaste {
       uid,
       const DeepCollectionEquality().hash(_labels),
       const DeepCollectionEquality().hash(_objects),
+      imageUrl,
       advice,
       tips,
       name,
@@ -309,6 +328,7 @@ abstract class _AnalyzedWaste extends AnalyzedWaste {
           {required final String uid,
           required final List<String> labels,
           required final List<String> objects,
+          final String? imageUrl,
           final String? advice,
           final String? tips,
           final String? name,
@@ -327,6 +347,8 @@ abstract class _AnalyzedWaste extends AnalyzedWaste {
   List<String> get labels;
   @override
   List<String> get objects;
+  @override
+  String? get imageUrl;
   @override
   String? get advice;
   @override

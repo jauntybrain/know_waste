@@ -4,7 +4,7 @@ import 'package:know_waste/repositories/analyzed_waste/analyzed_waste_repository
 
 import '../../../../providers/repositories_providers.dart';
 
-final userScansProvider = StateNotifierProvider<UserScansNotifier, AsyncValue<List<AnalyzedWaste>>>(
+final userAnalyzedWasteProvider = StateNotifierProvider<UserScansNotifier, AsyncValue<List<AnalyzedWaste>>>(
   (ref) => UserScansNotifier(ref, ref.read(wasteRepositoryProvider)),
 );
 

@@ -14,6 +14,7 @@ class AnalyzedWaste with _$AnalyzedWaste {
     required String uid,
     required List<String> labels,
     required List<String> objects,
+    String? imageUrl,
     String? advice,
     String? tips,
     String? name,

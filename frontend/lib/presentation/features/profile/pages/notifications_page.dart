@@ -22,7 +22,6 @@ class NotificationsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // SizedBox(height: MediaQuery.of(context).viewPadding.top + 60),
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(

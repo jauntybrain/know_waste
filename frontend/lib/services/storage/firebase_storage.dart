@@ -50,8 +50,12 @@ class FirebaseStorageService {
     );
   }
 
-  Future<String> getImageUrl(String imagePath) async {
-    final storageReference = FirebaseStorage.instance.ref(imagePath);
+  Future<String> getImageUrl(String? imagePath) async {
+    final storage = FirebaseStorage.instance;
+    if (imagePath == null) {
+      return '';
+    }
+    final storageReference = imagePath.contains('gs://') ? storage.refFromURL(imagePath) : storage.ref(imagePath);
     return storageReference.getDownloadURL();
   }
 }

@@ -45,6 +45,7 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
           RefreshIndicator.adaptive(
             edgeOffset: MediaQuery.of(context).viewPadding.top + 60,
             onRefresh: () async {
+              HapticFeedback.lightImpact();
               ref
                 ..invalidate(articlesProvider)
                 ..invalidate(featuredArticleProvider)
