@@ -175,7 +175,7 @@ class WasteAnalysisNotifier extends ChangeNotifier {
       _pickedImageID = const Uuid().v4();
       await ref.read(firebaseStorageServiceProvider).uploadImage(
             file: pickedImage!,
-            path: 'items/${ref.read(userProvider)!.uid}}/$_pickedImageID.jpg',
+            path: 'items/${ref.read(userProvider)!.uid}/$_pickedImageID.jpg',
             onUploadProgress: setLoadingProgress,
           );
       setProcessing(true);

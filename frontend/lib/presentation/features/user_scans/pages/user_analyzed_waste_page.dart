@@ -36,7 +36,7 @@ class UserAnalyzedWastePage extends ConsumerWidget {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: ConstrainedBox(
                     constraints: BoxConstraints.tightFor(
-                      height: MediaQuery.of(context).size.height,
+                      height: isEmpty ? MediaQuery.of(context).size.height : null,
                     ),
                     child: Column(
                       mainAxisAlignment: isEmpty ? MainAxisAlignment.center : MainAxisAlignment.start,
@@ -105,6 +105,7 @@ class UserAnalyzedWastePage extends ConsumerWidget {
                             ),
                           ),
                         ),
+                        if (!isEmpty) SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 120),
                       ],
                     ),
                   ),

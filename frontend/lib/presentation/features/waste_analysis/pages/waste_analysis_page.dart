@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/waste_analysis/pages/waste_analysis_loading_page.dart';
+import 'package:know_waste/presentation/shared/app_toast.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
 
 import '../providers/waste_analysis_provider.dart';
@@ -36,7 +37,8 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
     CameraDescription description = await availableCameras().then((cameras) => cameras[0]);
     _cameraController = CameraController(
       description,
-      ResolutionPreset.medium,
+      enableAudio: false,
+      ResolutionPreset.high,
       imageFormatGroup: ImageFormatGroup.yuv420,
     );
 
@@ -45,15 +47,17 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
         setState(() {});
       }
       if (_cameraController!.value.hasError) {
-        print('Camera error ${_cameraController!.value.errorDescription}');
-        // TODO: Add error dialog
+        AppToast.of(context).show(text: 'Camera error, try again');
       }
     });
 
     try {
       await _cameraController!.initialize();
+      _cameraController!.setFlashMode(FlashMode.off);
     } on CameraException catch (e) {
-      switch (e.code) {}
+      switch (e.code) {
+        // TODO: Add error dialog
+      }
     }
 
     if (mounted) {
@@ -208,9 +212,12 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
                 width: MediaQuery.of(context).size.width,
                 child: CameraControlsWidget(
                   controller: _cameraController,
-                  onCapture: (image) => ref.read(wasteAnalysisProvider.notifier)
-                    ..setPickedImage(image)
-                    ..uploadImage(),
+                  onCapture: (image) {
+                    _cameraController!.setFlashMode(FlashMode.off);
+                    ref.read(wasteAnalysisProvider.notifier)
+                      ..setPickedImage(image)
+                      ..uploadImage();
+                  },
                   onGallery: () => ref.read(wasteAnalysisProvider.notifier).pickImage(isCamera: false),
                 ),
               ),

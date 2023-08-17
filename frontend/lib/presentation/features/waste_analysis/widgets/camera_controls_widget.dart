@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:know_waste/presentation/shared/app_icon_button.dart';
@@ -23,6 +22,25 @@ class CameraControlsWidget extends ConsumerWidget {
   final CameraController? controller;
   final VoidCallback onGallery;
   final Function(File) onCapture;
+
+  FlashMode get currentMode => controller?.value.flashMode ?? FlashMode.off;
+
+  IconData _getFlashIcon() {
+    return currentMode == FlashMode.off ? Icons.flash_off_rounded : Icons.flash_on_rounded;
+  }
+
+  Color _getFillColor() {
+    return currentMode == FlashMode.off ? Colors.white : const Color(0xff007029);
+  }
+
+  Color _getColor() {
+    return currentMode == FlashMode.off ? const Color(0xff007029) : Colors.white;
+  }
+
+  void _toggleFlashMode() {
+    final newMode = currentMode == FlashMode.torch ? FlashMode.off : FlashMode.torch;
+    controller!.setFlashMode(newMode);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -84,14 +102,10 @@ class CameraControlsWidget extends ConsumerWidget {
                   ),
                 ),
                 AppIconButton(
-                  icon:
-                      controller?.value.flashMode == FlashMode.auto ? Icons.flash_off_rounded : Icons.flash_on_rounded,
-                  fillColor: controller?.value.flashMode == FlashMode.auto ? Colors.white : const Color(0xff007029),
-                  color: controller?.value.flashMode == FlashMode.auto ? const Color(0xff007029) : Colors.white,
-                  onTap: () {
-                    controller?.setFlashMode(
-                        controller!.value.flashMode == FlashMode.torch ? FlashMode.off : FlashMode.torch);
-                  },
+                  icon: _getFlashIcon(),
+                  fillColor: _getFillColor(),
+                  color: _getColor(),
+                  onTap: _toggleFlashMode,
                 ),
               ],
               childAnimationBuilder: (widget) => SlideAnimation(

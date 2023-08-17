@@ -19,7 +19,7 @@ class AnalyzedWaste with _$AnalyzedWaste {
     String? tips,
     String? name,
     String? material,
-    bool? recyclable,
+    @Default(false) bool? recyclable,
     @JsonKey(fromJson: dateTimeFromTimestamp) DateTime? date,
   }) = _AnalyzedWaste;
 

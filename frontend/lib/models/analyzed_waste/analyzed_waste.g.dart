@@ -18,7 +18,7 @@ _$_AnalyzedWaste _$$_AnalyzedWasteFromJson(Map<String, dynamic> json) =>
       tips: json['tips'] as String?,
       name: json['name'] as String?,
       material: json['material'] as String?,
-      recyclable: json['recyclable'] as bool?,
+      recyclable: json['recyclable'] as bool? ?? false,
       date: dateTimeFromTimestamp(json['date'] as Timestamp?),
     );
 

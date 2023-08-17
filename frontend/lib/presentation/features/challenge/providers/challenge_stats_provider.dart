@@ -5,7 +5,7 @@ import 'package:know_waste/repositories/challenges/challenges_repository.dart';
 import '../../../../providers/repositories_providers.dart';
 
 final challengeStatsProvider =
-    StateNotifierProvider.family<ChallengeStatsNotifier, AsyncValue<List<ChallengeStats>>, String>(
+    StateNotifierProvider.family.autoDispose<ChallengeStatsNotifier, AsyncValue<List<ChallengeStats>>, String>(
   (ref, id) => ChallengeStatsNotifier(ref, id, ref.read(challengesRepositoryProvider)),
 );
 

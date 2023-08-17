@@ -35,7 +35,7 @@ class BookmarksPage extends ConsumerWidget {
             SingleChildScrollView(
               child: ConstrainedBox(
                 constraints: BoxConstraints.tightFor(
-                  height: MediaQuery.of(context).size.height,
+                  height: isEmpty ? MediaQuery.of(context).size.height : null,
                 ),
                 child: Column(
                   mainAxisAlignment: isEmpty ? MainAxisAlignment.center : MainAxisAlignment.start,

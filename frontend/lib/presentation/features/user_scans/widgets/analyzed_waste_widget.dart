@@ -68,7 +68,7 @@ class AnalyzedWasteWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              analyzedWaste.name!,
+                              analyzedWaste.name ?? 'Analyzed Waste',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: AppTextStyles.blackBlack22.copyWith(fontSize: 17.5, height: 1.2),

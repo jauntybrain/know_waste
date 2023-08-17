@@ -92,7 +92,7 @@ class WasteAnalysisCameraPageState extends ConsumerState<WasteAnalysisCameraPage
               fit: BoxFit.cover,
               child: SizedBox(
                 height: 1,
-                width: 0.75,
+                width: 0.6,
                 child: CameraPreview(
                   widget.controller!,
                   key: stickyKey,

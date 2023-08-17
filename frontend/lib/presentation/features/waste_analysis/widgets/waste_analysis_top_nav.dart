@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/presentation/features/waste_analysis/widgets/tutorial_dialog.dart';
 import 'package:know_waste/presentation/shared/app_icon_button.dart';
 
 import '../../../theme/src/app_colors.dart';
@@ -41,7 +42,7 @@ class WasteAnalysisTopNav extends StatelessWidget {
                 ),
               ),
               AppIconButton(
-                onTap: () {},
+                onTap: () => TutorialDialog.of(context).show(),
                 size: 45,
                 icon: Icons.question_mark_rounded,
               ),

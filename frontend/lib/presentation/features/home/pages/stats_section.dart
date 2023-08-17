@@ -83,7 +83,7 @@ class StatsSection extends ConsumerWidget {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Top ${currentUser?.stats?.rank.toStringAsFixed(1) ?? 100}%',
+                        'Top ${currentUser?.stats?.rank.round() ?? 100}%',
                         style: AppTextStyles.blackBlack22.copyWith(fontSize: 20, height: 1.2),
                       ),
                     ],

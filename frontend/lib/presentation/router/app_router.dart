@@ -20,7 +20,6 @@ import '../features/profile/pages/help_page.dart';
 import '../features/profile/pages/settings_page.dart';
 import '../features/user_scans/pages/user_analyzed_waste_page.dart';
 import '../features/waste_analysis/pages/waste_analysis_page.dart';
-import '../features/welcome/pages/welcome_page.dart';
 import 'route_names.dart';
 import 'route_paths.dart';
 
@@ -47,23 +46,7 @@ class AppRouter {
         navigatorKey: _rootNavigatorKey,
         initialLocation: initialLocation,
         debugLogDiagnostics: true,
-        // redirect: (context, state) {
-        //   final loggedIn = ref.watch(authStateProvider).loggedIn;
-        //   if (!loggedIn) {
-        //     // Redirect to the welcome page if the user is not logged in
-        //     if (state.subloc != '/welcome') {
-        //       return '/welcome';
-        //     }
-        //     return null;
-        //   }
-        //   return null;
-        // },
         routes: [
-          GoRoute(
-            path: RoutePaths.welcome,
-            name: RouteNames.welcome,
-            builder: (context, state) => const WelcomePage(),
-          ),
           GoRoute(
             path: RoutePaths.analyze,
             name: RouteNames.analyze,

@@ -226,7 +226,7 @@ class _$_AnalyzedWaste extends _AnalyzedWaste {
       this.tips,
       this.name,
       this.material,
-      this.recyclable,
+      this.recyclable = false,
       @JsonKey(fromJson: dateTimeFromTimestamp) this.date})
       : _labels = labels,
         _objects = objects,
@@ -264,6 +264,7 @@ class _$_AnalyzedWaste extends _AnalyzedWaste {
   @override
   final String? material;
   @override
+  @JsonKey()
   final bool? recyclable;
   @override
   @JsonKey(fromJson: dateTimeFromTimestamp)
