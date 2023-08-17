@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../theme/theme.dart';
@@ -23,14 +24,7 @@ class ChallengeStatsSection extends ConsumerWidget {
           style: AppTextStyles.blackExtraBold20,
         ),
         const SizedBox(height: 10),
-        Container(
-          padding: const EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [AppShadows.small],
-            border: Border.all(color: const Color(0xfff2f2f2)),
-          ),
+        ContentBox(
           child: Column(
             children: [
               Padding(

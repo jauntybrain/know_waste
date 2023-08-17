@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 
 import '../../../../models/recycling_tool/recycling_tool.dart';
 import '../../../theme/src/app_icons.dart';
@@ -12,13 +13,9 @@ class RecyclingToolWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(color: const Color(0xfff2f2f2)),
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: [AppShadows.small],
-      ),
+    return ContentBox(
+      padding: EdgeInsets.zero,
+      borderRadius: 22,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(22),
         child: Column(

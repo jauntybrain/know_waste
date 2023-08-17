@@ -4,6 +4,8 @@ import '../theme/theme.dart';
 
 class ContentBox extends StatelessWidget {
   const ContentBox({
+    this.height,
+    this.width,
     this.padding,
     this.borderRadius,
     this.fillColor,
@@ -11,6 +13,8 @@ class ContentBox extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  final double? height;
+  final double? width;
   final EdgeInsets? padding;
   final double? borderRadius;
   final Color? fillColor;
@@ -19,8 +23,9 @@ class ContentBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      padding: padding ?? const EdgeInsets.all(16),
+      width: width ?? double.infinity,
+      height: height,
+      padding: padding ?? const EdgeInsets.all(6),
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xfff2f2f2)),
         color: fillColor ?? AppColors.white,

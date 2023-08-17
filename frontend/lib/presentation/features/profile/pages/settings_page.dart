@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../shared/app_icon_button.dart';
 import '../../../shared/app_toast.dart';
+import '../../../shared/content_box.dart';
 import '../../../theme/src/app_icons.dart';
 import '../../../theme/theme.dart';
 
@@ -27,15 +28,8 @@ class SettingsPage extends StatelessWidget {
                 SizedBox(height: MediaQuery.of(context).viewPadding.top + 75),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Container(
-                    width: double.infinity,
+                  child: ContentBox(
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [AppShadows.small],
-                      border: Border.all(color: const Color(0xfff2f2f2)),
-                    ),
                     child: Row(
                       children: [
                         Row(

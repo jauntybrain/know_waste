@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 
 import '../../../theme/src/app_icons.dart';
 import '../../../theme/theme.dart';
@@ -19,15 +20,10 @@ class StatsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ContentBox(
       height: 140,
       width: 140,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xfff2f2f2)),
-        boxShadow: [AppShadows.small],
-      ),
+      padding: EdgeInsets.zero,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Stack(

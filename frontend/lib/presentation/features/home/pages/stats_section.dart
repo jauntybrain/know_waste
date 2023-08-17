@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:know_waste/providers/user_provider.dart';
 
 import '../../../theme/src/app_icons.dart';
@@ -32,14 +33,8 @@ class StatsSection extends ConsumerWidget {
           child: Row(
             children: [
               Expanded(
-                child: Container(
+                child: ContentBox(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xfff2f2f2)),
-                    boxShadow: [AppShadows.small],
-                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -62,14 +57,8 @@ class StatsSection extends ConsumerWidget {
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Container(
+                child: ContentBox(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xfff2f2f2)),
-                    boxShadow: [AppShadows.small],
-                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

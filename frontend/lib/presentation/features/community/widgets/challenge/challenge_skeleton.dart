@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../theme/theme.dart';
@@ -10,15 +11,10 @@ class ChallengeSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       children: [
-        Container(
+        ContentBox(
           width: 220,
+          borderRadius: 12,
           padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xfff2f2f2)),
-            boxShadow: [AppShadows.primary],
-          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

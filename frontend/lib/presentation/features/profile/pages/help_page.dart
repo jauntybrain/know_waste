@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/shared/bouncing.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:know_waste/utils/constants.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -30,15 +31,8 @@ class HelpPage extends StatelessWidget {
                     SizedBox(height: MediaQuery.of(context).viewPadding.top + 55),
                     Bouncing(
                       onTap: () => launchUrlString('mailto:jauntybrain@gmail.com'),
-                      child: Container(
-                        width: double.infinity,
+                      child: ContentBox(
                         padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [AppShadows.small],
-                          border: Border.all(color: const Color(0xfff2f2f2)),
-                        ),
                         child: Row(
                           children: [
                             Container(
@@ -82,15 +76,8 @@ class HelpPage extends StatelessWidget {
                     Bouncing(
                       onTap: () => launchUrlString('mailto:jauntybrain@gmail.com?subject=KnowWaste%20bug%20report&'
                           'body=Please%20describe%20the%20bug%20you%20found%20in%20the%20application.%20Thank%20you!'),
-                      child: Container(
-                        width: double.infinity,
+                      child: ContentBox(
                         padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [AppShadows.small],
-                          border: Border.all(color: const Color(0xfff2f2f2)),
-                        ),
                         child: Row(
                           children: [
                             Container(
@@ -133,15 +120,8 @@ class HelpPage extends StatelessWidget {
                     const SizedBox(height: 10),
                     Bouncing(
                       onTap: () => GoRouter.of(context).goNamed(RouteNames.attributions),
-                      child: Container(
-                        width: double.infinity,
+                      child: ContentBox(
                         padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [AppShadows.small],
-                          border: Border.all(color: const Color(0xfff2f2f2)),
-                        ),
                         child: Row(
                           children: [
                             Container(
@@ -186,15 +166,8 @@ class HelpPage extends StatelessWidget {
                     ),
                     Bouncing(
                       onTap: () => launchUrlString(AppConstants.privacyPolicyUrl),
-                      child: Container(
-                        width: double.infinity,
+                      child: ContentBox(
                         padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [AppShadows.small],
-                          border: Border.all(color: const Color(0xfff2f2f2)),
-                        ),
                         child: Row(
                           children: [
                             Container(

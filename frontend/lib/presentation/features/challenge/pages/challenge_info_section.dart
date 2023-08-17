@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
 
 class ChallengeInfoSection extends StatelessWidget {
@@ -12,14 +13,7 @@ class ChallengeInfoSection extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [AppShadows.small],
-              border: Border.all(color: const Color(0xfff2f2f2)),
-            ),
+          ContentBox(
             child: Row(
               children: [
                 Row(
@@ -50,14 +44,7 @@ class ChallengeInfoSection extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 5),
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [AppShadows.small],
-              border: Border.all(color: const Color(0xfff2f2f2)),
-            ),
+          ContentBox(
             child: Row(
               children: [
                 Row(

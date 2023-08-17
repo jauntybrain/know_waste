@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/router/route_names.dart';
 import 'package:know_waste/presentation/shared/bouncing.dart';
+import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
 import '../../../theme/theme.dart';
@@ -13,14 +14,8 @@ class HomeRecommendedToolWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bouncing(
       onTap: () => GoRouter.of(context).pushNamed(RouteNames.analyze),
-      child: Container(
+      child: ContentBox(
         padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xfff2f2f2)),
-          boxShadow: [AppShadows.small],
-        ),
         child: Row(
           children: [
             Container(

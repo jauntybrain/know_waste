@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../../models/article/article.dart';
 import '../../../../shared/app_icon_button.dart';
 import '../../../../shared/bouncing.dart';
+import '../../../../shared/content_box.dart';
 import '../../../../theme/theme.dart';
 
 class ArticleSearchWidget extends StatelessWidget {
@@ -23,14 +24,10 @@ class ArticleSearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Bouncing(
         onTap: () => onTap?.call(article),
-        child: Container(
+        child: ContentBox(
           height: 140,
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xfff2f2f2)),
-            boxShadow: [AppShadows.small],
-          ),
+          borderRadius: 12,
+          padding: EdgeInsets.zero,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
