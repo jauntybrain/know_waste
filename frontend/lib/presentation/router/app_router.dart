@@ -9,7 +9,6 @@ import 'package:know_waste/presentation/features/community/pages/community_page.
 import 'package:know_waste/presentation/features/community/pages/search_page.dart';
 import 'package:know_waste/presentation/features/guide/pages/guide_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/attributions_page.dart';
-import 'package:know_waste/presentation/features/profile/pages/edit_profile_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/notifications_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/profile_page.dart';
 import 'package:know_waste/presentation/features/user_analyzed_waste/pages/analyzed_waste_detail_page.dart';

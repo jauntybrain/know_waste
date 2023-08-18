@@ -21,10 +21,10 @@ class AppMarkdown extends StatefulWidget {
   final double? lineHeight;
 
   @override
-  _AppMarkdownState createState() => _AppMarkdownState();
+  AppMarkdownState createState() => AppMarkdownState();
 }
 
-class _AppMarkdownState extends State<AppMarkdown> {
+class AppMarkdownState extends State<AppMarkdown> {
   bool showFullText = false;
 
   String get displayedText => widget.hasReadMore && !showFullText && widget.text.length > 500

@@ -38,7 +38,7 @@ final firestoreStreamProvider = StreamProvider<AnalyzedWaste?>((ref) async* {
       }
     }
   }, onError: (error) {
-    print('Error occurred in the Firestore stream: $error');
+    // TODO: Process firestore stream error
   });
 
   ref.onDispose(() {
