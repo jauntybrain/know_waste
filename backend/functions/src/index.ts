@@ -1,2 +1,17 @@
-import { processLabeledWaste, processAnalyzedWaste, updateUsersPercentile } from './triggers';
-export { processLabeledWaste, processAnalyzedWaste, updateUsersPercentile }
+import {
+    processLabeledWaste,
+    processAnalyzedWaste,
+    updateUsersPercentile,
+    updateChallengeOnJoin,
+    updateChallengeOnQuit,
+    updateUserDocument
+} from './triggers';
+
+export {
+    processLabeledWaste,
+    processAnalyzedWaste,
+    updateUsersPercentile,
+    updateChallengeOnJoin,
+    updateChallengeOnQuit,
+    updateUserDocument
+}

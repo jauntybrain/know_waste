@@ -132,11 +132,44 @@ export const processAnalyzedWaste = functions
                 .doc(analyzedWaste.userID)
                 .set(updateData, { merge: true });
 
+            // Update challenge progress
+            const challenges = await firestore.collection('challenges')
+                .where('material', '==', lowerCaseMaterial)
+                .where('users', 'array-contains', analyzedWaste.userID).get();
+
+            for (const challenge of challenges.docs) {
+                firestore.doc(`challenges/${challenge.id}/stats/${analyzedWaste.userID}`).update({ progress: increment });
+            }
+
         } catch (error) {
             console.error('Error:', error);
             throw new functions.https.HttpsError('internal', 'Error processing analyzed waste');
         }
     });
+
+export const updateChallengeOnJoin = functions.firestore
+    .document('challenges/{challengeID}/stats/{userID}')
+    .onCreate(async (snapshot, context) => {
+        const challengeID = context.params.challengeID;
+        const userStatsSnapshot = snapshot.data();
+
+        await firestore
+            .collection('challenges')
+            .doc(challengeID)
+            .update({ users: admin.firestore.FieldValue.arrayUnion(userStatsSnapshot.id) })
+    })
+
+export const updateChallengeOnQuit = functions.firestore
+    .document('challenges/{challengeID}/stats/{userID}')
+    .onDelete(async (snapshot, context) => {
+        const challengeID = context.params.challengeID;
+        const userStatsSnapshot = snapshot.data();
+
+        await firestore
+            .collection('challenges')
+            .doc(challengeID)
+            .update({ users: admin.firestore.FieldValue.arrayRemove(userStatsSnapshot.id) })
+    })
 
 export const updateUsersPercentile = functions
     .region('us-central1')
@@ -180,4 +213,3 @@ export const updateUsersPercentile = functions
             throw new functions.https.HttpsError('internal', 'Error updating percentiles');
         }
     });
-
