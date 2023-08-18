@@ -54,7 +54,7 @@ final wasteAnalysisProvider = ChangeNotifierProvider<WasteAnalysisNotifier>(
     final collection = AnalyzedWasteCollection();
     StreamController<AnalyzedWaste?> controller = StreamController<AnalyzedWaste?>();
     final query = collection.withConverter
-        .where('userID', isEqualTo: 'FdGe35sDg1345SFvDS')
+        .where('userID', isEqualTo: ref.read(userProvider)!.uid)
         .where('name', isNotEqualTo: null)
         .orderBy('date', descending: true)
         .limit(1)

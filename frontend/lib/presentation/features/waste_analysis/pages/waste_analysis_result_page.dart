@@ -176,7 +176,7 @@ class WasteAnalysisResultPage extends ConsumerWidget {
                 AppMarkdown(
                   text: wasteAnalysis.analyzedWaste?.advice ?? 'Loading...',
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
                 Text(
                   'AI-Powered',
                   style: AppTextStyles.blackBlack22.copyWith(
@@ -185,7 +185,7 @@ class WasteAnalysisResultPage extends ConsumerWidget {
                     fontSize: 14,
                   ),
                 ),
-                Text('Tips & Tricks', style: AppTextStyles.blackBlack22.copyWith(fontSize: 22)),
+                Text('Tips & Tricks', style: AppTextStyles.blackBlack22),
                 const SizedBox(height: 4),
                 AppMarkdown(
                   text: wasteAnalysis.analyzedWaste?.tips ?? 'Loading...',

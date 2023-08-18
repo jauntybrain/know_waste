@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/features/user_scans/providers/user_analyzed_waste_provider.dart';
-import 'package:know_waste/presentation/features/user_scans/widgets/analyzed_waste_widget.dart';
+import 'package:know_waste/presentation/features/user_analyzed_waste/providers/user_analyzed_waste_provider.dart';
+import 'package:know_waste/presentation/features/user_analyzed_waste/widgets/analyzed_waste_widget.dart';
+import 'package:know_waste/presentation/router/router_context_extension.dart';
 
 import '../../../../models/api_error/api_error.dart';
 import '../../../shared/app_icon_button.dart';
@@ -62,7 +63,7 @@ class UserAnalyzedWastePage extends ConsumerWidget {
                                       itemCount: waste.length,
                                       itemBuilder: (context, index) => AnalyzedWasteWidget(
                                         analyzedWaste: waste[index],
-                                        // onTap: context.pushWaste,
+                                        onTap: context.pushAnalyzedWaste,
                                       ),
                                     )
                                   : Center(

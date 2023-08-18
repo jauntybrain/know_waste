@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/models/analyzed_waste/analyzed_waste.dart';
 import 'package:know_waste/models/challenge/challenge.dart';
 import 'package:know_waste/models/guide/guide.dart';
 
@@ -30,6 +31,13 @@ extension RouterContextExt on BuildContext {
     GoRouter.of(this).pushNamed(
       RouteNames.challenge,
       extra: challenge,
+    );
+  }
+
+  void pushAnalyzedWaste(AnalyzedWaste waste) {
+    GoRouter.of(this).pushNamed(
+      RouteNames.analyzedWasteDetail,
+      extra: waste,
     );
   }
 }

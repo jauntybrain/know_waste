@@ -9,9 +9,15 @@ import '../../../theme/src/app_colors.dart';
 import '../../../theme/src/app_text_styles.dart';
 
 class WasteAnalysisTopNav extends StatelessWidget {
-  const WasteAnalysisTopNav({this.blurred = false, super.key});
+  const WasteAnalysisTopNav({
+    this.blurred = false,
+    this.showHelp = true,
+    this.title,
+    super.key,
+  });
 
-  final bool blurred;
+  final bool blurred, showHelp;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +41,20 @@ class WasteAnalysisTopNav extends StatelessWidget {
                 icon: Icons.close,
               ),
               Text(
-                'Scan Waste',
+                title ?? 'Scan Waste',
                 style: AppTextStyles.blackBlack22.copyWith(
                   color: Colors.black,
                   fontSize: 20,
                 ),
               ),
-              AppIconButton(
-                onTap: () => TutorialDialog.of(context).show(),
-                size: 45,
-                icon: Icons.question_mark_rounded,
-              ),
+              if (showHelp)
+                AppIconButton(
+                  onTap: () => TutorialDialog.of(context).show(),
+                  size: 45,
+                  icon: Icons.question_mark_rounded,
+                )
+              else
+                const SizedBox(width: 45),
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/models/analyzed_waste/analyzed_waste.dart';
 import 'package:know_waste/models/guide/guide.dart';
 import 'package:know_waste/presentation/features/article/pages/article_page.dart';
 import 'package:know_waste/presentation/features/bookmarks/pages/bookmarks_page.dart';
@@ -8,8 +9,10 @@ import 'package:know_waste/presentation/features/community/pages/community_page.
 import 'package:know_waste/presentation/features/community/pages/search_page.dart';
 import 'package:know_waste/presentation/features/guide/pages/guide_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/attributions_page.dart';
+import 'package:know_waste/presentation/features/profile/pages/edit_profile_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/notifications_page.dart';
 import 'package:know_waste/presentation/features/profile/pages/profile_page.dart';
+import 'package:know_waste/presentation/features/user_analyzed_waste/pages/analyzed_waste_detail_page.dart';
 import 'package:know_waste/presentation/shared/app_wrapper.dart';
 
 import '../../models/article/article.dart';
@@ -18,7 +21,7 @@ import '../features/challenge/pages/challenge_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../features/profile/pages/help_page.dart';
 import '../features/profile/pages/settings_page.dart';
-import '../features/user_scans/pages/user_analyzed_waste_page.dart';
+import '../features/user_analyzed_waste/pages/user_analyzed_waste_page.dart';
 import '../features/waste_analysis/pages/waste_analysis_page.dart';
 import 'route_names.dart';
 import 'route_paths.dart';
@@ -159,10 +162,21 @@ class AppRouter {
                         ],
                       ),
                       GoRoute(
-                        path: RoutePaths.scans,
-                        name: RouteNames.scans,
-                        builder: (BuildContext context, GoRouterState state) => const UserAnalyzedWastePage(),
-                      ),
+                          path: RoutePaths.analyzedWaste,
+                          name: RouteNames.analyzedWaste,
+                          builder: (BuildContext context, GoRouterState state) => const UserAnalyzedWastePage(),
+                          routes: [
+                            GoRoute(
+                              path: RoutePaths.analyzedWasteDetail,
+                              name: RouteNames.analyzedWasteDetail,
+                              parentNavigatorKey: _rootNavigatorKey,
+                              pageBuilder: (BuildContext context, GoRouterState state) => slideUpPageTransition<void>(
+                                context: context,
+                                state: state,
+                                child: AnalyzedWasteDetailPage(analyzedWaste: state.extra as AnalyzedWaste),
+                              ),
+                            ),
+                          ]),
                     ],
                   ),
                 ],
