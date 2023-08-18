@@ -3,8 +3,7 @@ import {
     processAnalyzedWaste,
     updateUsersPercentile,
     updateChallengeOnJoin,
-    updateChallengeOnQuit,
-    updateUserDocument
+    updateChallengeOnQuit
 } from './triggers';
 
 export {
@@ -12,6 +11,5 @@ export {
     processAnalyzedWaste,
     updateUsersPercentile,
     updateChallengeOnJoin,
-    updateChallengeOnQuit,
-    updateUserDocument
+    updateChallengeOnQuit
 }
