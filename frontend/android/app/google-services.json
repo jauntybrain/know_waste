@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "848280063891-kkelj6o5bhm19tq6of1mbfvgttrue1t0.apps.googleusercontent.com",
+              "client_id": "848280063891-37fsb0k4frblao3r6dmspl7t7g5pmkjh.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.knowWaste"
+                "bundle_id": "com.application.knowWaste"
               }
             }
           ]
