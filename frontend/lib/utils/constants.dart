@@ -17,7 +17,8 @@ class AppConstants {
       tag: 'AI-Powered',
       image: AppImages.wasteScanner,
       icon: AppIcons.wasteScanner,
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.',
+      about:
+          'Your pocket-sized AI recycling companion. Take a photo of an item to receive AI-generated recycling advice, as well as tips and tricks.',
       route: RouteNames.analyze,
       buttonText: 'Launch Scanner',
     ),
@@ -27,7 +28,8 @@ class AppConstants {
       tag: 'Stay tuned...',
       image: AppImages.comingSoon,
       icon: AppIcons.comingSoon,
-      about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna.',
+      about:
+          'New exciting AI-powereed features like recycling label scanning are currently in development, stay tuned for updates!',
     ),
   ];
 }
