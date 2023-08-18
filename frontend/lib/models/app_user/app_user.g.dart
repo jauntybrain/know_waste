@@ -13,10 +13,10 @@ _$_AppUser _$$_AppUserFromJson(Map<String, dynamic> json) => _$_AppUser(
           : UserStats.fromJson(json['stats'] as Map<String, dynamic>),
       email: json['email'] as String?,
       username: json['username'] as String?,
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
+      name: json['name'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       profilePicture: json['profilePicture'] as String?,
+      isAnonymous: json['isAnonymous'] as bool? ?? true,
       bookmarks: (json['bookmarks'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -29,10 +29,10 @@ Map<String, dynamic> _$$_AppUserToJson(_$_AppUser instance) =>
       'uid': instance.uid,
       'email': instance.email,
       'username': instance.username,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'name': instance.name,
       'phoneNumber': instance.phoneNumber,
       'profilePicture': instance.profilePicture,
+      'isAnonymous': instance.isAnonymous,
       'bookmarks': instance.bookmarks,
       'fcm_token': instance.fcmToken,
     };

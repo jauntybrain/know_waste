@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:know_waste/providers/auth_provider.dart';
 
@@ -31,7 +30,7 @@ class AuthPromptWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '♻️ Join today ',
+              '♻️ Join KnowWaste',
               textAlign: TextAlign.start,
               style: AppTextStyles.blackBlack22.copyWith(fontSize: 21),
             ),
@@ -59,26 +58,24 @@ class AuthPromptWidget extends ConsumerWidget {
                   fillColor: AppColors.secondary.withOpacity(0.1),
                   textColor: AppColors.secondary,
                   hasShadow: false,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Continue with email'),
-                    ],
-                  ),
+                  child: const Text('Continue with email'),
                 ),
-                Container(height: 20, width: 1, color: Colors.black.withOpacity(smallScreen ? 0 : 0.1)),
+                Container(
+                  height: 20,
+                  width: 1,
+                  color: Colors.black.withOpacity(smallScreen ? 0 : 0.1),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Bouncing(
                       onTap: () {
-                        ref.read(authProvider.notifier).signInWithGoogle();
-                        AppToast.of(context).show(
-                          icon: Icons.person_rounded,
-                          gravity: ToastGravity.BOTTOM,
-                          text: 'Welcome back!',
-                        );
+                        ref.read(authProvider.notifier).signInWithGoogle(
+                              onSuccess: () => AppToast.of(context).show(
+                                icon: Icons.person_rounded,
+                                text: 'Welcome to KnowWaste! 🎉',
+                              ),
+                            );
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10),
@@ -92,12 +89,12 @@ class AuthPromptWidget extends ConsumerWidget {
                     ),
                     Bouncing(
                       onTap: () {
-                        ref.read(authProvider.notifier).signInWithApple();
-                        AppToast.of(context).show(
-                          icon: Icons.person_rounded,
-                          gravity: ToastGravity.BOTTOM,
-                          text: 'Welcome back',
-                        );
+                        ref.read(authProvider.notifier).signInWithApple(
+                              onSuccess: () => AppToast.of(context).show(
+                                icon: Icons.person_rounded,
+                                text: 'Welcome to KnowWaste! 🎉',
+                              ),
+                            );
                       },
                       child: Container(
                         padding: const EdgeInsets.all(14),

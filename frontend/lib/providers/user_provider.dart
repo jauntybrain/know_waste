@@ -12,7 +12,9 @@ final userProvider = StateNotifierProvider<UserNotifier, AppUser?>(
 
 class UserNotifier extends StateNotifier<AppUser?> {
   UserNotifier(this.ref, this.userRepository) : super(null) {
-    userRepository.signInAnonymously();
+    if (FirebaseAuth.instance.currentUser == null) {
+      userRepository.signInAnonymously();
+    }
     _userSubscription = userRepository.authState().listen(_userListener);
   }
 
@@ -68,7 +70,6 @@ class UserNotifier extends StateNotifier<AppUser?> {
     try {
       List<String> newBookmarks = List.from(state!.bookmarks);
       state = state!.copyWith(bookmarks: newBookmarks..remove(articleID));
-      print(state!.uid);
       await userRepository.updateProfile(state!.uid, state!.toJson());
       callback.call(true);
     } catch (err) {

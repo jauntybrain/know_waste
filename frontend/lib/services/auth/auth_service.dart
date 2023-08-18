@@ -59,22 +59,33 @@ class AuthService {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
+    final googleUser = await GoogleSignIn(
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/userinfo.profile',
+      ],
+    ).signIn();
+
+    if (googleUser == null) {
+      return null;
+    }
+
+    final googleAuth = await googleUser.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
     try {
-      final googleUser = await GoogleSignIn().signIn();
-
-      if (googleUser != null) {
-        final googleAuth = await googleUser.authentication;
-        final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
-
-        return await FirebaseAuth.instance.signInWithCredential(credential);
+      return FirebaseAuth.instance.currentUser!.linkWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      // If an account was already linked, just sign back in.
+      // e.credential is always null, therefore we must use GoogleAuth credential
+      if (e.code == 'credential-already-in-use' || e.code == 'provider-already-linked') {
+        return FirebaseAuth.instance.signInWithCredential(credential);
       } else {
-        return null;
+        rethrow;
       }
-    } catch (e) {
-      rethrow;
     }
   }
 
@@ -90,11 +101,11 @@ class AuthService {
     final nonce = _sha256ofString(rawNonce);
 
     final appleCredential = await SignInWithApple.getAppleIDCredential(
+      nonce: nonce,
       scopes: [
         AppleIDAuthorizationScopes.email,
         AppleIDAuthorizationScopes.fullName,
       ],
-      nonce: nonce,
     );
 
     final oauthCredential = OAuthProvider('apple.com').credential(
@@ -102,7 +113,17 @@ class AuthService {
       rawNonce: rawNonce,
     );
 
-    return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+    try {
+      return FirebaseAuth.instance.currentUser!.linkWithCredential(oauthCredential);
+    } on FirebaseAuthException catch (e) {
+      // If an account was already linked, just sign back in.
+      // e.credential is always null, therefore we must use Apple oAuth credential
+      if (e.code == 'credential-already-in-use' || e.code == 'provider-already-linked') {
+        return FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      } else {
+        rethrow;
+      }
+    }
   }
 
   Future<void> signOut() async {

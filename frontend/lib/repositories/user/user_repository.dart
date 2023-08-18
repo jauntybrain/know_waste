@@ -15,7 +15,9 @@ abstract class UserRepository {
 
   Future<User?> signInAnonymously();
 
-  Future<User?> signInWithGoogle();
+  Future<UserCredential?> signInWithGoogle();
 
-  Future<User?> signInWithApple();
+  Future<UserCredential?> signInWithApple();
+
+  Future<User?> processLinkedUser({required UserCredential? credential});
 }

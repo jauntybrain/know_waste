@@ -16,10 +16,10 @@ class AppUser with _$AppUser {
     @JsonKey(includeToJson: false) UserStats? stats,
     String? email,
     String? username,
-    String? firstName,
-    String? lastName,
+    String? name,
     String? phoneNumber,
     String? profilePicture,
+    @Default(true) bool isAnonymous,
     @Default([]) List<String> bookmarks,
     @JsonKey(name: 'fcm_token') String? fcmToken,
   }) = _AppUser;

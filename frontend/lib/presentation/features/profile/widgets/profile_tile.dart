@@ -5,6 +5,7 @@ import 'package:know_waste/presentation/shared/app_icon_button.dart';
 import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
+import 'package:know_waste/providers/auth_provider.dart';
 
 import '../../../../models/profile_item.dart';
 
@@ -19,7 +20,13 @@ class ProfileTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Bouncing(
-      onTap: () => GoRouter.of(context).goNamed(profileItem.routeName),
+      onTap: () {
+        if (profileItem.routeName == 'logout') {
+          ref.read(authProvider.notifier).signOut();
+        } else {
+          GoRouter.of(context).goNamed(profileItem.routeName);
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
         child: ContentBox(

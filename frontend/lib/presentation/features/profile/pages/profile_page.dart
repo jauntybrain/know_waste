@@ -12,11 +12,13 @@ import 'package:know_waste/presentation/features/profile/widgets/auth_prompt_wid
 import 'package:know_waste/presentation/router/route_names.dart';
 import 'package:know_waste/presentation/shared/app_toast.dart';
 import 'package:know_waste/presentation/shared/bouncing.dart';
+import 'package:know_waste/providers/auth_provider.dart';
 import 'package:know_waste/providers/package_info_provider.dart';
 import 'package:know_waste/providers/user_provider.dart';
 
 import '../../../../models/profile_item.dart';
 import '../../../shared/app_icon_button.dart';
+import '../../../shared/app_loading_dialog.dart';
 import '../../../theme/src/app_colors.dart';
 import '../../../theme/src/app_text_styles.dart';
 import '../widgets/profile_tile.dart';
@@ -38,13 +40,13 @@ const profileItems = [
     icon: Icons.inventory_2_rounded,
     title: 'Your scans',
     subtitle: 'Check out your waste scans',
-    routeName: RouteNames.scans,
+    routeName: RouteNames.analyzedWaste,
   ),
   ProfileItem(
     icon: Icons.logout_rounded,
     title: 'Sign out',
     subtitle: 'Log out from your current account',
-    routeName: '',
+    routeName: 'logout',
     hasChevron: false,
     registeredOnly: true,
   ),
@@ -55,8 +57,21 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAnonymous = ref.watch(userProvider.select((value) => value?.email == null));
+    final isAnonymous = ref.watch(userProvider.select((value) => value?.isAnonymous ?? true));
     final currentUser = ref.watch(userProvider);
+
+    ref.listen(authProvider, (prev, next) {
+      if (next is AsyncLoading) {
+        AppDialog.of(context).loading();
+        return;
+      } else if (prev is AsyncLoading) {
+        AppDialog.dispose();
+      }
+
+      if (next is AsyncError) {
+        AppToast.of(context).show(text: 'An issue occured, please try again', isError: true);
+      }
+    });
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -79,7 +94,7 @@ class ProfilePage extends ConsumerWidget {
                 duration: const Duration(milliseconds: 500),
                 delay: const Duration(milliseconds: 20),
                 children: [
-                  SizedBox(height: MediaQuery.of(context).padding.top + 60),
+                  SizedBox(height: MediaQuery.of(context).padding.top + 65),
                   AnimationConfiguration.synchronized(
                     child: ScaleAnimation(
                       duration: const Duration(milliseconds: 300),
@@ -158,12 +173,12 @@ class ProfilePage extends ConsumerWidget {
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            currentUser?.firstName ?? 'Anonymous user',
+                            currentUser?.name ?? 'Anonymous user',
                             style: AppTextStyles.blackBold22.copyWith(height: 1, fontSize: 19),
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            currentUser?.username ?? '@anonymous',
+                            '@${currentUser?.username ?? 'anonymous'}',
                             style: AppTextStyles.grayMedium16.copyWith(color: const Color(0xffB4B4B4)),
                           ),
                         ],
@@ -230,7 +245,7 @@ class ProfilePage extends ConsumerWidget {
             width: MediaQuery.of(context).size.width,
             child: ClipRect(
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                filter: ImageFilter.blur(sigmaX: 30, sigmaY: 10),
                 child: Container(
                   padding: EdgeInsets.only(
                     left: 20,

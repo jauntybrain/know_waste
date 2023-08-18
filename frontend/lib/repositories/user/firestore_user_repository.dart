@@ -49,7 +49,7 @@ class FirestoreUserRepository implements UserRepository {
 
   @override
   Future<void> signOut([String? userId]) async {
-    return firebaseAuth.signOut();
+    await firebaseAuth.signOut();
   }
 
   @override
@@ -58,12 +58,52 @@ class FirestoreUserRepository implements UserRepository {
   }
 
   @override
-  Future<User?> signInWithApple() async {
-    return (await firebaseAuth.signInWithApple())?.user;
+  Future<UserCredential?> signInWithApple() async {
+    return (await firebaseAuth.signInWithApple());
   }
 
   @override
-  Future<User?> signInWithGoogle() async {
-    return (await firebaseAuth.signInWithGoogle())?.user;
+  Future<UserCredential?> signInWithGoogle() async {
+    return (await firebaseAuth.signInWithGoogle());
+  }
+
+  /* 
+    *Why not use a trigger?*
+    As of 2023, Firebase does not support triggers on account linkings,
+    and account parameters like "displayName", "profilePicture" are not
+    applied to the anonymous user, therefore, we must attach them manually. 
+  */
+  @override
+  Future<User?> processLinkedUser({required UserCredential? credential}) async {
+    try {
+      // Don't update if the user profile is null
+      if (credential?.additionalUserInfo?.profile == null) {
+        return null;
+      }
+
+      // Don't update if the user exists
+      if (!credential!.additionalUserInfo!.isNewUser) {
+        return credential.user;
+      }
+
+      // Pull data from profile and populate Firestore entry
+      final userID = credential.user!.uid;
+      final providerID = credential.additionalUserInfo!.providerId!;
+      final profile = credential.additionalUserInfo!.profile!;
+
+      final userData = {
+        'uid': userID,
+        'isAnonymous': false,
+        'email': profile['email'],
+        'name': providerID == 'google.com' ? profile['name'] : 'Apple User',
+        if (providerID == 'google.com') 'profilePicture': profile['picture'],
+      };
+
+      await firestore.set('users/$userID', userData);
+
+      return credential.user;
+    } catch (e) {
+      rethrow;
+    }
   }
 }
