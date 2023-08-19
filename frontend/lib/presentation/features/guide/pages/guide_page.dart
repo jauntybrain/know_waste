@@ -85,7 +85,7 @@ class GuidePage extends ConsumerWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       child: AppMarkdown(text: guide.content, lineHeight: 1.5),
                     ),
                   ],

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -50,47 +48,42 @@ class AnalyzedWasteWidget extends StatelessWidget {
                 Positioned(
                   bottom: 0,
                   width: 200,
-                  child: ClipRRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        color: AppColors.white.withOpacity(0.85),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              DateFormat('MMM d, y').format(analyzedWaste.date!),
-                              style: AppTextStyles.blackBlack22.copyWith(
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.secondary,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Text(
-                              analyzedWaste.name ?? 'Analyzed Waste',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: AppTextStyles.blackBlack22.copyWith(fontSize: 17.5, height: 1.2),
-                            ),
-                            const SizedBox(height: 12),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: analyzedWaste.recyclable!
-                                    ? AppColors.primary.withOpacity(0.2)
-                                    : const Color(0xffB14305).withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                analyzedWaste.recyclable! ? 'Recyclable' : 'Non-Recyclable',
-                                style: AppTextStyles.primaryBold14.copyWith(
-                                    color: analyzedWaste.recyclable! ? AppColors.secondary : const Color(0xffB14305)),
-                              ),
-                            ),
-                          ],
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    color: AppColors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          DateFormat('MMM d, y hh:mm a').format(analyzedWaste.date!),
+                          style: AppTextStyles.blackBlack22.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.secondary,
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
+                        Text(
+                          analyzedWaste.name ?? 'Analyzed Waste',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyles.blackBlack22.copyWith(fontSize: 17.5, height: 1.2),
+                        ),
+                        const SizedBox(height: 12),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: analyzedWaste.recyclable!
+                                ? AppColors.primary.withOpacity(0.2)
+                                : const Color(0xffB14305).withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            analyzedWaste.recyclable! ? 'Recyclable' : 'Non-Recyclable',
+                            style: AppTextStyles.primaryBold14.copyWith(
+                                color: analyzedWaste.recyclable! ? AppColors.secondary : const Color(0xffB14305)),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

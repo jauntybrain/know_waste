@@ -121,7 +121,7 @@ class ChallengePageState extends ConsumerState<ChallengePage> {
                                       isLoading: statsWatcher.isLoading,
                                       onTap: () => QuitChallengeDialog.of(context).show().then(
                                         (value) {
-                                          if (value != null) {
+                                          if (value == true) {
                                             statsReader.quitChallenge();
                                           }
                                         },

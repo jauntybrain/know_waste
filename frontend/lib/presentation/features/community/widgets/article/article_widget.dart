@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -174,41 +172,38 @@ class ArticleWidget extends StatelessWidget {
                       topLeft: Radius.circular(18),
                       bottomLeft: Radius.circular(18),
                     ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.white.withOpacity(0.92),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Article'.toUpperCase(),
-                                style: AppTextStyles.blackBlack22.copyWith(
-                                  color: AppColors.secondary,
-                                  fontSize: 12,
-                                ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: AppColors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Article'.toUpperCase(),
+                              style: AppTextStyles.blackBlack22.copyWith(
+                                color: AppColors.secondary,
+                                fontSize: 12,
                               ),
-                              Text(
-                                article.title.split(' ').map((word) => word.capitalize()).join(' '),
-                                style: AppTextStyles.blackBlack22.copyWith(fontSize: 19),
-                              ),
-                              const Spacer(),
-                              AppButton.primary(
-                                fillColor: AppColors.secondary,
-                                textColor: AppColors.white,
-                                height: 42,
-                                width: 120,
-                                borderRadius: 40,
-                                onTap: () => onTap?.call(article),
-                                hasShadow: true,
-                                child: const Text('Read Now'),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Text(
+                              article.title.split(' ').map((word) => word.capitalize()).join(' '),
+                              style: AppTextStyles.blackBlack22.copyWith(fontSize: 19),
+                            ),
+                            const Spacer(),
+                            AppButton.primary(
+                              fillColor: AppColors.secondary,
+                              textColor: AppColors.white,
+                              height: 42,
+                              width: 120,
+                              borderRadius: 40,
+                              onTap: () => onTap?.call(article),
+                              hasShadow: true,
+                              child: const Text('Read Now'),
+                            ),
+                          ],
                         ),
                       ),
                     ),

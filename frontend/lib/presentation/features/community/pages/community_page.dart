@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -84,52 +82,47 @@ class CommunityPageState extends ConsumerState<CommunityPage> {
           Positioned(
             top: 0,
             width: MediaQuery.of(context).size.width,
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                child: Container(
-                  padding: EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    bottom: 12,
-                    top: MediaQuery.of(context).viewPadding.top,
+            child: Container(
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: 12,
+                top: MediaQuery.of(context).viewPadding.top,
+              ),
+              color: AppColors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Hero(
+                    tag: 'search_bar',
+                    child: AppIconButton(
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(RouteNames.search);
+                      },
+                      size: 45,
+                      iconSize: 22,
+                      fillColor: AppColors.primary.withOpacity(0.1),
+                      icon: Icons.search_rounded,
+                    ),
                   ),
-                  color: AppColors.white.withOpacity(0.9),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Hero(
-                        tag: 'search_bar',
-                        child: AppIconButton(
-                          onTap: () {
-                            GoRouter.of(context).pushNamed(RouteNames.search);
-                          },
-                          size: 45,
-                          iconSize: 22,
-                          fillColor: AppColors.primary.withOpacity(0.1),
-                          icon: Icons.search_rounded,
-                        ),
-                      ),
-                      Text(
-                        'Community',
-                        style: AppTextStyles.blackBlack22.copyWith(
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                      ),
-                      Hero(
-                        tag: 'search_close',
-                        child: AppIconButton(
-                          onTap: () => GoRouter.of(context).pushNamed(RouteNames.bookmarks),
-                          size: 45,
-                          iconSize: 22,
-                          fillColor: AppColors.primary.withOpacity(0.1),
-                          icon: Icons.bookmarks_rounded,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    'Community',
+                    style: AppTextStyles.blackBlack22.copyWith(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
+                  Hero(
+                    tag: 'search_close',
+                    child: AppIconButton(
+                      onTap: () => GoRouter.of(context).pushNamed(RouteNames.bookmarks),
+                      size: 45,
+                      iconSize: 22,
+                      fillColor: AppColors.primary.withOpacity(0.1),
+                      icon: Icons.bookmarks_rounded,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
