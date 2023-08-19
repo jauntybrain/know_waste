@@ -3,6 +3,7 @@
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,7 +60,7 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isAnonymous = ref.watch(userProvider.select((value) => value?.isAnonymous ?? true));
+    final isAnonymous = FirebaseAuth.instance.currentUser?.isAnonymous ?? true;
     final currentUser = ref.watch(userProvider);
 
     ref.listen(authProvider, (prev, next) {

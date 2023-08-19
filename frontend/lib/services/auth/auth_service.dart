@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -77,7 +78,8 @@ class AuthService {
     );
 
     try {
-      return FirebaseAuth.instance.currentUser!.linkWithCredential(credential);
+      final user = await FirebaseAuth.instance.currentUser!.linkWithCredential(credential);
+      return user;
     } on FirebaseAuthException catch (e) {
       // If an account was already linked, just sign back in.
       // e.credential is always null, therefore we must use GoogleAuth credential
@@ -114,10 +116,22 @@ class AuthService {
     );
 
     try {
-      return FirebaseAuth.instance.currentUser!.linkWithCredential(oauthCredential);
+      // Check if user with this email exists
+      final query = FirebaseFirestore.instance.collection('users').where('email', isEqualTo: appleCredential.email);
+      final snapshot = await query.get();
+
+      if (snapshot.docs.isEmpty) {
+        // If user doesn't exist, link it to the current anonymous user
+        return FirebaseAuth.instance.currentUser!.linkWithCredential(oauthCredential);
+      } else {
+        // If user exists, reauthenticate
+        return FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      }
     } on FirebaseAuthException catch (e) {
       // If an account was already linked, just sign back in.
       // e.credential is always null, therefore we must use Apple oAuth credential
+      // ** NOTE ** This does not work with Apple because of invalid nonce error.
+
       if (e.code == 'credential-already-in-use' || e.code == 'provider-already-linked') {
         return FirebaseAuth.instance.signInWithCredential(oauthCredential);
       } else {
