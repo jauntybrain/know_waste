@@ -1,6 +1,9 @@
 # KnowWaste: Your AI Recycling Companion 🌱
 
-KnowWaste (pun intended) is an innovative application developed as part of the [Firebase Builders '23 competition](https://firebasebuilders.app/). KnowWaste's goal is to simplify recycling education and make it fun and engaging. With AI-powered tools and educational resources, KnowWaste aims to promote sustainable recycling and raise environmental awareness.
+<img width="600" alt="KnowWaste-banner" src="https://github.com/jauntybrain/know_waste/assets/105740958/7488dfa8-6c63-4826-8b55-f4dcb080c93c"/>
+<br/><br/>
+
+KnowWaste (*pun intended*) is an innovative application developed as part of the [Firebase Builders '23 competition](https://firebasebuilders.app/). KnowWaste's goal is to simplify recycling education and make it fun and engaging. With AI-powered tools and educational resources, KnowWaste aims to promote sustainable recycling and raise environmental awareness.
 
 ## About
 
