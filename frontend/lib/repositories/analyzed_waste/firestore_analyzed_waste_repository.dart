@@ -21,7 +21,8 @@ class FirestoreAnalyzedWasteRepository implements AnalyzedWasteRepository {
 
   @override
   Future<List<AnalyzedWaste>> getUserWaste() async {
-    final analyzedWaste = await wasteCollection.futureAllWhereEqual('userID', firebaseAuth.currentUser!.uid);
+    final analyzedWaste =
+        await wasteCollection.futureAllWhereEqual('userID', firebaseAuth.currentUser!.uid, 'date', true);
     return Future.wait(
       analyzedWaste.map(
         (waste) => storage.getImageUrl(waste.imageUrl).then((url) => waste = waste.copyWith(imageUrl: url)),

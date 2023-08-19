@@ -89,19 +89,18 @@ class FirestoreCollection<T> {
     }
   }
 
-  
-
   Future<List<T>> futureAll([String? orderBy, bool desc = false]) async {
     final docs = orderBy != null ? (await this.orderBy(orderBy, desc).get()).docs : (await withConverter.get()).docs;
 
     return docs.map((doc) => doc.data()).toList();
   }
 
-  Future<List<T>> futureAllWhereEqual(String field, dynamic value) async {
+  Future<List<T>> futureAllWhereEqual(String field, dynamic value, [String? orderBy, bool desc = false]) async {
     try {
       final query = whereEqual(field, value);
 
-      final docs = (await query.get()).docs;
+      final docs =
+          orderBy != null ? (await query.orderBy(orderBy, descending: desc).get()).docs : (await query.get()).docs;
 
       return docs.map((doc) => doc.data()).toList();
     } catch (err) {
