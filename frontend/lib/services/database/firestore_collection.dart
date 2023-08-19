@@ -17,11 +17,21 @@ class FirestoreCollection<T> {
     return withConverter.orderBy(field, descending: desc);
   }
 
-  Future<T?> futureSingle(String id) async {
+  Future<T?> futureSingleByID(String id) async {
     try {
       return (await withConverter.doc(id).get()).data();
     } catch (err) {
       return null;
+    }
+  }
+
+  Future<T?> futureSingleWhereEqual(String field, dynamic value) async {
+    try {
+      final query = withConverter.where(field, isEqualTo: value).orderBy('date', descending: true).limit(1);
+
+      return (await query.get()).docs.firstOrNull?.data();
+    } catch (err) {
+      rethrow;
     }
   }
 
@@ -52,40 +62,53 @@ class FirestoreCollection<T> {
     }
   }
 
-  Stream<T?> streamAll() async* {
-    final StreamController<T?> streamController = StreamController();
+  Stream<List<T>> streamAllWhereIn(Object field, List<String> array) async* {
+    if (array.isEmpty) {
+      yield* Stream.value([]);
+    } else {
+      final StreamController<List<T>> streamController = StreamController();
 
-    try {
-      final snapshots = withConverter.snapshots();
+      try {
+        final snapshots = withConverter.where(field, whereIn: array).snapshots();
 
-      snapshots.listen(
-        (snapshot) {
-          for (var document in snapshot.docs) {
-            streamController.add(document.data());
-          }
-        },
-        onError: (e) {
-          streamController.addError(e);
-          streamController.close();
-        },
-      );
-    } catch (e) {
-      streamController.addError(e);
-      streamController.close();
+        snapshots.listen(
+          (snapshot) {
+            streamController.add(snapshot.docs.map((e) => e.data()).toList());
+          },
+          onError: (e) {
+            streamController.addError(e);
+            streamController.close();
+          },
+        );
+      } catch (e) {
+        streamController.addError(e);
+        streamController.close();
+      }
+
+      yield* streamController.stream;
     }
-
-    yield* streamController.stream;
   }
 
-  Future<Map<String, T>> futureAll([String? orderBy, bool desc = false]) async {
-    List<QueryDocumentSnapshot<T>> docs;
+  Future<List<T>> futureAll([String? orderBy, bool desc = false]) async {
+    final docs = orderBy != null ? (await this.orderBy(orderBy, desc).get()).docs : (await withConverter.get()).docs;
 
-    docs = orderBy != null ? (await this.orderBy(orderBy, desc).get()).docs : (await withConverter.get()).docs;
-
-    return {for (QueryDocumentSnapshot<T> doc in docs) doc.id: doc.data()};
+    return docs.map((doc) => doc.data()).toList();
   }
 
-  Query<T> whereEqual(String field, String value) {
+  Future<List<T>> futureAllWhereEqual(String field, dynamic value, [String? orderBy, bool desc = false]) async {
+    try {
+      final query = whereEqual(field, value);
+
+      final docs =
+          orderBy != null ? (await query.orderBy(orderBy, descending: desc).get()).docs : (await query.get()).docs;
+
+      return docs.map((doc) => doc.data()).toList();
+    } catch (err) {
+      rethrow;
+    }
+  }
+
+  Query<T> whereEqual(String field, dynamic value) {
     return withConverter.where(field, isEqualTo: value);
   }
 }

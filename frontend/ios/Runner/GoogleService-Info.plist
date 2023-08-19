@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>848280063891-kkelj6o5bhm19tq6of1mbfvgttrue1t0.apps.googleusercontent.com</string>
+	<string>848280063891-37fsb0k4frblao3r6dmspl7t7g5pmkjh.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.848280063891-kkelj6o5bhm19tq6of1mbfvgttrue1t0</string>
+	<string>com.googleusercontent.apps.848280063891-37fsb0k4frblao3r6dmspl7t7g5pmkjh</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDh8haU252k-qSAry9pZ-d8l0VQEeR_7eI</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.knowWaste</string>
+	<string>com.application.knowWaste</string>
 	<key>PROJECT_ID</key>
 	<string>waste-wise-d88a7</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:848280063891:ios:80120e766ba01774c96266</string>
+	<string>1:848280063891:ios:67a781c301053bfdc96266</string>
 </dict>
 </plist>

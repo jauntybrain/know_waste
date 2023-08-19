@@ -73,12 +73,6 @@ class WasteAnalysisCameraPageState extends ConsumerState<WasteAnalysisCameraPage
 
   @override
   Widget build(BuildContext context) {
-    // ref.listen(cameraFlashProvider, (prev, next) {
-    //   if (next != prev) {
-    //     widget.controller?.setFlashMode(next);
-    //   }
-    // });
-
     return Listener(
       onPointerDown: (_) => _pointers++,
       onPointerUp: (_) => _pointers--,
@@ -92,7 +86,7 @@ class WasteAnalysisCameraPageState extends ConsumerState<WasteAnalysisCameraPage
               fit: BoxFit.cover,
               child: SizedBox(
                 height: 1,
-                width: 0.75,
+                width: 0.6,
                 child: CameraPreview(
                   widget.controller!,
                   key: stickyKey,

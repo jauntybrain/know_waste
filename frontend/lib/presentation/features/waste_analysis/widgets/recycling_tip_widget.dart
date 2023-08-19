@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
 import '../../../theme/src/app_colors.dart';
 import '../../../theme/src/app_text_styles.dart';
@@ -32,10 +32,7 @@ class RecyclingTipWidget extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          SvgPicture.asset(
-                            'assets/images/jade-tips.svg',
-                            height: 40,
-                          ),
+                          AppIcons.icon(AppIcons.tips, size: 40),
                           const SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

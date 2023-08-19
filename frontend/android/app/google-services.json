@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "848280063891-ffsrh464t1o7ch8eapgpj6h94l3l3ql1.apps.googleusercontent.com",
+          "client_id": "848280063891-enntrfo2hfa4uqo86torek19jeu70dh4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +27,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "848280063891-ffsrh464t1o7ch8eapgpj6h94l3l3ql1.apps.googleusercontent.com",
+              "client_id": "848280063891-enntrfo2hfa4uqo86torek19jeu70dh4.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "848280063891-37fsb0k4frblao3r6dmspl7t7g5pmkjh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.application.knowWaste"
+              }
             }
           ]
         }

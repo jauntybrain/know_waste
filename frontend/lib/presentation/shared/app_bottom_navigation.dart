@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../utils/app_wrapper_manager.dart';
 import '../theme/src/app_colors.dart';
 import '../theme/src/app_text_styles.dart';
-import '../../utils/app_wrapper_manager.dart';
 
 final bottomBarIndexProvider = StateProvider<int>((ref) => 0);
 
@@ -53,17 +53,13 @@ class AppBottomNavigation extends ConsumerWidget {
                     showSelectedLabels: true,
                     showUnselectedLabels: true,
                     backgroundColor: Colors.transparent,
-                    unselectedItemColor: Colors.black.withOpacity(0.6),
-                    fixedColor: AppColors.primary,
-                    unselectedLabelStyle: AppTextStyles.blackSemiBold14
-                        .copyWith(fontSize: 12, height: 1.6),
-                    selectedLabelStyle: AppTextStyles.blackBold14
-                        .copyWith(fontSize: 12, height: 1.6),
+                    unselectedItemColor: AppColors.secondary.withOpacity(0.5),
+                    fixedColor: AppColors.secondary,
+                    unselectedLabelStyle: AppTextStyles.blackBold14.copyWith(fontSize: 12, height: 1.6),
+                    selectedLabelStyle: AppTextStyles.blackExtraBold16.copyWith(fontSize: 12, height: 1.6),
                     onTap: (index) {
                       HapticFeedback.lightImpact();
-                      navigationShell.goBranch(index,
-                          initialLocation:
-                              index == navigationShell.currentIndex);
+                      navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex);
                     },
                     items: List.generate(
                       AppWrapperManager.tabItems.length,

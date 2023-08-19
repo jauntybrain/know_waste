@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+// Credit: https://github.com/MingSern/flutter_bounceable 
 class Bouncing extends StatefulWidget {
   /// Set it to `null` to disable `onTap`.
   final VoidCallback? onTap;
@@ -80,6 +82,7 @@ class _BouncingState extends State<Bouncing> with SingleTickerProviderStateMixin
   }
 
   void _onTap() {
+    HapticFeedback.lightImpact();
     if (widget.onTap != null) widget.onTap!();
 
     _controller.reverse().then((_) {

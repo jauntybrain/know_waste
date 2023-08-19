@@ -14,20 +14,16 @@ class AnalyzedWaste with _$AnalyzedWaste {
     required String uid,
     required List<String> labels,
     required List<String> objects,
+    String? imageUrl,
     String? advice,
     String? tips,
     String? name,
     String? material,
-    bool? recyclable,
+    @Default(false) bool? recyclable,
     @JsonKey(fromJson: dateTimeFromTimestamp) DateTime? date,
   }) = _AnalyzedWaste;
 
   factory AnalyzedWaste.fromJson(Map<String, Object?> json) => _$AnalyzedWasteFromJson(json);
 }
 
-DateTime? dateTimeFromTimestamp(Timestamp? timestamp) {
-  if (timestamp == null) {
-    return null;
-  }
-  return timestamp.toDate();
-}
+DateTime? dateTimeFromTimestamp(Timestamp? timestamp) => timestamp?.toDate();

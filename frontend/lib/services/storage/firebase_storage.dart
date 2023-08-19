@@ -49,4 +49,19 @@ class FirebaseStorageService {
       }),
     );
   }
+
+  Future<String> getImageUrl(String? imagePath) async {
+    final storage = FirebaseStorage.instance;
+    if (imagePath == null) {
+      return '';
+    }
+    final storageReference = imagePath.contains('gs://') ? storage.refFromURL(imagePath) : storage.ref(imagePath);
+    return storageReference.getDownloadURL();
+  }
+
+  Future<void> deleteImage(String imagePath) async {
+    final storage = FirebaseStorage.instance;
+    final storageReference = imagePath.contains('gs://') ? storage.refFromURL(imagePath) : storage.ref(imagePath);
+    await storageReference.delete();
+  }
 }

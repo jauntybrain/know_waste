@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 enum TabItemId {
   home,
-  analyze,
   community,
+  profile,
 }
 
 class TabItem {

@@ -1,4 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:know_waste/models/article/article.dart';
+import 'package:know_waste/models/challenge/challenge.dart';
+import 'package:know_waste/models/guide/guide.dart';
+import 'package:know_waste/models/user_stats/user_stats.dart';
 
 import '../models/analyzed_waste/analyzed_waste.dart';
 import '../models/app_user/app_user.dart';
@@ -15,6 +19,17 @@ class UserCollection extends FirestoreCollection<AppUser> {
       );
 }
 
+class UserStatsCollection extends FirestoreCollection<UserStats> {
+  @override
+  String get path => 'userStats';
+
+  @override
+  CollectionReference<UserStats> get withConverter => firestore.collection(path).withConverter<UserStats>(
+        fromFirestore: (snapshot, _) => UserStats.fromJson(snapshot.data()!),
+        toFirestore: (user, _) => {},
+      );
+}
+
 class AnalyzedWasteCollection extends FirestoreCollection<AnalyzedWaste> {
   @override
   String get path => 'analyzedWaste';
@@ -24,30 +39,37 @@ class AnalyzedWasteCollection extends FirestoreCollection<AnalyzedWaste> {
         fromFirestore: (snapshot, _) => AnalyzedWaste.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
         toFirestore: (user, _) => {},
       );
+}
 
-//   @override
-//   AnalyzedWaste streamAllFiltered() {
-//     final Stream<AnalyzedWaste?> streamController = streamAll();
+class ArticlesCollection extends FirestoreCollection<Article> {
+  @override
+  String get path => 'articles';
 
-//     try {
-//       final snapshots = withConverter.snapshots();
+  @override
+  CollectionReference<Article> get withConverter => firestore.collection(path).withConverter<Article>(
+        fromFirestore: (snapshot, _) => Article.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
+        toFirestore: (article, _) => {},
+      );
+}
 
-//       snapshots.listen(
-//         (snapshot) {
-//           for (var document in snapshot.docs) {
-//             streamController.add(document.data());
-//           }
-//         },
-//         onError: (e) {
-//           streamController.addError(e);
-//           streamController.close();
-//         },
-//       );
-//     } catch (e) {
-//       streamController.addError(e);
-//       streamController.close();
-//     }
+class GuidesCollection extends FirestoreCollection<Guide> {
+  @override
+  String get path => 'guides';
 
-//     yield * streamController.stream;
-//   }
+  @override
+  CollectionReference<Guide> get withConverter => firestore.collection(path).withConverter<Guide>(
+        fromFirestore: (snapshot, _) => Guide.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
+        toFirestore: (article, _) => {},
+      );
+}
+
+class ChallengesCollection extends FirestoreCollection<Challenge> {
+  @override
+  String get path => 'challenges';
+
+  @override
+  CollectionReference<Challenge> get withConverter => firestore.collection(path).withConverter<Challenge>(
+        fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
+        toFirestore: (article, _) => {},
+      );
 }

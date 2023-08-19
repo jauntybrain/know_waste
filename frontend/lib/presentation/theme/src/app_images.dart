@@ -1,18 +1,23 @@
-abstract class BaseAppImages {
-  String imagesPath = '';
+import 'package:flutter/material.dart';
 
-  String networkImagesPath = '';
-}
+class AppImages {
+  static const imagesPath = 'assets/images';
 
-class AppImages extends BaseAppImages {
-  factory AppImages() => instance;
-  AppImages._();
+  /// Define local assets
+  static const String wasteScanner = 'waste-scanner.jpg';
+  static const String comingSoon = 'coming-soon.jpg';
 
-  static AppImages instance = AppImages._();
-
-  @override
-  String get imagesPath => 'assets/images';
-
-  @override
-  String get networkImagesPath => 'https://image.tmdb.org/t/p/w500/';
+  /// Return the image
+  static Widget image(
+    String path, {
+    double? height,
+    double? width,
+  }) {
+    return Image.asset(
+      '$imagesPath/$path',
+      fit: BoxFit.cover,
+      width: height,
+      height: width,
+    );
+  }
 }

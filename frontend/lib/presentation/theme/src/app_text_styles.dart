@@ -268,6 +268,12 @@ class AppTextStyles {
     fontSize: 18,
   );
 
+  static TextStyle blackExtraBold15 = GoogleFonts.nunitoSans(
+    color: AppColors.text,
+    fontWeight: FontWeight.w800,
+    fontSize: 15,
+  );
+
   // Black Extra Bold 16
   static TextStyle blackExtraBold16 = GoogleFonts.nunitoSans(
     color: AppColors.text,

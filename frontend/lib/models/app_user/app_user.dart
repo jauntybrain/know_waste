@@ -2,6 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../user_stats/user_stats.dart';
+
 part 'app_user.freezed.dart';
 part 'app_user.g.dart';
 
@@ -11,14 +13,15 @@ class AppUser with _$AppUser {
 
   const factory AppUser({
     required String uid,
-    required String email,
-    required String username,
-    required String firstName,
-    required String lastName,
+    @JsonKey(includeToJson: false) UserStats? stats,
+    String? email,
+    String? username,
+    String? name,
     String? phoneNumber,
     String? profilePicture,
+    @Default(true) bool isAnonymous,
+    @Default([]) List<String> bookmarks,
     @JsonKey(name: 'fcm_token') String? fcmToken,
-    String? token,
   }) = _AppUser;
 
   factory AppUser.fromJson(Map<String, Object?> json) => _$AppUserFromJson(json);

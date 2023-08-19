@@ -2,15 +2,24 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:know_waste/presentation/features/waste_analysis/widgets/tutorial_dialog.dart';
 import 'package:know_waste/presentation/shared/app_icon_button.dart';
 
 import '../../../theme/src/app_colors.dart';
 import '../../../theme/src/app_text_styles.dart';
 
 class WasteAnalysisTopNav extends StatelessWidget {
-  const WasteAnalysisTopNav({this.blurred = false, super.key});
+  const WasteAnalysisTopNav({
+    this.blurred = false,
+    this.showHelp = true,
+    this.onClose,
+    this.title,
+    super.key,
+  });
 
-  final bool blurred;
+  final bool blurred, showHelp;
+  final Function()? onClose;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -25,26 +34,32 @@ class WasteAnalysisTopNav extends StatelessWidget {
             top: MediaQuery.of(context).viewPadding.top + 6,
           ),
           color: blurred ? AppColors.white.withOpacity(0.9) : Colors.transparent,
-          child: 
-          Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppIconButton(
-                onTap: () => GoRouter.of(context).pop(),
-                isSmaller: true,
+                onTap: () {
+                  onClose?.call();
+                  GoRouter.of(context).pop();
+                },
+                size: 45,
                 icon: Icons.close,
               ),
               Text(
-                'Scan Waste',
-                style: AppTextStyles.blackExtraBold18.copyWith(
+                title ?? 'Scan Waste',
+                style: AppTextStyles.blackBlack22.copyWith(
                   color: Colors.black,
+                  fontSize: 20,
                 ),
               ),
-              AppIconButton(
-                onTap: () {},
-                isSmaller: true,
-                icon: Icons.question_mark_rounded,
-              ),
+              if (showHelp)
+                AppIconButton(
+                  onTap: () => TutorialDialog.of(context).show(),
+                  size: 45,
+                  icon: Icons.question_mark_rounded,
+                )
+              else
+                const SizedBox(width: 45),
             ],
           ),
         ),
