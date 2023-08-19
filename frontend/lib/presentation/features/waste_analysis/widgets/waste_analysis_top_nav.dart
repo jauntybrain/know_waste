@@ -12,11 +12,13 @@ class WasteAnalysisTopNav extends StatelessWidget {
   const WasteAnalysisTopNav({
     this.blurred = false,
     this.showHelp = true,
+    this.onClose,
     this.title,
     super.key,
   });
 
   final bool blurred, showHelp;
+  final Function()? onClose;
   final String? title;
 
   @override
@@ -36,7 +38,10 @@ class WasteAnalysisTopNav extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppIconButton(
-                onTap: () => GoRouter.of(context).pop(),
+                onTap: () {
+                  onClose?.call();
+                  GoRouter.of(context).pop();
+                },
                 size: 45,
                 icon: Icons.close,
               ),

@@ -23,7 +23,13 @@ class CameraControlsWidget extends ConsumerWidget {
   final VoidCallback onGallery;
   final Function(File) onCapture;
 
-  FlashMode get currentMode => controller?.value.flashMode ?? FlashMode.off;
+  FlashMode get currentMode {
+    if (controller?.value.isInitialized ?? false) {
+      return FlashMode.off;
+    }
+
+    return controller?.value.flashMode ?? FlashMode.off;
+  }
 
   IconData _getFlashIcon() {
     return currentMode == FlashMode.off ? Icons.flash_off_rounded : Icons.flash_on_rounded;

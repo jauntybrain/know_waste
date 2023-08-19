@@ -6,16 +6,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:know_waste/presentation/features/waste_analysis/pages/waste_analysis_loading_page.dart';
+import 'package:know_waste/presentation/features/waste_analysis/widgets/restart_analysis_dialog.dart';
 import 'package:know_waste/presentation/shared/app_toast.dart';
 import 'package:know_waste/presentation/theme/theme.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../providers/waste_analysis_provider.dart';
 import '../widgets/camera_controls_widget.dart';
 import '../widgets/waste_analysis_top_nav.dart';
 import 'waste_analysis_camera_page.dart';
 import 'waste_analysis_result_page.dart';
-
-GlobalKey stickyKey = GlobalKey();
 
 class WasteAnalysisPage extends ConsumerStatefulWidget {
   const WasteAnalysisPage({Key? key}) : super(key: key);
@@ -31,6 +31,12 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
   void initState() {
     super.initState();
     _initializeCamera();
+  }
+
+  @override
+  void dispose() {
+    _cameraController?.dispose();
+    super.dispose();
   }
 
   void _initializeCamera() async {
@@ -53,7 +59,9 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
 
     try {
       await _cameraController!.initialize();
-      _cameraController!.setFlashMode(FlashMode.off);
+      _cameraController!
+        ..lockCaptureOrientation(DeviceOrientation.portraitUp)
+        ..setFlashMode(FlashMode.off);
     } on CameraException catch (e) {
       switch (e.code) {
         // TODO: Add error dialog
@@ -70,6 +78,16 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
     final wasteAnalysis = ref.watch(wasteAnalysisProvider);
     final hasData = wasteAnalysis.analyzedWaste != null;
     final isLoading = wasteAnalysis.loading;
+
+    ref.listen(wasteAnalysisProvider, (prev, next) {
+      if (next.error != null) {
+        _cameraController?.resumePreview();
+        AppToast.of(context).show(
+          isError: true,
+          text: next.error.toString(),
+        );
+      }
+    });
 
     List<Widget> buildBackground() => [
           Positioned.fill(
@@ -107,7 +125,10 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
             child: Column(
               children: [
                 AppButton.primary(
-                  onTap: () => GoRouter.of(context).pop(),
+                  onTap: () {
+                    ref.read(wasteAnalysisProvider.notifier).reset();
+                    GoRouter.of(context).pop();
+                  },
                   hasShadow: false,
                   fillColor: AppColors.secondary,
                   height: 50,
@@ -115,7 +136,13 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
                 ),
                 const SizedBox(height: 10),
                 AppButton.secondary(
-                  onTap: () {},
+                  onTap: () => RestartAnalysisDialog.of(context).show().then(
+                    (value) {
+                      if (value == true) {
+                        ref.read(wasteAnalysisProvider.notifier).restart();
+                      }
+                    },
+                  ),
                   height: 50,
                   child: const Text('Wrong object or material?'),
                 ),
@@ -131,10 +158,10 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
         return AnimatedPadding(
           duration: const Duration(milliseconds: 400),
           padding: EdgeInsets.only(
-            left: 18,
-            right: 18,
             top: MediaQuery.of(context).viewPadding.top + 75,
             bottom: MediaQuery.of(context).viewPadding.bottom + (wasteAnalysis.loading ? 10 : 110),
+            left: 18,
+            right: 18,
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
@@ -156,15 +183,20 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
                     const WasteAnalysisLoadingPage(),
                     // TODO: Bring back tips later
                     // const RecyclingTipWidget(),
+
                     // If camera is initialized, show camera preview
-                  ] else if (_cameraController?.value.isInitialized ?? false)
+                  ] else if (_cameraController?.value.lockedCaptureOrientation != null)
                     WasteAnalysisCameraPage(
                       controller: _cameraController,
                       pickedImage: wasteAnalysis.pickedImage,
                     )
-                  // Default: show white container
+                  // Default: show loading Shimmer
                   else
-                    Container(color: AppColors.white)
+                    Shimmer.fromColors(
+                      baseColor: Colors.black.withOpacity(0.1),
+                      highlightColor: Colors.black.withOpacity(0.08),
+                      child: Container(width: 200, height: 200, color: AppColors.white),
+                    ),
                 ],
               ),
             ),
@@ -203,7 +235,10 @@ class WasteAnalysisPageState extends ConsumerState<WasteAnalysisPage> {
             Positioned(
               top: 0,
               width: MediaQuery.of(context).size.width,
-              child: WasteAnalysisTopNav(blurred: hasData),
+              child: WasteAnalysisTopNav(
+                blurred: hasData,
+                onClose: ref.read(wasteAnalysisProvider.notifier).reset,
+              ),
             ),
             // Camera Controls
             if (wasteAnalysis.pickedImage == null && !isLoading)
