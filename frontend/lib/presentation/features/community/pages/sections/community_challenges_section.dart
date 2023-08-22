@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/presentation/features/community/widgets/challenge/challenge_widget.dart';
 import 'package:know_waste/presentation/router/router_context_extension.dart';
 
 import '../../../../../models/api_error/api_error.dart';
 import '../../../../theme/src/app_text_styles.dart';
 import '../../providers/challenges_provider.dart';
 import '../../widgets/challenge/challenge_skeleton.dart';
+import '../../widgets/challenge/challenge_widget.dart';
 
 class CommunityChallengesSection extends ConsumerWidget {
   const CommunityChallengesSection({super.key});

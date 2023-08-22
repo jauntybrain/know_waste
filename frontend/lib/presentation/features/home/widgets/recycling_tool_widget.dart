@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
 
 import '../../../../models/recycling_tool/recycling_tool.dart';
-import '../../../theme/src/app_icons.dart';
+import '../../../shared/content_box.dart';
 import '../../../theme/theme.dart';
 
 class RecyclingToolWidget extends StatelessWidget {

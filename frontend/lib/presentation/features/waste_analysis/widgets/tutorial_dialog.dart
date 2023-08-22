@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
 import '../../../theme/theme.dart';
 

@@ -8,8 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../utils/app_wrapper_manager.dart';
-import '../theme/src/app_colors.dart';
-import '../theme/src/app_text_styles.dart';
+import '../theme/theme.dart';
 
 final bottomBarIndexProvider = StateProvider<int>((ref) => 0);
 

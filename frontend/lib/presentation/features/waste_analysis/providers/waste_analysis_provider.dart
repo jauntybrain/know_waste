@@ -5,15 +5,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/repositories/analyzed_waste/analyzed_waste_repository.dart';
-import 'package:know_waste/services/collections.dart';
-import 'package:know_waste/services/image_picker_service.dart';
-import 'package:know_waste/services/storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../models/analyzed_waste/analyzed_waste.dart';
 import '../../../../providers/repositories_providers.dart';
 import '../../../../providers/user_provider.dart';
+import '../../../../repositories/analyzed_waste/analyzed_waste_repository.dart';
+import '../../../../services/collections.dart';
+import '../../../../services/image_picker_service.dart';
+import '../../../../services/storage/firebase_storage.dart';
 
 final wasteAnalysisProvider = ChangeNotifierProvider.autoDispose<WasteAnalysisNotifier>(
   (ref) {

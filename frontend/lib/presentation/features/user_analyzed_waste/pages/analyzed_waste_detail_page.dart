@@ -4,10 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:know_waste/models/analyzed_waste/analyzed_waste.dart';
-import 'package:know_waste/presentation/shared/app_markdown.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 
+import '../../../../models/analyzed_waste/analyzed_waste.dart';
+import '../../../shared/app_markdown.dart';
+import '../../../theme/theme.dart';
 import '../../waste_analysis/widgets/waste_analysis_top_nav.dart';
 
 class AnalyzedWasteDetailPage extends ConsumerWidget {
@@ -174,9 +174,7 @@ class AnalyzedWasteDetailPage extends ConsumerWidget {
                         style: AppTextStyles.blackBlack22.copyWith(fontSize: 24),
                       ),
                       const SizedBox(height: 5),
-                      AppMarkdown(
-                        text: analyzedWaste.advice!,
-                      ),
+                      AppMarkdown(text: analyzedWaste.advice!),
                       const SizedBox(height: 25),
                       Text(
                         'AI-Powered',

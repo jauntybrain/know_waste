@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/features/community/widgets/article_search/article_search_skeleton.dart';
 import 'package:know_waste/presentation/router/router_context_extension.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 
 import '../../../../models/api_error/api_error.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../shared/app_search_widget.dart';
+import '../../../theme/theme.dart';
 import '../providers/search_provider.dart';
+import '../widgets/article_search/article_search_skeleton.dart';
 import '../widgets/article_search/article_search_widget.dart';
 
 class SearchPage extends ConsumerWidget {

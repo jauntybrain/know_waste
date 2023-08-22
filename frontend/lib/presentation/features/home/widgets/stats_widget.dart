@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
 
-import '../../../theme/src/app_icons.dart';
+import '../../../shared/content_box.dart';
 import '../../../theme/theme.dart';
 
 class StatsWidget extends StatelessWidget {

@@ -7,11 +7,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
 
 import '../../../../models/api_error/api_error.dart';
 import '../../../shared/app_text_field.dart';
 import '../../../shared/app_toast.dart';
+import '../../../shared/bouncing.dart';
 import '../../../theme/theme.dart';
 import '../providers/edit_profile_controller.dart';
 import '../widgets/change_photo_sheet.dart';

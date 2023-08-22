@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/models/challenge/challenge.dart';
 
+import '../../../../models/challenge/challenge.dart';
 import '../../../../providers/repositories_providers.dart';
 import '../../../../repositories/challenges/challenges_repository.dart';
 

@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:know_waste/models/challenge/challenge.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:know_waste/utils/extensions.dart';
 
+import '../../../../../models/challenge/challenge.dart';
+import '../../../../shared/bouncing.dart';
 import '../../../../theme/theme.dart';
 
 class ChallengeWidget extends StatelessWidget {

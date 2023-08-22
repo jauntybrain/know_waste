@@ -4,12 +4,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/providers/package_info_provider.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 import 'firebase_options.dart';
 import 'presentation/router/app_router.dart';
 import 'presentation/theme/src/app_themes.dart';
+import 'providers/package_info_provider.dart';
 import 'providers/providers_logger.dart';
 import 'providers/user_provider.dart';
 

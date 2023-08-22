@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/models/analyzed_waste/analyzed_waste.dart';
-import 'package:know_waste/repositories/analyzed_waste/analyzed_waste_repository.dart';
 
+import '../../../../models/analyzed_waste/analyzed_waste.dart';
 import '../../../../providers/repositories_providers.dart';
+import '../../../../repositories/analyzed_waste/analyzed_waste_repository.dart';
 
 final userAnalyzedWasteProvider = StateNotifierProvider<UserScansNotifier, AsyncValue<List<AnalyzedWaste>>>(
   (ref) => UserScansNotifier(ref, ref.read(wasteRepositoryProvider)),

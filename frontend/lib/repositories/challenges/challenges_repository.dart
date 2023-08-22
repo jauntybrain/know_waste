@@ -1,5 +1,5 @@
-import 'package:know_waste/models/challenge/challenge.dart';
-import 'package:know_waste/models/challenge_stats/challenge_stats.dart';
+import '../../models/challenge/challenge.dart';
+import '../../models/challenge_stats/challenge_stats.dart';
 
 abstract class ChallengesRepository {
   Future<List<Challenge>> getChallenges();

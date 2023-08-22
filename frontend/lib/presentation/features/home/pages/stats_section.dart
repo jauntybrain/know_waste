@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
-import 'package:know_waste/providers/user_provider.dart';
 
-import '../../../theme/src/app_icons.dart';
+import '../../../../providers/user_provider.dart';
+import '../../../shared/content_box.dart';
 import '../../../theme/theme.dart';
 import '../widgets/stats_widget.dart';
 

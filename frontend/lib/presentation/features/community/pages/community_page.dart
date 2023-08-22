@@ -3,17 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/features/community/pages/sections/community_guide_section.dart';
-import 'package:know_waste/presentation/features/community/providers/articles_provider.dart';
-import 'package:know_waste/presentation/features/community/providers/featured_article_provider.dart';
-import 'package:know_waste/presentation/features/community/providers/guides_provider.dart';
 
 import '../../../router/route_names.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../theme/theme.dart';
+import '../providers/articles_provider.dart';
+import '../providers/featured_article_provider.dart';
+import '../providers/guides_provider.dart';
 import 'sections/community_articles_section.dart';
 import 'sections/community_challenges_section.dart';
 import 'sections/community_featured_section.dart';
+import 'sections/community_guide_section.dart';
 
 class CommunityPage extends ConsumerStatefulWidget {
   const CommunityPage({Key? key}) : super(key: key);

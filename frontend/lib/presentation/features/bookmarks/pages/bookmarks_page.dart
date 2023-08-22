@@ -3,18 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/features/community/widgets/article_search/article_search_skeleton.dart';
 import 'package:know_waste/presentation/router/router_context_extension.dart';
-import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
 import '../../../../models/api_error/api_error.dart';
 import '../../../../providers/user_provider.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../shared/app_toast.dart';
-import '../../../theme/src/app_colors.dart';
-import '../../../theme/src/app_shadows.dart';
-import '../../../theme/src/app_text_styles.dart';
+import '../../../theme/theme.dart';
 import '../../community/providers/bookmarks_provider.dart';
+import '../../community/widgets/article_search/article_search_skeleton.dart';
 import '../../community/widgets/article_search/article_search_widget.dart';
 
 class BookmarksPage extends ConsumerWidget {

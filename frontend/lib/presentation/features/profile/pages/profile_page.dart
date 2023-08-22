@@ -11,19 +11,19 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/features/profile/widgets/auth_prompt_widget.dart';
-import 'package:know_waste/presentation/router/route_names.dart';
-import 'package:know_waste/presentation/shared/app_toast.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
-import 'package:know_waste/providers/auth_provider.dart';
-import 'package:know_waste/providers/package_info_provider.dart';
-import 'package:know_waste/providers/user_provider.dart';
 
 import '../../../../models/profile_item.dart';
+import '../../../../providers/auth_provider.dart';
+import '../../../../providers/package_info_provider.dart';
+import '../../../../providers/user_provider.dart';
+import '../../../router/route_names.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../shared/app_loading_dialog.dart';
+import '../../../shared/app_toast.dart';
+import '../../../shared/bouncing.dart';
 import '../../../theme/src/app_colors.dart';
 import '../../../theme/src/app_text_styles.dart';
+import '../widgets/auth_prompt_widget.dart';
 import '../widgets/profile_tile.dart';
 
 const profileItems = [

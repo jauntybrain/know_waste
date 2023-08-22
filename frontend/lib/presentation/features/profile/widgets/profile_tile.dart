@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/shared/app_icon_button.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
-import 'package:know_waste/providers/auth_provider.dart';
 
 import '../../../../models/profile_item.dart';
+import '../../../../providers/auth_provider.dart';
+import '../../../shared/app_icon_button.dart';
+import '../../../shared/bouncing.dart';
+import '../../../shared/content_box.dart';
+import '../../../theme/theme.dart';
 
 class ProfileTile extends ConsumerWidget {
   const ProfileTile({

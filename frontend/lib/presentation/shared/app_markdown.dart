@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../theme/src/app_colors.dart';
-import '../theme/src/app_text_styles.dart';
+import '../theme/theme.dart';
 
 class AppMarkdown extends StatefulWidget {
   const AppMarkdown({

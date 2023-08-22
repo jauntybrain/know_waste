@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/providers/user_provider.dart';
 
 import '../../../../models/article/article.dart';
+import '../../../../providers/user_provider.dart';
 import '../../../../services/collections.dart';
 import '../../../../services/storage/firebase_storage.dart';
 

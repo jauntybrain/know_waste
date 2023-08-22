@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/features/waste_analysis/pages/waste_analysis_loading_page.dart';
-import 'package:know_waste/presentation/features/waste_analysis/widgets/restart_analysis_dialog.dart';
-import 'package:know_waste/presentation/shared/app_toast.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../shared/app_toast.dart';
+import '../../../theme/theme.dart';
 import '../providers/waste_analysis_provider.dart';
 import '../widgets/camera_controls_widget.dart';
+import '../widgets/restart_analysis_dialog.dart';
 import '../widgets/waste_analysis_top_nav.dart';
 import 'waste_analysis_camera_page.dart';
+import 'waste_analysis_loading_page.dart';
 import 'waste_analysis_result_page.dart';
 
 class WasteAnalysisPage extends ConsumerStatefulWidget {

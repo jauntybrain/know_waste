@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/providers/repositories_providers.dart';
-import 'package:know_waste/repositories/search/search_repository.dart';
 
 import '../../../../models/article/article.dart';
+import '../../../../providers/repositories_providers.dart';
+import '../../../../repositories/search/search_repository.dart';
 
 final searchProvider = StateNotifierProvider.autoDispose<SearchNotifier, AsyncValue<List<Article>?>>(
   (ref) => SearchNotifier(ref, ref.watch(searchRepositoryProvider)),

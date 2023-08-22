@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
 
+import '../../shared/bouncing.dart';
 import 'app_colors.dart';
 import 'app_shadows.dart';
 import 'app_text_styles.dart';

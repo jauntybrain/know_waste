@@ -6,13 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/models/guide/guide.dart';
-import 'package:know_waste/presentation/shared/app_markdown.dart';
 import 'package:know_waste/utils/extensions.dart';
 
+import '../../../../models/guide/guide.dart';
 import '../../../shared/app_icon_button.dart';
-import '../../../theme/src/app_colors.dart';
-import '../../../theme/src/app_text_styles.dart';
+import '../../../shared/app_markdown.dart';
+import '../../../theme/theme.dart';
 
 class GuidePage extends ConsumerWidget {
   const GuidePage({required this.guide, super.key});

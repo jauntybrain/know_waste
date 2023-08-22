@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
+
+import '../../../shared/content_box.dart';
+import '../../../theme/theme.dart';
 
 class ChallengeInfoSection extends StatelessWidget {
   const ChallengeInfoSection({required this.criteria, super.key});

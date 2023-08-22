@@ -4,8 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:know_waste/presentation/shared/app_icon_button.dart';
 
+import '../../../shared/app_icon_button.dart';
 import '../../../shared/bouncing.dart';
 import '../../../theme/src/app_shadows.dart';
 

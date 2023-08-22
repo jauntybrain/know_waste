@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:know_waste/models/article/article.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:know_waste/utils/extensions.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../../models/article/article.dart';
 import '../../../../../utils/constants.dart';
+import '../../../../shared/bouncing.dart';
 import '../../../../theme/src/app_buttons.dart';
 import '../../../../theme/src/app_colors.dart';
 import '../../../../theme/src/app_shadows.dart';

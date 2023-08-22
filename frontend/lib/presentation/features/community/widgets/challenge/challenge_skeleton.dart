@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../shared/content_box.dart';
 import '../../../../theme/theme.dart';
 
 class ChallengeSkeleton extends StatelessWidget {

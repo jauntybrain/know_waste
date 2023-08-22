@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/router/route_names.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
-import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
+import '../../../router/route_names.dart';
+import '../../../shared/bouncing.dart';
+import '../../../shared/content_box.dart';
 import '../../../theme/theme.dart';
 
 class HomeRecommendedToolWidget extends StatelessWidget {
