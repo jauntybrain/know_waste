@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../shared/content_box.dart';
 import '../../../theme/theme.dart';
 import '../providers/challenge_stats_provider.dart';
 

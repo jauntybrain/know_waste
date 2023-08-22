@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:know_waste/presentation/shared/app_markdown.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 
+import '../../../shared/app_markdown.dart';
+import '../../../theme/theme.dart';
 import '../providers/waste_analysis_provider.dart';
 
 class WasteAnalysisResultPage extends ConsumerWidget {
@@ -173,9 +173,7 @@ class WasteAnalysisResultPage extends ConsumerWidget {
                   style: AppTextStyles.blackBlack22.copyWith(fontSize: 24),
                 ),
                 const SizedBox(height: 5),
-                AppMarkdown(
-                  text: wasteAnalysis.analyzedWaste?.advice ?? 'Loading...',
-                ),
+                AppMarkdown(text: wasteAnalysis.analyzedWaste?.advice ?? 'Loading...'),
                 const SizedBox(height: 25),
                 Text(
                   'AI-Powered',
@@ -187,9 +185,7 @@ class WasteAnalysisResultPage extends ConsumerWidget {
                 ),
                 Text('Tips & Tricks', style: AppTextStyles.blackBlack22),
                 const SizedBox(height: 4),
-                AppMarkdown(
-                  text: wasteAnalysis.analyzedWaste?.tips ?? 'Loading...',
-                ),
+                AppMarkdown(text: wasteAnalysis.analyzedWaste?.tips ?? 'Loading...'),
               ],
               childAnimationBuilder: (widget) => SlideAnimation(
                 verticalOffset: 30,

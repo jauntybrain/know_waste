@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:know_waste/models/analyzed_waste/analyzed_waste.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../models/analyzed_waste/analyzed_waste.dart';
+import '../../../shared/bouncing.dart';
 import '../../../theme/theme.dart';
 
 class AnalyzedWasteWidget extends StatelessWidget {

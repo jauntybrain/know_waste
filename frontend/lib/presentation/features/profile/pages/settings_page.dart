@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../../shared/app_icon_button.dart';
 import '../../../shared/app_toast.dart';
 import '../../../shared/content_box.dart';
-import '../../../theme/src/app_icons.dart';
 import '../../../theme/theme.dart';
 
 // TODO - Add more settings

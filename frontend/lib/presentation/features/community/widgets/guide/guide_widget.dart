@@ -1,14 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:know_waste/models/guide/guide.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
 import 'package:know_waste/utils/extensions.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../theme/src/app_colors.dart';
-import '../../../../theme/src/app_shadows.dart';
-import '../../../../theme/src/app_text_styles.dart';
+import '../../../../../models/guide/guide.dart';
+import '../../../../shared/bouncing.dart';
+import '../../../../theme/theme.dart';
 
 class GuideWidget extends StatelessWidget {
   const GuideWidget({

@@ -1,9 +1,8 @@
-import 'package:know_waste/services/storage/firebase_storage.dart';
-
 import '../../models/api_error/api_error.dart';
 import '../../models/article/article.dart';
 import '../../services/database/firestore_collection.dart';
 import '../../services/database/firestore_service.dart';
+import '../../services/storage/firebase_storage.dart';
 import 'articles_repository.dart';
 
 class FirestoreArticlesRepository implements ArticlesRepository {

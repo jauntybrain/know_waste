@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/providers/repositories_providers.dart';
-import 'package:know_waste/repositories/user/user_repository.dart';
+
+import '../repositories/user/user_repository.dart';
+import 'repositories_providers.dart';
 
 final authProvider = StateNotifierProvider<AuthNotifier, AsyncValue<User?>>(
   (ref) => AuthNotifier(ref, ref.watch(userRepositoryProvider)),

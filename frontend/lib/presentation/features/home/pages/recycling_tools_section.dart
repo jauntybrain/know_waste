@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:know_waste/utils/constants.dart';
 
+import '../../../../utils/constants.dart';
 import '../../../theme/theme.dart';
 import '../widgets/recycling_tool_widget.dart';
 

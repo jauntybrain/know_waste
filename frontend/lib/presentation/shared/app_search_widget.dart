@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../theme/src/app_colors.dart';
-import '../theme/src/app_text_styles.dart';
+import '../theme/theme.dart';
 
 class AppSearchWidget extends StatefulWidget {
   const AppSearchWidget({

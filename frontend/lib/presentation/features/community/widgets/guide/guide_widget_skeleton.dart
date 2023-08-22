@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../theme/src/app_colors.dart';
-import '../../../../theme/src/app_shadows.dart';
+import '../../../../theme/theme.dart';
 
 class GuideWidgetSkeleton extends StatelessWidget {
   const GuideWidgetSkeleton({Key? key}) : super(key: key);

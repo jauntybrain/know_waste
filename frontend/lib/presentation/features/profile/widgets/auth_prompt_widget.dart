@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
-import 'package:know_waste/providers/auth_provider.dart';
 
+import '../../../../providers/auth_provider.dart';
 import '../../../shared/app_toast.dart';
+import '../../../shared/bouncing.dart';
 import '../../../shared/content_box.dart';
-import '../../../theme/src/app_icons.dart';
 import '../../../theme/theme.dart';
 
 class AuthPromptWidget extends ConsumerWidget {

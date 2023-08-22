@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:know_waste/models/user_stats/user_stats.dart';
-import 'package:know_waste/repositories/user/user_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../models/app_user/app_user.dart';
+import '../../models/user_stats/user_stats.dart';
 import '../../services/auth/auth_service.dart';
 import '../../services/database/firestore_collection.dart';
 import '../../services/database/firestore_service.dart';
+import 'user_repository.dart';
 
 class FirestoreUserRepository implements UserRepository {
   FirestoreUserRepository(

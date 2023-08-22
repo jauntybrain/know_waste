@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:know_waste/models/api_error/api_error.dart';
-import 'package:know_waste/presentation/features/community/widgets/guide/guide_widget_skeleton.dart';
 import 'package:know_waste/presentation/router/router_context_extension.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 
+import '../../../../../models/api_error/api_error.dart';
+import '../../../../theme/theme.dart';
 import '../../providers/guides_provider.dart';
 import '../../widgets/guide/guide_widget.dart';
+import '../../widgets/guide/guide_widget_skeleton.dart';
 
 class CommunityGuidesSection extends ConsumerWidget {
   const CommunityGuidesSection({super.key});

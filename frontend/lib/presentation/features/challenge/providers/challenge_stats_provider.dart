@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/models/challenge_stats/challenge_stats.dart';
-import 'package:know_waste/repositories/challenges/challenges_repository.dart';
 
+import '../../../../models/challenge_stats/challenge_stats.dart';
 import '../../../../providers/repositories_providers.dart';
+import '../../../../repositories/challenges/challenges_repository.dart';
 
 final challengeStatsProvider =
     StateNotifierProvider.family<ChallengeStatsNotifier, AsyncValue<List<ChallengeStats>>, String>(

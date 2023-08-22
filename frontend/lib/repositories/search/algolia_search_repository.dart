@@ -1,9 +1,9 @@
 import 'package:algoliasearch/algoliasearch_lite.dart';
-import 'package:know_waste/repositories/search/search_repository.dart';
-import 'package:know_waste/services/storage/firebase_storage.dart';
 
 import '../../models/api_error/api_error.dart';
 import '../../models/article/article.dart';
+import '../../services/storage/firebase_storage.dart';
+import 'search_repository.dart';
 
 class AlgoliaSearchRepository implements SearchRepository {
   AlgoliaSearchRepository(this.searchClient, this.storage);

@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:know_waste/models/challenge_stats/challenge_stats.dart';
-import 'package:know_waste/services/storage/firebase_storage.dart';
 
 import '../../models/api_error/api_error.dart';
 import '../../models/challenge/challenge.dart';
+import '../../models/challenge_stats/challenge_stats.dart';
 import '../../services/database/firestore_collection.dart';
 import '../../services/database/firestore_service.dart';
+import '../../services/storage/firebase_storage.dart';
 import 'challenges_repository.dart';
 
 class FirestoreChallengesRepository implements ChallengesRepository {

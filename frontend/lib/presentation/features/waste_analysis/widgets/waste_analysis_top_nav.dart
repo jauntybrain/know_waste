@@ -2,11 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/features/waste_analysis/widgets/tutorial_dialog.dart';
-import 'package:know_waste/presentation/shared/app_icon_button.dart';
 
-import '../../../theme/src/app_colors.dart';
-import '../../../theme/src/app_text_styles.dart';
+import '../../../shared/app_icon_button.dart';
+import '../../../theme/theme.dart';
+import 'tutorial_dialog.dart';
 
 class WasteAnalysisTopNav extends StatelessWidget {
   const WasteAnalysisTopNav({

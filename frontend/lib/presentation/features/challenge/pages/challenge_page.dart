@@ -3,19 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/models/api_error/api_error.dart';
-import 'package:know_waste/models/challenge/challenge.dart';
-import 'package:know_waste/presentation/features/challenge/pages/challenge_info_section.dart';
-import 'package:know_waste/presentation/features/challenge/widgets/challenge_app_bar.dart';
-import 'package:know_waste/presentation/features/challenge/widgets/quit_challenge_dialog.dart';
-import 'package:know_waste/presentation/shared/app_markdown.dart';
-import 'package:know_waste/presentation/shared/app_toast.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 import 'package:know_waste/utils/extensions.dart';
 
+import '../../../../models/api_error/api_error.dart';
+import '../../../../models/challenge/challenge.dart';
 import '../../../../models/challenge_stats/challenge_stats.dart';
 import '../../../shared/app_icon_button.dart';
+import '../../../shared/app_markdown.dart';
+import '../../../shared/app_toast.dart';
+import '../../../theme/theme.dart';
 import '../providers/challenge_stats_provider.dart';
+import '../widgets/challenge_app_bar.dart';
+import '../widgets/quit_challenge_dialog.dart';
+import 'challenge_info_section.dart';
 import 'challenge_stats_section.dart';
 
 final challengeAppBarStateProvider = StateProvider.autoDispose<bool>((ref) => false);

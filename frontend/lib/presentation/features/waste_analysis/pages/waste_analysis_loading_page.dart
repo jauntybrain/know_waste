@@ -2,9 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:know_waste/presentation/features/waste_analysis/providers/waste_analysis_provider.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+
+import '../../../theme/theme.dart';
+import '../providers/waste_analysis_provider.dart';
 
 class WasteAnalysisLoadingPage extends ConsumerWidget {
   const WasteAnalysisLoadingPage({Key? key}) : super(key: key);

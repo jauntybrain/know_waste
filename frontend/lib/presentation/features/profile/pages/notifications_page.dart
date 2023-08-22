@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../shared/app_icon_button.dart';
-import '../../../theme/src/app_icons.dart';
 import '../../../theme/theme.dart';
 
 // TODO - Make dynamic

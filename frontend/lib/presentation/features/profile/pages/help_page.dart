@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:know_waste/presentation/shared/bouncing.dart';
-import 'package:know_waste/presentation/shared/content_box.dart';
-import 'package:know_waste/utils/constants.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../../../utils/constants.dart';
 import '../../../router/route_names.dart';
 import '../../../shared/app_icon_button.dart';
+import '../../../shared/bouncing.dart';
+import '../../../shared/content_box.dart';
 import '../../../theme/theme.dart';
 
 class HelpPage extends StatelessWidget {

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:know_waste/models/article/article.dart';
-import 'package:know_waste/models/challenge/challenge.dart';
-import 'package:know_waste/models/guide/guide.dart';
-import 'package:know_waste/models/user_stats/user_stats.dart';
 
 import '../models/analyzed_waste/analyzed_waste.dart';
 import '../models/app_user/app_user.dart';
+import '../models/article/article.dart';
+import '../models/challenge/challenge.dart';
+import '../models/guide/guide.dart';
+import '../models/user_stats/user_stats.dart';
 import 'database/firestore_collection.dart';
 
 class UserCollection extends FirestoreCollection<AppUser> {

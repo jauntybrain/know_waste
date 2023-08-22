@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:know_waste/models/app_user/app_user.dart';
-import 'package:know_waste/providers/user_provider.dart';
-import 'package:know_waste/services/storage/firebase_storage.dart';
 
+import '../../../../models/app_user/app_user.dart';
 import '../../../../providers/repositories_providers.dart';
+import '../../../../providers/user_provider.dart';
+import '../../../../services/storage/firebase_storage.dart';
 
 class EditProfileController extends AutoDisposeAsyncNotifier<AppUser?> {
   EditProfileController() : super();

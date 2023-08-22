@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:know_waste/presentation/theme/theme.dart';
 
 import '../models/tab_item_id.dart';
 import '../presentation/router/route_names.dart';
+import '../presentation/theme/theme.dart';
 
 class AppWrapperManager {
   static List<TabItem> tabItems = [

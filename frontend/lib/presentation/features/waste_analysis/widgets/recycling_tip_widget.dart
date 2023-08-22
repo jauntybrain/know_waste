@@ -1,10 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:know_waste/presentation/theme/src/app_icons.dart';
 
-import '../../../theme/src/app_colors.dart';
-import '../../../theme/src/app_text_styles.dart';
+import '../../../theme/theme.dart';
 
 class RecyclingTipWidget extends StatelessWidget {
   const RecyclingTipWidget({super.key});
