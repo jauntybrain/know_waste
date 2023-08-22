@@ -44,7 +44,7 @@ export const processLabeledWaste = functions
                 'labels': textLabels,
                 'objects': textObjects,
                 'labelsString': labelsWithPreditions.join(', '),
-                'objectsString': objectsWithPredictions.join(', '),
+                'objectsString': objectsWithPredictions.length == 0 ? 'Unknown object: 0.99' : objectsWithPredictions.join(', '),
                 'date': Timestamp.now()
             });
         } catch (error) {
