@@ -1,8 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:know_waste/presentation/router/router_context_extension.dart';
+import 'package:uni_links/uni_links.dart';
 
+import '../../../../providers/repositories_providers.dart';
+import '../../../shared/app_loading_dialog.dart';
+import '../../../shared/app_toast.dart';
 import '../../../theme/theme.dart';
 import '../../community/pages/sections/community_challenges_section.dart';
 import '../widgets/home_app_bar.dart';
@@ -25,14 +34,79 @@ class HomePageState extends ConsumerState<HomePage> {
   ScrollController scrollController = ScrollController();
   bool get showAppBar => ref.watch(homeAppBarStateProvider);
 
+  late StreamSubscription _sub;
+
+  Future<void> initUniLinks() async {
+    try {
+      handleLink(await getInitialUri());
+      _sub = uriLinkStream.listen(handleLink, onError: (err) {});
+    } on PlatformException {}
+  }
+
+  // TODO: Make this logic prettier
+  void handleLink(Uri? uri) async {
+    if (uri == null) {
+      return;
+    }
+
+    try {
+      AppDialog.of(context).loading();
+      final path = uri.pathSegments.first;
+
+      switch (path) {
+        case 'article':
+          final articleID = uri.queryParameters['id'];
+
+          if (articleID != null) {
+            final article = await ref.read(articlesRepositoryProvider).getArticle(articleID);
+
+            if (article != null) {
+              context.pushArticle(article);
+            }
+          }
+          break;
+        case 'guide':
+          final guideID = uri.queryParameters['id'];
+
+          if (guideID != null) {
+            final guide = await ref.read(guidesRepositoryProvider).getGuide(guideID);
+
+            if (guide != null) {
+              context.pushGuide(guide);
+            }
+          }
+          break;
+        case 'challenge':
+          final challengeID = uri.queryParameters['id'];
+
+          if (challengeID != null) {
+            final challenge = await ref.read(challengesRepositoryProvider).getChallenge(challengeID);
+
+            if (challenge != null) {
+              context.pushChallenge(challenge);
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    } catch (e) {
+      AppToast.of(context).show(text: 'Invalid link', isError: true);
+    } finally {
+      AppDialog.dispose();
+    }
+  }
+
   @override
   void initState() {
+    initUniLinks();
     scrollController.addListener(_scrollListener);
     super.initState();
   }
 
   @override
   void dispose() {
+    _sub.cancel();
     scrollController.removeListener(_scrollListener());
     scrollController.dispose();
     super.dispose();

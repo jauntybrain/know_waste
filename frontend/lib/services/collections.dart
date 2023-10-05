@@ -15,7 +15,7 @@ class UserCollection extends FirestoreCollection<AppUser> {
   @override
   CollectionReference<AppUser> get withConverter => firestore.collection(path).withConverter<AppUser>(
         fromFirestore: (snapshot, _) => AppUser.fromJson(snapshot.data()!),
-        toFirestore: (user, _) => {},
+        toFirestore: (_, __) => {},
       );
 }
 
@@ -26,7 +26,7 @@ class UserStatsCollection extends FirestoreCollection<UserStats> {
   @override
   CollectionReference<UserStats> get withConverter => firestore.collection(path).withConverter<UserStats>(
         fromFirestore: (snapshot, _) => UserStats.fromJson(snapshot.data()!),
-        toFirestore: (user, _) => {},
+        toFirestore: (_, __) => {},
       );
 }
 
@@ -37,7 +37,7 @@ class AnalyzedWasteCollection extends FirestoreCollection<AnalyzedWaste> {
   @override
   CollectionReference<AnalyzedWaste> get withConverter => firestore.collection(path).withConverter<AnalyzedWaste>(
         fromFirestore: (snapshot, _) => AnalyzedWaste.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
-        toFirestore: (user, _) => {},
+        toFirestore: (_, __) => {},
       );
 }
 
@@ -48,7 +48,7 @@ class ArticlesCollection extends FirestoreCollection<Article> {
   @override
   CollectionReference<Article> get withConverter => firestore.collection(path).withConverter<Article>(
         fromFirestore: (snapshot, _) => Article.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
-        toFirestore: (article, _) => {},
+        toFirestore: (_, __) => {},
       );
 }
 
@@ -59,7 +59,7 @@ class GuidesCollection extends FirestoreCollection<Guide> {
   @override
   CollectionReference<Guide> get withConverter => firestore.collection(path).withConverter<Guide>(
         fromFirestore: (snapshot, _) => Guide.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
-        toFirestore: (article, _) => {},
+        toFirestore: (_, __) => {},
       );
 }
 
@@ -70,6 +70,6 @@ class ChallengesCollection extends FirestoreCollection<Challenge> {
   @override
   CollectionReference<Challenge> get withConverter => firestore.collection(path).withConverter<Challenge>(
         fromFirestore: (snapshot, _) => Challenge.fromJson(snapshot.data()!..addAll({'uid': snapshot.id})),
-        toFirestore: (article, _) => {},
+        toFirestore: (_, __) => {},
       );
 }

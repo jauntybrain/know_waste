@@ -30,12 +30,26 @@ class FirestoreArticlesRepository implements ArticlesRepository {
       throw ApiError(message: 'Error fetching articles');
     }
   }
-  
 
   @override
   Future<Article?> getFeaturedArticle() async {
     try {
       final article = await articlesCollection.futureSingleWhereEqual('featured', true);
+      if (article == null) {
+        return null;
+      }
+
+      final imageUrl = await storage.getImageUrl(article.imageUrl);
+      return article.copyWith(imageUrl: imageUrl);
+    } catch (err) {
+      throw ApiError(message: 'Error fetching featured article');
+    }
+  }
+
+  @override
+  Future<Article?> getArticle(String id) async {
+    try {
+      final article = await articlesCollection.futureSingleByID(id);
       if (article == null) {
         return article;
       }
@@ -43,7 +57,7 @@ class FirestoreArticlesRepository implements ArticlesRepository {
       final imageUrl = await storage.getImageUrl(article.imageUrl);
       return article.copyWith(imageUrl: imageUrl);
     } catch (err) {
-      throw ApiError(message: 'Error fetching featured article');
+      throw ApiError(message: 'Error fetching article $id');
     }
   }
 }

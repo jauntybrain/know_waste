@@ -264,21 +264,22 @@ class ArticlePage extends ConsumerWidget {
             child: IgnorePointer(
               ignoring: expandedPositon == null,
               child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 200),
-                  opacity: expandedPositon != null ? 1 : 0,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: 30,
-                        sigmaY: 30,
-                      ),
-                      child: Container(
-                        color: Colors.white.withOpacity(0.8),
-                        width: double.infinity,
-                      ),
+                duration: const Duration(milliseconds: 200),
+                opacity: expandedPositon != null ? 1 : 0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 30,
+                      sigmaY: 30,
                     ),
-                  )),
+                    child: Container(
+                      color: Colors.white.withOpacity(0.8),
+                      width: double.infinity,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           if (expandedPositon != null) ...[

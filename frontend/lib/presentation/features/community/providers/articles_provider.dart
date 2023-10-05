@@ -10,13 +10,13 @@ final articlesProvider = StateNotifierProvider<ArticlesNotifier, AsyncValue<List
 
 class ArticlesNotifier extends StateNotifier<AsyncValue<List<Article>>> {
   ArticlesNotifier(this.ref, this.repository) : super(const AsyncValue.loading()) {
-    getArticles();
+    getAllArticles();
   }
 
   final Ref ref;
   final ArticlesRepository repository;
 
-  Future<void> getArticles() async {
+  Future<void> getAllArticles() async {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {

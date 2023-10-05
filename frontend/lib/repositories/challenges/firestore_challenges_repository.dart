@@ -40,6 +40,15 @@ class FirestoreChallengesRepository implements ChallengesRepository {
   }
 
   @override
+  Future<Challenge?> getChallenge(String id) async {
+    try {
+      return await challengesCollection.futureSingleByID(id);
+    } catch (e) {
+      throw ApiError(message: 'Error fetching challenge $id');
+    }
+  }
+
+  @override
   Future<List<ChallengeStats>> getStats(String id) async {
     try {
       final snapshot = await firestore.db.collection('${challengesCollection.path}/$id/stats').get();

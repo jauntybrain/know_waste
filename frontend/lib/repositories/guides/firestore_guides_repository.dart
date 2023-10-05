@@ -1,5 +1,3 @@
-
-
 import '../../models/api_error/api_error.dart';
 import '../../models/guide/guide.dart';
 import '../../services/database/firestore_collection.dart';
@@ -34,6 +32,15 @@ class FirestoreGuidesRepository implements GuidesRepository {
       );
     } catch (e) {
       throw ApiError(message: 'Error fetching guides');
+    }
+  }
+
+  @override
+  Future<Guide?> getGuide(String id) async {
+    try {
+      return await guidesCollection.futureSingleByID(id);
+    } catch (e) {
+      throw ApiError(message: 'Error fetchig guide $id');
     }
   }
 }
