@@ -13,6 +13,7 @@ class RouteNames {
   static const String analyzedWaste = 'analyzedWaste';
   static const String analyzedWasteDetail = 'analyzedWasteDetail';
   static const String attributions = 'attributions';
+  static const String editProfile = 'editProfile';
 
   // Tools
   static const String analyze = 'analyze';

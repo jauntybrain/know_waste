@@ -19,7 +19,6 @@ class EditProfileController extends AutoDisposeAsyncNotifier<AppUser?> {
   Future<void> updateProfile({
     required String name,
     required String email,
-    required String phone,
     required String username,
     VoidCallback? onSuccess,
   }) async {
@@ -31,10 +30,9 @@ class EditProfileController extends AutoDisposeAsyncNotifier<AppUser?> {
       await userRepo.updateProfile(userID!, {
         'email': email,
         'name': name,
-        'phone': phone,
         'username': username,
       });
-      return null;
+      return ref.read(userProvider);
     });
 
     if (state is AsyncData) {
@@ -59,34 +57,32 @@ class EditProfileController extends AutoDisposeAsyncNotifier<AppUser?> {
     /// Upload new image
     final file = File(image.path);
     final imageUrl = await ref.read(firebaseStorageServiceProvider).uploadImage(
-          path: 'users/${ref.read(userProvider)!.uid}.jpg',
+          path: 'users/${ref.read(userProvider)!.uid}/profile.jpg',
           file: file,
         );
 
     await userRepo.updateProfile(userID!, {'profilePicture': imageUrl});
+    state = AsyncData(state.value?.copyWith(profilePicture: imageUrl));
   }
 
-  // Future<void> changePassword({
-  //   required String oldPassword,
-  //   required String newPassword,
-  //   VoidCallback? onSuccess,
-  // }) async {
-  //   final lastState = state;
-  //   final authRepo = ref.read(authRepositoryProvider);
-  //   state = const AsyncValue.loading();
+  Future<void> changePassword({
+    required String oldPassword,
+    required String newPassword,
+    VoidCallback? onSuccess,
+  }) async {
+    final lastState = state;
+    final userRepository = ref.read(userRepositoryProvider);
+    state = const AsyncValue.loading();
 
-  //   state = await AsyncValue.guard(() async {
-  //     await authRepo.changePassword(
-  //       oldPassword: oldPassword,
-  //       newPassword: newPassword,
-  //     );
-  //     return lastState.value;
-  //   });
+    state = await AsyncValue.guard(() async {
+      await userRepository.changePassword(oldPassword, newPassword);
+      return lastState.value;
+    });
 
-  //   if (state is AsyncData) {
-  //     onSuccess?.call();
-  //   }
-  // }
+    if (state is AsyncData) {
+      onSuccess?.call();
+    }
+  }
 }
 
 final editProfileControllerProvider =

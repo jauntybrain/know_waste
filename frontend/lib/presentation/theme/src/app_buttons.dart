@@ -44,14 +44,14 @@ class AppButton extends StatelessWidget {
     this.isLoading = false,
     this.isDisabled = false,
     this.hasShadow = true,
-  })  : fillColor = null,
-        border = null,
-        highlightColor = null,
-        textColor = AppColors.secondary,
+    this.textColor = AppColors.secondary,
+    this.fillColor,
+    this.border,
+  })  : highlightColor = null,
         decoration = BoxDecoration(
-          color: AppColors.primary.withOpacity(0.1),
+          color: fillColor ?? AppColors.primary.withOpacity(0.1),
           borderRadius: BorderRadius.circular(borderRadius),
-          border: Border.all(width: 1, color: const Color(0xffECECEC)),
+          border: border ?? Border.all(width: 1, color: const Color(0xffECECEC)),
         ),
         super(key: key);
 

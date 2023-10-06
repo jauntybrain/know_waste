@@ -67,6 +67,19 @@ class FirestoreUserRepository implements UserRepository {
     return (await firebaseAuth.signInWithGoogle());
   }
 
+  @override
+  Future<void> changePassword(String oldPassword, String newPassword) async {
+    await firebaseAuth.reauthenticateEmailUser(oldPassword);
+    await firebaseAuth.updatePassword(newPassword);
+  }
+
+  @override
+  Future<void> deleteAccount(String password) async {
+    await firebaseAuth.reauthenticateEmailUser(password);
+    await firebaseAuth.currentUser?.delete();
+    await firebaseAuth.signOut();
+  }
+
   /* 
     *Why not use a trigger?*
     As of 2023, Firebase does not support triggers on account linkings,

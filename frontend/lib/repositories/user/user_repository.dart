@@ -19,5 +19,9 @@ abstract class UserRepository {
 
   Future<UserCredential?> signInWithApple();
 
+  Future<void> changePassword(String oldPassword, String newPassword);
+
+  Future<void> deleteAccount(String password);
+
   Future<User?> processLinkedUser({required UserCredential? credential});
 }

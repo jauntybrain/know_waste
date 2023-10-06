@@ -98,6 +98,11 @@ class ChangePhotoSheet {
                       if (hasPhoto) ...[
                         const SizedBox(height: 10),
                         AppButton.secondary(
+                          fillColor: AppColors.red.withOpacity(0.2),
+                          border: Border.all(
+                            width: 1,
+                            color: AppColors.red.withOpacity(0.1),
+                          ),
                           onTap: () {
                             Navigator.pop(context);
                             onDelete.call();
@@ -106,7 +111,7 @@ class ChangePhotoSheet {
                             children: [
                               Icon(
                                 Icons.delete_rounded,
-                                color: AppColors.white,
+                                color: AppColors.red,
                               ),
                               SizedBox(width: 10),
                               Text('Remove photo'),

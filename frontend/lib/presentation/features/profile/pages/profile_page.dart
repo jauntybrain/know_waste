@@ -116,9 +116,9 @@ class ProfilePage extends ConsumerWidget {
                                   ),
                                   SvgPicture.asset(
                                     'assets/images/dotted_border.svg',
+                                    color: AppColors.secondary,
                                     height: 140,
                                     width: 140,
-                                    color: AppColors.secondary,
                                   ),
                                   Container(
                                     height: 140,
@@ -149,11 +149,7 @@ class ProfilePage extends ConsumerWidget {
                                     child: Material(
                                       color: Colors.transparent,
                                       child: Bouncing(
-                                        onTap: () => AppToast.of(context).show(
-                                          text: 'Coming soon!',
-                                          icon: Icons.hourglass_top_rounded,
-                                          gravity: ToastGravity.BOTTOM,
-                                        ),
+                                        onTap: () => GoRouter.of(context).pushNamed(RouteNames.editProfile),
                                         child: Container(
                                           padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(

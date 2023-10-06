@@ -11,6 +11,7 @@ import '../features/bookmarks/pages/bookmarks_page.dart';
 import '../features/challenge/pages/challenge_page.dart';
 import '../features/community/pages/community_page.dart';
 import '../features/community/pages/search_page.dart';
+import '../features/edit_profile/pages/edit_profile_page.dart';
 import '../features/guide/pages/guide_page.dart';
 import '../features/home/pages/home_page.dart';
 import '../features/profile/pages/attributions_page.dart';
@@ -137,6 +138,16 @@ class AppRouter {
                         path: RoutePaths.notifications,
                         name: RouteNames.notifications,
                         builder: (BuildContext context, GoRouterState state) => const NotificationsPage(),
+                      ),
+                      GoRoute(
+                        parentNavigatorKey: _rootNavigatorKey,
+                        path: RoutePaths.editProfile,
+                        name: RouteNames.editProfile,
+                        pageBuilder: (BuildContext context, GoRouterState state) => slideUpPageTransition<void>(
+                          context: context,
+                          state: state,
+                          child: const EditProfilePage(),
+                        ),
                       ),
                       GoRoute(
                         path: RoutePaths.settings,

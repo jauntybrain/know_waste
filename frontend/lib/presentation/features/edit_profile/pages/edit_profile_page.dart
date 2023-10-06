@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -6,15 +8,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:know_waste/providers/repositories_providers.dart';
 
 import '../../../../models/api_error/api_error.dart';
+import '../../../shared/app_loading_dialog.dart';
 import '../../../shared/app_text_field.dart';
 import '../../../shared/app_toast.dart';
 import '../../../shared/bouncing.dart';
 import '../../../theme/theme.dart';
+import '../../profile/widgets/change_photo_sheet.dart';
 import '../providers/edit_profile_controller.dart';
-import '../widgets/change_photo_sheet.dart';
+import '../widgets/change_password_sheet.dart';
+import '../widgets/delete_account_dialog.dart';
 
 class EditProfilePage extends ConsumerStatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -39,8 +46,8 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   void initState() {
     WidgetsFlutterBinding.ensureInitialized();
     ref.read(editProfileControllerProvider).whenData((value) {
-      nameController.text = value?.name ?? 'New Hero';
-      emailController.text = value?.email ?? 'user@beaherotoday.com';
+      nameController.text = value?.name ?? '';
+      emailController.text = value?.email ?? '';
       phoneController.text = value?.phoneNumber ?? '';
       usernameController.text = value?.username ?? '';
     });
@@ -92,14 +99,13 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
         ),
         child: SafeArea(
           child: AppButton.primary(
-            fillColor: AppColors.primary,
+            fillColor: AppColors.secondary,
             onTap: () {
               HapticFeedback.lightImpact();
               if (_formKey.currentState!.validate()) {
                 ref.read(editProfileControllerProvider.notifier).updateProfile(
                       name: nameController.text,
                       email: emailController.text,
-                      phone: phoneController.text,
                       username: usernameController.text,
                       onSuccess: () => AppToast.of(context).show(text: 'Profile updated!'),
                     );
@@ -138,6 +144,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                                 ),
                                 SvgPicture.asset(
                                   'assets/images/dotted_border.svg',
+                                  color: AppColors.secondary,
                                   height: 140,
                                   width: 140,
                                 ),
@@ -148,7 +155,9 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                                   child: AnimatedSwitcher(
                                     duration: const Duration(milliseconds: 200),
                                     child: isImageLoading
-                                        ? const CircularProgressIndicator()
+                                        ? const CircularProgressIndicator(
+                                            valueColor: AlwaysStoppedAnimation(AppColors.secondary),
+                                          )
                                         : userState.value?.profilePicture != null
                                             ? ClipRRect(
                                                 borderRadius: BorderRadius.circular(100),
@@ -156,7 +165,9 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                                                   imageUrl: userState.value!.profilePicture!,
                                                   height: 140,
                                                   width: 140,
-                                                  placeholder: (context, url) => const CircularProgressIndicator(),
+                                                  placeholder: (context, url) => const CircularProgressIndicator(
+                                                    valueColor: AlwaysStoppedAnimation(AppColors.secondary),
+                                                  ),
                                                   fit: BoxFit.cover,
                                                 ),
                                               )
@@ -218,13 +229,16 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                                       color: Colors.transparent,
                                       child: Ink(
                                         decoration: BoxDecoration(
-                                          color: AppColors.primary,
+                                          color: AppColors.secondary,
                                           border: Border.all(color: AppColors.background, width: 3),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Container(
                                           padding: const EdgeInsets.all(12),
-                                          child: const Icon(Icons.camera),
+                                          child: const Icon(
+                                            Icons.camera_alt_rounded,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -277,7 +291,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                           AppTextField(
                             textController: usernameController,
                             label: 'Username',
-                            hintText: 'superhero',
+                            hintText: 'recyclinghero',
                             isDisabled: isLoading,
                             inputAction: TextInputAction.next,
                             keyboardType: TextInputType.name,
@@ -297,9 +311,15 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                           ),
                           const SizedBox(height: 10),
                           AppButton.secondary(
+                            onTap: () => ChangePasswordSheet.of(context).show(),
                             borderRadius: 12,
                             child: const Row(
                               children: [
+                                Icon(
+                                  Icons.password_rounded,
+                                  color: AppColors.secondary,
+                                ),
+                                SizedBox(width: 10),
                                 Text(
                                   'Change password',
                                 ),
@@ -307,23 +327,29 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                             ),
                           ),
                           const SizedBox(height: 15),
-                          AppButton.primary(
+                          AppButton.secondary(
                             borderRadius: 12,
+                            fillColor: Colors.red.withOpacity(0.2),
+                            textColor: AppColors.red,
+                            border: Border.all(width: 1, color: Colors.red.withOpacity(0.1)),
                             onTap: () {
-                              // DeleteAccountDialog.of(context).show().then((value) {
-                              //   if (value == null || !value) {
-                              //     return;
-                              //   }
-                              //   AppDialog.of(context).loading();
-                              //   ref.read(storageNotifierProvider.notifier).deleteAccount().then((value) {
-                              //     AppDialog.dispose();
-                              //     GoRouter.of(context).pushReplacementNamed(RouteNames.welcome);
-                              //   });
-                              // }),
+                              DeleteAccountDialog.of(context).show().then((value) {
+                                if (value == null) {
+                                  return;
+                                }
+                                AppDialog.of(context).loading();
+                                ref.read(userRepositoryProvider).deleteAccount(value).then((value) {
+                                  AppDialog.dispose();
+                                  GoRouter.of(context).pop();
+                                });
+                              });
                             },
                             child: const Row(
                               children: [
-                                // AppIcons.icon(AppIcons.deleteAccount, size: 18),
+                                Icon(
+                                  Icons.delete_rounded,
+                                  color: AppColors.red,
+                                ),
                                 SizedBox(width: 10),
                                 Text('Delete account'),
                               ],
@@ -357,12 +383,15 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                       children: [
                         const SizedBox(width: 50),
                         Text(
-                          'Edit Profile'.toUpperCase(),
-                          style: AppTextStyles.blackBold18.copyWith(fontSize: 18),
+                          'Edit Profile',
+                          style: AppTextStyles.blackExtraBold18.copyWith(fontSize: 18),
                         ),
                         GestureDetector(
                           behavior: HitTestBehavior.opaque,
-                          onTap: () => Navigator.of(context).pop(),
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                            Navigator.of(context).pop();
+                          },
                           child: Container(
                             width: 50,
                             height: 25,

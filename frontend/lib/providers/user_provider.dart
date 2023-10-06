@@ -52,7 +52,7 @@ class UserNotifier extends StateNotifier<AppUser?> {
     }
   }
 
-  profileListener(String uid, AppUser? profile) {
+  void profileListener(String uid, AppUser? profile) {
     state = profile;
   }
 
