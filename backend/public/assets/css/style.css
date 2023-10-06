@@ -6,7 +6,10 @@ body {
   line-height: 1.6em;
   font-weight: 500;
   background-color: #ffffff;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
 }
 h1 {
   font-weight: 900;
@@ -21,6 +24,7 @@ a:hover {
   position: absolute;
   height: 100%;
   width: 100%;
+  background-size: 100%;
 }
 .center-pane {
   margin: auto;
@@ -40,16 +44,17 @@ a:hover {
   flex-direction: column;
 }
 .preview {
-  width: 500px;
+  width: 450px;
 }
 .buttons {
   gap: 20px;
 }
 .row.pane {
   gap: 50px;
+  flex-wrap: wrap;
 }
 .logo {
-  height: 120px;
+  height: 100px;
 }
 .buttons img {
   height: 55px;
@@ -57,15 +62,107 @@ a:hover {
 .column.pane {
   align-items: start;
   gap: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
 }
 .text p {
   color: #008732;
   font-weight: 800;
+  font-size: 0.8em;
 }
 .credit {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding-top: 80px;
+  padding-bottom: 20px;
+}
+span.green {
+  color: #008732;
+}
+.content {
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  max-width: 1200px;
+}
+.how-to-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 30px;
+  max-width: 1200px;
+  gap: 80px;
+}
+.how-to-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.how-to-block h2 {
+  font-size: 1.2em;
+  line-height: 1.2em;
+  font-weight: 800;
+  text-align: center;
+}
+#about {
+  height: 100vh;
+}
+.how-to-block img {
+  max-width: 230px;
+}
+#contact {
+  padding-top: 100px;
+}
+p.description {
+  max-width: 60%;
+  text-align: center;
+  line-height: 1.7em;
+}
+.bold {
+  font-weight: 800;
+}
+p.paragraph-hero {
+  text-align: center;
+}
+
+@media screen and (max-width: 1060px) {
+  #about {
+    height: auto;
+    padding: 50px;
+  }
+  .preview {
+    display: none;
+  }
+  p.description {
+    max-width: 80%;
+  }
+  .how-to-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 629px) {
+  #about {
+    padding: 20px;
+    text-align: center;
+  }
+  .column.pane {
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  h1 {
+    font-weight: 900;
+    font-size: 1.8em;
+  }
+  p.description {
+    max-width: 100%;
+    padding: 0px 20px;
+  }
 }
