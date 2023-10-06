@@ -1,7 +1,7 @@
 name: know_waste
 description: Your Personal AI Recycling Assistant
 publish_to: "none"
-version: 1.0.1+7
+version: 1.0.2+8
 
 environment:
   sdk: ">=3.0.6 <4.0.0"
