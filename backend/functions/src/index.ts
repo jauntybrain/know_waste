@@ -1,9 +1,14 @@
 import {
+    deleteAccount
+} from './requests';
+
+import {
     processLabeledWaste,
     processAnalyzedWaste,
     updateUsersPercentile,
     updateChallengeOnJoin,
-    updateChallengeOnQuit
+    updateChallengeOnQuit,
+    onDeleteUser
 } from './triggers';
 
 export {
@@ -11,5 +16,10 @@ export {
     processAnalyzedWaste,
     updateUsersPercentile,
     updateChallengeOnJoin,
-    updateChallengeOnQuit
+    updateChallengeOnQuit,
+    onDeleteUser
+}
+
+export {
+    deleteAccount
 }

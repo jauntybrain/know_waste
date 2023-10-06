@@ -213,3 +213,22 @@ export const updateUsersPercentile = functions
             throw new functions.https.HttpsError('internal', 'Error updating percentiles');
         }
     });
+
+export const onDeleteUser = functions.auth.user().onDelete(async (user) => {
+    // Delete analyzed waste
+    const userWasteQuery = firestore.collection('analyzedWaste').where('userID', '==', user.uid);
+    userWasteQuery.get().then(function (wasteSnapshot) {
+        wasteSnapshot.forEach(function (doc) {
+            doc.ref.delete();
+        });
+    });
+
+    // Delete user content from Storage
+    await admin.storage().bucket().deleteFiles({
+        prefix: `users/${user.uid}/`
+    });
+
+    await admin.storage().bucket().deleteFiles({
+        prefix: `items/${user.uid}/`
+    });
+});

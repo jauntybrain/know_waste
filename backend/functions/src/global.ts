@@ -5,7 +5,7 @@ import * as querystring from 'querystring';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
-admin.initializeApp({});
+const app = admin.initializeApp();
 
 const firestore = admin.firestore();
 const fcm = admin.messaging();
@@ -16,5 +16,6 @@ export {
     functions,
     admin,
     firestore,
-    fcm
+    fcm,
+    app
 };
