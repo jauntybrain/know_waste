@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD8mYznC0r6NdSwdNwev9z_2d1oecvqzWY',
-    appId: '1:848280063891:android:f1e771658b28f58dc96266',
+    appId: '1:848280063891:android:f2656e00629a32c2c96266',
     messagingSenderId: '848280063891',
     projectId: 'waste-wise-d88a7',
     storageBucket: 'waste-wise-d88a7.appspot.com',
@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '848280063891',
     projectId: 'waste-wise-d88a7',
     storageBucket: 'waste-wise-d88a7.appspot.com',
+    androidClientId: '848280063891-3mbf16i4r4nh8i3oeft5mpvsss393552.apps.googleusercontent.com',
     iosClientId: '848280063891-37fsb0k4frblao3r6dmspl7t7g5pmkjh.apps.googleusercontent.com',
     iosBundleId: 'com.application.knowWaste',
   );

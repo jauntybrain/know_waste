@@ -7,7 +7,7 @@ final packageInfoProvider = Provider<PackageInfoService>((ref) => PackageInfoSer
 class PackageInfoService {
   late final PackageInfo _packageInfo;
 
-  String get version => '${_packageInfo.version}+${_packageInfo.buildNumber}';
+  String get version => '${_packageInfo.version} (${_packageInfo.buildNumber})';
 
   /// Logs proper info depending on the platform running the app
   Future<void> init() async {

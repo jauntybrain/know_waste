@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:848280063891:android:f1e771658b28f58dc96266",
+        "mobilesdk_app_id": "1:848280063891:android:f2656e00629a32c2c96266",
         "android_client_info": {
           "package_name": "com.application.know_waste"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "848280063891-agehdps5r53hiu6j30b463uds5l30c6c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.application.know_waste",
+            "certificate_hash": "44de7a725fa70b7d977861a277e3ef5420f50a7b"
+          }
+        },
         {
           "client_id": "848280063891-enntrfo2hfa4uqo86torek19jeu70dh4.apps.googleusercontent.com",
           "client_type": 3

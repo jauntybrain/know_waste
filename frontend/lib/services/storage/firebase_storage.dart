@@ -55,8 +55,13 @@ class FirebaseStorageService {
     if (imagePath == null) {
       return '';
     }
-    final storageReference = imagePath.contains('gs://') ? storage.refFromURL(imagePath) : storage.ref(imagePath);
-    return storageReference.getDownloadURL();
+
+    try {
+      final storageReference = imagePath.contains('gs://') ? storage.refFromURL(imagePath) : storage.ref(imagePath);
+      return await storageReference.getDownloadURL();
+    } catch (e) {
+      return await storage.ref('thumbnails/kw-not-found.jpg').getDownloadURL();
+    }
   }
 
   Future<void> deleteImage(String imagePath) async {

@@ -65,7 +65,7 @@ dev_dependencies:
 flutter_native_splash:
   android: true
   ios: true
-  background_image: "assets/images/splash.png"
+  background_image: "assets/images/splash.jpg"
 
 flutter:
   uses-material-design: true
