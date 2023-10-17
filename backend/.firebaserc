@@ -1,5 +1,21 @@
 {
   "projects": {
     "default": "waste-wise-d88a7"
+  },
+  "targets": {},
+  "etags": {
+    "waste-wise-d88a7": {
+      "extensionInstances": {
+        "firestore-user-document": "3626cfd87348096d6197767996dc549f07832b0311c39d9bc4607086683a56b7",
+        "storage-label-images": "577c7dc99762302b7cbbd11ce945d145ae55c55310d73b117939521fb6a1f423",
+        "firestore-algolia-search": "6043f645194b7df8438d335e249a3a0a52443688079097737fd05ceb5f78b682",
+        "storage-detect-objects": "68712025678ba3986ac42f97d34f648a5140d45fdfc960c833ad6000b8f7e807",
+        "firestore-palm-gen-text": "69ffe53874d2c1a8fa9e53d032821a4769463fa6bed956d59aec66814f37387c",
+        "firestore-counter": "4bbfffeaa5ba236583ebb8e879ee526d621b77bb9bddac026ff47cf32c780d0f",
+        "firebase-flow-links": "a21066a23e4d1cd0f7889549673fe778a3561e35ff6302eb312be0e6a8eb6a40",
+        "grid-cms": "bea2c1359fc211477f53d23bba7fd65ab7e60ff3f9dbc315b795fe3628cb1815",
+        "firestore-palm-summarize-text": "ab323ea2c5cac74dee31acd6c915adc15f96205fc6e6b284011dd3ff59b8217c"
+      }
+    }
   }
 }

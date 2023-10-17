@@ -27,5 +27,16 @@
         "function": "ext-grid-cms-server"
       }
     ]
+  },
+  "extensions": {
+    "firestore-user-document": "rowy/firestore-user-document@0.0.6",
+    "storage-label-images": "googlecloud/storage-label-images@0.1.5",
+    "firestore-algolia-search": "algolia/firestore-algolia-search@1.1.3",
+    "storage-detect-objects": "jauntybrain/storage-detect-objects@0.1.0",
+    "firestore-palm-gen-text": "googlecloud/firestore-palm-gen-text@0.1.7",
+    "firestore-counter": "firebase/firestore-counter@0.2.8",
+    "firebase-flow-links": "jauntybrain/firebase-flow-links@0.1.2",
+    "grid-cms": "grid/grid-cms@1.1.0",
+    "firestore-palm-summarize-text": "googlecloud/firestore-palm-summarize-text@0.1.6"
   }
 }
