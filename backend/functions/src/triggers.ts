@@ -1,9 +1,7 @@
 import { Timestamp } from 'firebase-admin/firestore';
 import { admin, firestore, functions } from './global';
 
-import * as vision from '@google-cloud/vision';
-
-export const processLabeledWaste = functions
+export const processLabeledObjects = functions
     .region('us-central1')
     .firestore.document('labeledWaste/{wasteID}')
     .onCreate(async (snapshot) => {
@@ -17,38 +15,101 @@ export const processLabeledWaste = functions
                 );
             }
 
-            // Get userID from the image path
-            const userID = wasteData.file.split('gs://')[1].split('/')[2];
+            // Get userID and fileID from the image path
+            const filePath = wasteData.file.split('gs://')[1].split('/');
+            const userID = filePath[2];
+            const fileID = filePath[3].split('.jpg')[0];
 
             // Process image labels
             const textLabels = wasteData.labels.map((label: any) => label.description);
             const labelsWithPreditions = wasteData.labels.map((label: any) => `${label.description}: ${label.score}`);
 
-            // Call Vertex AI to detect objects in the image
-            const client = new vision.ImageAnnotatorClient();
-            var textObjects: any[] = [];
-            var objectsWithPredictions: any[] = [];
-
-            if (client.objectLocalization) {
-                const [result] = await client.objectLocalization(wasteData.file);
-                const objects = result.localizedObjectAnnotations!;
-
-                textObjects = objects.map((object: any) => object.name);
-                objectsWithPredictions = objects.map((object: any) => `${object.name}: ${object.score}`)
-            }
-
-            await firestore.collection('analyzedWaste').add({
-                'labeledWasteID': snapshot.id,
+            const queuedWasteData = {
+                'labeledWasteID': fileID,
                 'imageUrl': wasteData.file,
                 'userID': userID,
                 'labels': textLabels,
-                'objects': textObjects,
                 'labelsString': labelsWithPreditions.join(', '),
-                'objectsString': objectsWithPredictions.length == 0 ? 'Unknown object: 0.99' : objectsWithPredictions.join(', '),
                 'date': Timestamp.now()
-            });
+            };
+
+            // Update/create queued waste document
+            await firestore
+                .collection('wasteQueue')
+                .doc(fileID)
+                .set(queuedWasteData, { merge: true });
+
         } catch (error) {
-            throw new functions.https.HttpsError('internal', 'Error processing labeled waste');
+            throw new functions.https.HttpsError('internal', 'Error processing labeled objects');
+        }
+    });
+
+
+export const processDetectedObjects = functions
+    .region('us-central1')
+    .firestore.document('detectedObjects/{wasteID}')
+    .onCreate(async (snapshot) => {
+        try {
+            const wasteData = snapshot.data();
+
+            if (!wasteData.objects || wasteData.objects.length == 0) {
+                throw new functions.https.HttpsError(
+                    'unavailable',
+                    'Error occurred'
+                );
+            }
+
+            // Get userID and fileID from the image path
+            const filePath = wasteData.file.split('gs://')[1].split('/');
+            const userID = filePath[2];
+            const fileID = filePath[3].split('.jpg')[0];
+
+            // Process detected objects
+            const textObjects = wasteData.objects.map((object: any) => object.name);
+            const objectsWithPredictions = wasteData.objects.map((object: any) => `${object.name}: ${object.score}`);
+            const objectsString = objectsWithPredictions.length == 0 ? 'Unknown object: 0.99' : objectsWithPredictions.join(', ');
+
+            const queuedWasteData = {
+                'labeledWasteID': fileID,
+                'imageUrl': wasteData.file,
+                'userID': userID,
+                'objects': textObjects,
+                'objectsString': objectsString,
+                'date': Timestamp.now()
+            };
+
+            // Update/create queued waste document
+            await firestore
+                .collection('wasteQueue')
+                .doc(fileID)
+                .set(queuedWasteData, { merge: true });
+
+        } catch (error) {
+            throw new functions.https.HttpsError('internal', 'Error processing detected objects');
+        }
+    });
+
+export const processWasteQueue = functions
+    .region('us-central1')
+    .firestore.document('wasteQueue/{wasteID}')
+    .onUpdate(async (snapshot) => {
+        try {
+            const queuedData = snapshot.after.data();
+
+            // Check if all processing is finished
+            if (!queuedData.objectsString || !queuedData.labelsString) {
+                return;
+            }
+
+            // Create analyzed waste document for further processing
+            await firestore
+                .collection('analyzedWaste')
+                .doc(snapshot.after.id)
+                .set(queuedData);
+
+        } catch (error) {
+            console.error('Error:', error);
+            throw new functions.https.HttpsError('internal', 'Error processing waste queue');
         }
     });
 
@@ -99,13 +160,16 @@ export const processAnalyzedWaste = functions
                 .replace(regexRecyclable, '');
 
             // Update analyzedWaste document
-            await firestore.collection('analyzedWaste').doc(snapshot.after.id).update({
-                'advice': filteredAdvice,
-                'name': objectName,
-                'material': objectMaterial,
-                'tips': tips,
-                'recyclable': recyclable?.toLowerCase() === 'true',
-            });
+            await firestore
+                .collection('analyzedWaste')
+                .doc(snapshot.after.id)
+                .update({
+                    'advice': filteredAdvice,
+                    'name': objectName,
+                    'material': objectMaterial,
+                    'tips': tips,
+                    'recyclable': recyclable?.toLowerCase() === 'true',
+                });
 
             // Increment user stats values
             const increment = admin.firestore.FieldValue.increment(1);
@@ -128,17 +192,21 @@ export const processAnalyzedWaste = functions
                 [type]: typeIncrement
             };
 
-            await firestore.collection('userStats')
+            await firestore
+                .collection('userStats')
                 .doc(analyzedWaste.userID)
                 .set(updateData, { merge: true });
 
             // Update challenge progress
-            const challenges = await firestore.collection('challenges')
+            const challenges = await firestore
+                .collection('challenges')
                 .where('material', '==', lowerCaseMaterial)
                 .where('users', 'array-contains', analyzedWaste.userID).get();
 
             for (const challenge of challenges.docs) {
-                firestore.doc(`challenges/${challenge.id}/stats/${analyzedWaste.userID}`).update({ progress: increment });
+                firestore
+                    .doc(`challenges/${challenge.id}/stats/${analyzedWaste.userID}`)
+                    .update({ progress: increment });
             }
 
         } catch (error) {
@@ -216,7 +284,10 @@ export const updateUsersPercentile = functions
 
 export const onDeleteUser = functions.auth.user().onDelete(async (user) => {
     // Delete analyzed waste
-    const userWasteQuery = firestore.collection('analyzedWaste').where('userID', '==', user.uid);
+    const userWasteQuery = firestore
+        .collection('analyzedWaste')
+        .where('userID', '==', user.uid);
+
     userWasteQuery.get().then(function (wasteSnapshot) {
         wasteSnapshot.forEach(function (doc) {
             doc.ref.delete();

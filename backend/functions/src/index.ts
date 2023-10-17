@@ -3,7 +3,9 @@ import {
 } from './requests';
 
 import {
-    processLabeledWaste,
+    processLabeledObjects,
+    processDetectedObjects,
+    processWasteQueue,
     processAnalyzedWaste,
     updateUsersPercentile,
     updateChallengeOnJoin,
@@ -12,7 +14,9 @@ import {
 } from './triggers';
 
 export {
-    processLabeledWaste,
+    processLabeledObjects,
+    processDetectedObjects,
+    processWasteQueue,
     processAnalyzedWaste,
     updateUsersPercentile,
     updateChallengeOnJoin,
