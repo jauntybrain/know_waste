@@ -147,6 +147,26 @@ p.paragraph-hero {
   }
 }
 
+.action-button {
+  background: #038732;
+  color: white;
+  padding: 5px 20px;
+  border-radius: 100px;
+  margin: 15px;
+  transition: 0.3s all;
+  cursor: pointer;
+}
+
+.action-button a {
+  color: white;
+  font-size: 15px;
+  text-transform: none !important;
+}
+
+.action-button:hover {
+  transform: scale(0.98);
+}
+
 @media screen and (max-width: 629px) {
   #about {
     padding: 20px;
